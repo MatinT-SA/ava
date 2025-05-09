@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 function Main() {
   return (
@@ -14,22 +13,19 @@ function Main() {
         <h2 className="text-2xl font-semibold mb-3">محتواهای موجود:</h2>
         <ul className="list-disc pr-5 space-y-2 text-base">
           <li>
-            <Link
-              to="/archive/sports"
-              className="text-blue-600 hover:underline"
-            >
+            <span className="text-blue-600 hover:underline cursor-pointer">
               آرشیو ورزشی
-            </Link>
+            </span>
           </li>
           <li>
-            <Link to="/archive/music" className="text-blue-600 hover:underline">
+            <span className="text-blue-600 hover:underline cursor-pointer">
               آرشیو موسیقی
-            </Link>
+            </span>
           </li>
           <li>
-            <Link to="/archive/tech" className="text-blue-600 hover:underline">
+            <span className="text-blue-600 hover:underline cursor-pointer">
               آرشیو تکنولوژی
-            </Link>
+            </span>
           </li>
         </ul>
       </section>

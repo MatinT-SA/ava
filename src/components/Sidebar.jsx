@@ -1,7 +1,6 @@
 import React from "react";
 import Logo from "./Logo";
 import { FaMicrophoneAlt, FaArchive } from "react-icons/fa";
-import { NavLink } from "react-router-dom";
 
 function Sidebar() {
   return (
@@ -12,29 +11,15 @@ function Sidebar() {
       </div>
 
       <nav className="flex flex-col gap-4">
-        <NavLink
-          to="/"
-          className={({ isActive }) =>
-            `flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-800 ${
-              isActive ? "bg-gray-800" : ""
-            }`
-          }
-        >
+        <div className="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-800 cursor-pointer">
           <FaMicrophoneAlt className="text-lg" />
           <span>تبدیل گفتار</span>
-        </NavLink>
+        </div>
 
-        <NavLink
-          to="/archive"
-          className={({ isActive }) =>
-            `flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-800 ${
-              isActive ? "bg-gray-800" : ""
-            }`
-          }
-        >
+        <div className="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-800 cursor-pointer">
           <FaArchive className="text-lg" />
           <span>آرشیو</span>
-        </NavLink>
+        </div>
       </nav>
     </aside>
   );
