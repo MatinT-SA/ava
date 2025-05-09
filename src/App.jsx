@@ -1,8 +1,18 @@
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import ArchivePage from "./pages/ArchivePage";
+import NotFound from "./pages/NotFound";
+
 function App() {
   return (
-    <div>
-      <h1 className="bg-red-400 text-blue-800">Hello Vite</h1>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/archive" element={<ArchivePage />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Router>
   );
 }
 
