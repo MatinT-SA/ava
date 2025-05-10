@@ -3,12 +3,11 @@ import Sidebar from "./Sidebar";
 
 function AppLayout({ children }) {
   return (
-    <div className="grid h-screen grid-rows-[auto_1fr_auto]">
-      <Sidebar />
-
-      <main className="mx-auto max-w-3xl flex-grow 2xl:max-w-6xl">
-        {children}
-      </main>
+    <div className="flex h-screen">
+      <aside className="w-64 shrink-0 border-l border-gray-200 bg-white p-4">
+        <Sidebar />
+      </aside>
+      <main className="flex-1 overflow-y-auto p-6">{children}</main>
     </div>
   );
 }

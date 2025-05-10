@@ -1,65 +1,30 @@
 import { useState } from "react";
 import Button from "./Button";
+import Microphone from "./Microphone";
+import Uploader from "./Uploader";
+import Goftar from "./Goftar";
 
 function Main() {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-
-  const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
-
-  const handleLogout = () => {
-    console.log("خروج انجام شد");
-    setDropdownOpen(false);
-  };
-
   return (
-    <div className="relative flex-1 p-6 pr-64 font-sans">
-      {/* Dropdown Button - طبق طرح فیگما */}
-      <div className="absolute top-6 left-6 z-50">
-        <div className="relative">
-          <Button>مهمان</Button>
+    <main className="flex min-h-screen flex-col items-center justify-start space-y-10 px-4 pt-24 text-center">
+      {/* عنوان اصلی */}
+      <h1 className="text-4xl font-bold">تبدیل گفتار به متن</h1>
 
-          {/* Dropdown List */}
-          {dropdownOpen && (
-            <div className="absolute left-0 mt-1 w-28 overflow-hidden rounded-md border border-gray-200 bg-white text-sm shadow-md">
-              <button
-                onClick={handleLogout}
-                className="w-full border-b px-4 py-2 text-right hover:bg-gray-100"
-              >
-                خروج
-              </button>
-            </div>
-          )}
-        </div>
-      </div>
-
-      {/* محتوا */}
-      <h1 className="mb-4 text-3xl font-bold">خوش آمدید به سایت ما!</h1>
-      <p className="mb-6 text-lg">
-        در اینجا می‌توانید به راحتی به آرشیو پست‌ها، مقالات، و محتوای قدیمی
-        دسترسی داشته باشید.
+      {/* توضیح زیر عنوان */}
+      <p className="max-w-xl text-lg">
+        آوا با استفاده از هزاران ساعت گفتار با صدای افراد مختلف، زبان فارسی را
+        یاد گرفته است و می‌تواند متن صحبت‌ها را بنویسد.
       </p>
 
-      <section>
-        <h2 className="mb-3 text-2xl font-semibold">محتواهای موجود:</h2>
-        <ul className="list-disc space-y-2 pr-5 text-base">
-          <li>
-            <span className="cursor-pointer text-blue-600 hover:underline">
-              آرشیو ورزشی
-            </span>
-          </li>
-          <li>
-            <span className="cursor-pointer text-blue-600 hover:underline">
-              آرشیو موسیقی
-            </span>
-          </li>
-          <li>
-            <span className="cursor-pointer text-blue-600 hover:underline">
-              آرشیو تکنولوژی
-            </span>
-          </li>
-        </ul>
-      </section>
-    </div>
+      {/* کامپوننت میکروفن در مرکز */}
+      <Microphone />
+
+      {/* کامپوننت uploader (با تب‌ها برای ضبط و آپلود و لینک) */}
+      <Uploader />
+
+      {/* کامپوننت Goftar */}
+      <Goftar />
+    </main>
   );
 }
 
