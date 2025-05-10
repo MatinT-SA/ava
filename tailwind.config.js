@@ -1,11 +1,19 @@
-module.exports = {
-  purge: [],
-  darkMode: false, // or 'media' or 'class'
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
-  },
-  variants: {
-    extend: {},
+    fontFamily: {
+      sans: "Dangrek, Rubik, Poppins",
+    },
+
+    extend: {
+      height: {
+        screen: "100dvh",
+      },
+      colors: {
+        customGreen: "#00BA9F",
+      },
+    },
   },
   plugins: [],
 };

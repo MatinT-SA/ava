@@ -8,7 +8,7 @@ function Main() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-start space-y-10 px-4 pt-24 text-center">
       {/* عنوان اصلی */}
-      <h1 className="text-4xl font-bold">تبدیل گفتار به متن</h1>
+      <h1 className="text-4xl font-bold text-[#00BA9F]">تبدیل گفتار به متن</h1>
 
       {/* توضیح زیر عنوان */}
       <p className="max-w-xl text-lg">

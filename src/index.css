@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+@layer utilities {
+  .text-custom-teal {
+    color: #00ba9f;
+  }
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
