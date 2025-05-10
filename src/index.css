@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Vazir";
+  src:
+    url("/fonts/vazir/Vazir.woff2") format("woff2"),
+    url("/fonts/vazir/Vazir.woff") format("woff"),
+    url("/fonts/vazir/Vazir.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 @layer utilities {
   .text-custom-teal {
     color: #00ba9f;
@@ -36,6 +46,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  font-family: "Vazir", sans-serif;
 }
 
 h1 {
