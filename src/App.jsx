@@ -1,11 +1,11 @@
-import React from "react";
 import HomePage from "./pages/HomePage";
+import AppLayout from "./components/AppLayout";
 
 function App() {
   return (
-    <div className="App">
+    <AppLayout>
       <HomePage />
-    </div>
+    </AppLayout>
   );
 }
 

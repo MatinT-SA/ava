@@ -4,19 +4,19 @@ import { FaMicrophoneAlt, FaArchive } from "react-icons/fa";
 
 function Sidebar() {
   return (
-    <aside className="fixed right-0 top-0 h-full w-64 bg-gray-900 text-white p-6 flex flex-col gap-10">
-      <div className="flex items-center gap-3">
+    <aside className="fixed top-0 right-0 flex h-full w-64 flex-col gap-10 bg-gray-900 p-6 text-white">
+      <div className="flex items-center justify-center gap-3">
         <Logo />
         <span className="text-2xl font-bold">آوا</span>
       </div>
 
-      <nav className="flex flex-col gap-4">
-        <div className="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-800 cursor-pointer">
+      <nav className="mt-25 flex h-full flex-col items-center gap-4">
+        <div className="flex cursor-pointer items-center gap-3 rounded-md px-3 py-2 hover:bg-gray-800">
           <FaMicrophoneAlt className="text-lg" />
           <span>تبدیل گفتار</span>
         </div>
 
-        <div className="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-800 cursor-pointer">
+        <div className="flex cursor-pointer items-center gap-3 rounded-md px-3 py-2 hover:bg-gray-800">
           <FaArchive className="text-lg" />
           <span>آرشیو</span>
         </div>
