@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { FaUser } from "react-icons/fa";
+import UserIcon from "../assets/icons/UserIcon";
+import ArrowDownIcon from "../assets/icons/ArrowDownIcon";
 
-export default function Button({ label = "مهمان", options = [], onSelect }) {
+export default function Button({ children, options = [], onSelect }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => setIsOpen(!isOpen);
@@ -19,21 +20,9 @@ export default function Button({ label = "مهمان", options = [], onSelect })
           isOpen ? "bg-[#f0fdfa]" : "bg-white"
         }`}
       >
-        <FaUser className="h-4 w-4 text-[#0f766e]" />
-        {label}
-        <svg
-          className="mt-0.5 h-3 w-3"
-          fill="none"
-          stroke="#0f766e"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d={isOpen ? "M5 15l7-7 7 7" : "M19 9l-7 7-7-7"}
-          />
-        </svg>
+        <UserIcon />
+        {children}
+        <ArrowDownIcon isOpen={isOpen} />
       </button>
 
       {isOpen && (

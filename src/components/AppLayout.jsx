@@ -6,9 +6,9 @@ function AppLayout({ children }) {
     <div className="grid h-screen grid-rows-[auto_1fr_auto]">
       <Sidebar />
 
-      <div className="overflow-scroll">
-        <main className="mx-auto max-w-3xl 2xl:max-w-6xl">{children}</main>
-      </div>
+      <main className="mx-auto max-w-3xl flex-grow 2xl:max-w-6xl">
+        {children}
+      </main>
     </div>
   );
 }

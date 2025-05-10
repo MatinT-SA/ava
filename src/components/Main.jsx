@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import Button from "../components/Button"; // این در اصل Dropdown شماست
+import { useState } from "react";
+import Button from "./Button";
 
 function Main() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -16,43 +16,7 @@ function Main() {
       {/* Dropdown Button - طبق طرح فیگما */}
       <div className="absolute top-6 left-6 z-50">
         <div className="relative">
-          <button
-            onClick={toggleDropdown}
-            className={`flex items-center gap-2 rounded-full border border-[#2dd4bf] px-4 py-2 text-sm text-[#0f766e] transition hover:bg-[#f0fdfa] ${
-              dropdownOpen ? "bg-[#f0fdfa]" : "bg-white"
-            }`}
-          >
-            {/* آیکون کاربر */}
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-4 w-4"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="#0f766e"
-              strokeWidth="2"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M5.121 17.804A13.937 13.937 0 0112 15c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0z"
-              />
-            </svg>
-            مهمان
-            {/* آیکون فلش */}
-            <svg
-              className="mt-0.5 h-3 w-3"
-              fill="none"
-              stroke="#0f766e"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M19 9l-7 7-7-7"
-              />
-            </svg>
-          </button>
+          <Button>مهمان</Button>
 
           {/* Dropdown List */}
           {dropdownOpen && (
