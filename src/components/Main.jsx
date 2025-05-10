@@ -1,5 +1,3 @@
-import { useState } from "react";
-import Button from "./Button";
 import Microphone from "./Microphone";
 import Uploader from "./Uploader";
 import Goftar from "./Goftar";
@@ -10,14 +8,14 @@ function Main() {
       <h1 className="text-3xl font-bold text-[#00BA9F]">تبدیل گفتار به متن</h1>
 
       <p className="text-custom-gray max-w-xl text-lg">
-        آوا با استفاده از هزاران ساعت گفتار با صدای افراد مختلف،
-        <br /> زبان فارسی را یاد گرفته است و می‌تواند متن صحبت‌ها را بنویسد.
+        آوا با استفاده از هزاران ساعت گفتار با صدای افراد مختلف، <br />
+        زبان فارسی را یاد گرفته است و می‌تواند متن صحبت‌ها را بنویسد.
       </p>
 
-      <Microphone />
-
+      {/* Upload section */}
       <Uploader />
 
+      {/* Goftar at bottom */}
       <Goftar />
     </div>
   );

@@ -1,6 +1,6 @@
 import React from "react";
-import SpeechInput from "./components/SpeechInput";
-import SpeechOutput from "./components/SpeechOutput";
+import SpeechInput from "./SpeechInput";
+import SpeechOutput from "./SpeechOutput";
 
 const SpeechConversionPage = () => {
   return (
