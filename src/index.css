@@ -16,8 +16,18 @@
   }
 }
 
+@layer components {
+  .sidebar-bg {
+    background-image:
+      url("/images/sidebar-bg.svg"),
+      linear-gradient(to bottom, #00b5a0, #00c69b);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+}
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
