@@ -4,7 +4,7 @@ import Goftar from "./Goftar";
 
 function Main() {
   return (
-    <div className="flex h-full flex-col items-center justify-start space-y-3 px-4 text-center">
+    <div className="flex h-full flex-col items-center justify-start space-y-3 bg-white px-4 text-center">
       <h1 className="text-3xl font-bold text-[#00BA9F]">تبدیل گفتار به متن</h1>
 
       <p className="text-custom-gray max-w-xl text-lg">
