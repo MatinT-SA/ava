@@ -1,4 +1,3 @@
-import Microphone from "./Microphone";
 import Uploader from "./Uploader";
 import Goftar from "./Goftar";
 
