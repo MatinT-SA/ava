@@ -1,13 +1,11 @@
-import React from "react";
-import ArchiveList from "./components/ArchiveList";
+// src/features/archive/ArchivePage.jsx
+import ArchiveTable from "./components/ArchiveTable";
 
-const ArchivePage = () => {
+export default function ArchivePage() {
   return (
-    <div>
-      <h1>آرشیو</h1>
-      <ArchiveList />
+    <div className="px-12 py-6">
+      <h1 className="mb-4 text-xl font-bold text-teal-600">آرشیو من</h1>
+      <ArchiveTable />
     </div>
   );
-};
-
-export default ArchivePage;
+}

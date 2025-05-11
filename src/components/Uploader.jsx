@@ -1,19 +1,19 @@
 import { useState } from "react";
-import { FaMicrophone, FaUpload, FaLink } from "react-icons/fa";
 import UploadIcon from "../assets/icons/UploadIcon";
 import MicIcon from "../assets/icons/MicIcon";
 import Input from "./Input";
 import Goftar from "./Goftar";
+import LinkIcon from "../assets/icons/LinkIcon";
 
 const tabs = [
-  { id: "record", label: "ضبط صدا", icon: <FaMicrophone />, color: "#00BA9F" },
+  { id: "record", label: "ضبط صدا", icon: <MicIcon />, color: "#00BA9F" },
   {
     id: "upload",
     label: "بارگذاری فایل",
-    icon: <FaUpload />,
+    icon: <UploadIcon />,
     color: "#118AD3",
   },
-  { id: "link", label: "لینک", icon: <FaLink />, color: "#FF1654" },
+  { id: "link", label: "لینک", icon: <LinkIcon />, color: "#FF1654" },
 ];
 
 function Uploader() {

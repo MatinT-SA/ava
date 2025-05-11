@@ -1,6 +1,7 @@
-function UploadIcon() {
+function UploadIcon({ className }) {
   return (
     <svg
+      className={className}
       width="33"
       height="28"
       viewBox="0 0 33 28"

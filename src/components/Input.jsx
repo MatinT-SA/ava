@@ -1,11 +1,12 @@
-import { FaLink } from "react-icons/fa";
+// import { FaLink } from "react-icons/fa";
+import LinkIcon from "../assets/icons/LinkIcon";
 
 function Input() {
   return (
     <div className="relative w-full max-w-sm">
       <div className="pointer-events-none absolute top-1/2 left-14 -translate-y-1/2">
         <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#FF1654]">
-          <FaLink className="text-sm font-semibold text-white" />
+          <LinkIcon className="text-sm font-semibold text-white" />
         </div>
       </div>
       <input

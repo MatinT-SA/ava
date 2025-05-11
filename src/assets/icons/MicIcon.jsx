@@ -1,8 +1,9 @@
 import React from "react";
 
-function MicIcon() {
+function MicIcon({ className }) {
   return (
     <svg
+      className={className}
       width="20"
       height="34"
       viewBox="0 0 20 34"

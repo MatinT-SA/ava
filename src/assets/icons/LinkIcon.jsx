@@ -1,8 +1,9 @@
 import React from "react";
 
-function LinkIcon() {
+function LinkIcon({ className }) {
   return (
     <svg
+      className={className}
       width="17"
       height="21"
       viewBox="0 0 17 21"
