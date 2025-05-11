@@ -1,5 +1,9 @@
 import { useState } from "react";
 import { FaMicrophone, FaUpload, FaLink } from "react-icons/fa";
+import UploadIcon from "../assets/icons/UploadIcon";
+import MicIcon from "../assets/icons/MicIcon";
+import Input from "./Input";
+import Goftar from "./Goftar";
 
 const tabs = [
   { id: "record", label: "ضبط صدا", icon: <FaMicrophone />, color: "#00BA9F" },
@@ -14,22 +18,27 @@ const tabs = [
 
 function Uploader() {
   const [activeTab, setActiveTab] = useState("upload");
+  const activeColor = tabs.find((tab) => tab.id === activeTab)?.color;
 
   return (
-    <div className="relative mt-20 w-full max-w-3xl space-y-4" dir="rtl">
-      {/* Tabs - OUTSIDE the upload box, on the top-right */}
-      <div className="-mb-0 flex justify-start">
+    <div className="relative mt-7 w-full max-w-3xl" dir="rtl">
+      {/* Tabs + Goftar */}
+      <div className="flex items-center justify-between">
         <div className="flex flex-row gap-2">
           {tabs.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium transition-all ${activeTab === tab.id ? "text-white shadow" : "text-custom-gray hover:text-primary"} `}
+              className={`flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium transition-all ${
+                activeTab === tab.id
+                  ? "text-white shadow"
+                  : "text-custom-gray hover:text-primary"
+              }`}
               style={{
                 backgroundColor:
                   activeTab === tab.id ? tab.color : "transparent",
                 borderRadius: activeTab === tab.id ? "10px 10px 0 0" : "0",
-                border: "none", // <-- Removed border
+                border: "none",
               }}
             >
               {tab.icon}
@@ -41,33 +50,52 @@ function Uploader() {
 
       {/* Upload Box */}
       <div
-        className="relative w-full rounded-3xl border bg-gray-50 p-6 shadow-md"
+        className="relative w-full rounded-3xl border bg-white p-6 shadow-md"
         style={{
           borderRadius:
             activeTab === "record" ? "1.5rem 0 1.5rem 1.5rem" : "1.5rem",
+          borderColor: activeColor,
+          borderWidth: "2px",
+          borderStyle: "solid",
         }}
       >
-        {/* Tab Content */}
         <div className="text-custom-gray flex flex-col items-center justify-center space-y-4 py-10 text-center">
           {activeTab === "record" && (
             <>
-              <FaMicrophone className="text-primary text-4xl" />
-              برای ضبط صدا دکمه را فشار دهید
+              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#00B3A1]">
+                <MicIcon className="text-primary text-4xl" />
+              </div>
+              <p>
+                برای شروع به صحبت، دکمه را فشار دهید
+                <br /> متن پیاده شده آن، در اینجا ظاهر شود
+              </p>
             </>
           )}
           {activeTab === "upload" && (
             <>
-              <FaUpload className="text-primary text-4xl" />
-              برای بارگذاری فایل گفتاری (صوتی/تصویری)، دکمه را فشار دهید
+              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#118AD3]">
+                <UploadIcon className="text-primary text-4xl" />
+              </div>
+              <p>
+                برای بارگذاری فایل گفتاری (صوتی/تصویری)، دکمه را فشار دهید
+                <br /> متن پیاده شده آن، در اینجا ظاهر می شود
+              </p>
             </>
           )}
           {activeTab === "link" && (
             <>
-              <FaLink className="text-primary text-4xl" />
-              برای افزودن لینک، دکمه را فشار دهید
+              <Input />
+              <p>
+                نشانی اینترنتی فایل حاوی گفتار (صوتی/تصویری) را وارد
+                <br /> و دکمه را فشار دهید
+              </p>
             </>
           )}
         </div>
+      </div>
+
+      <div className="ml-auto">
+        <Goftar />
       </div>
     </div>
   );

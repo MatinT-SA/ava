@@ -15,7 +15,7 @@ function Main() {
       <Uploader />
 
       {/* Goftar at bottom */}
-      <Goftar />
+      {/* <Goftar /> */}
     </div>
   );
 }

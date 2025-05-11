@@ -1,21 +1,60 @@
-import React from "react";
+import { useState, useRef, useEffect } from "react";
+import Button from "./Button";
+import ArrowIconDown from "../assets/icons/ArrowIconDown";
+import ArrowIconUp from "../assets/icons/ArrowIconUp";
 
 function Goftar() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedLang, setSelectedLang] = useState("فارسی");
+  const dropdownRef = useRef(null);
+
+  const languages = ["فارسی", "انگلیسی"];
+
+  const toggleDropdown = () => setIsOpen((prev) => !prev);
+
+  const handleSelect = (lang) => {
+    setSelectedLang(lang);
+    setIsOpen(false);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   return (
-    <div className="flex items-center space-x-4 rtl:space-x-reverse">
-      <span className="text-base">زبان گفتار</span>
-      {/* Dropdown Language Selector */}
-      <div className="relative">
-        <button className="rounded-xl border px-4 py-2 text-sm font-medium">
-          فارسی
-        </button>
-        {/* منوی کشویی */}
-        {/* 
-          <ul className="absolute top-full left-0 mt-1 w-full border bg-white rounded-md shadow-md">
-            <li className="px-4 py-2 hover:bg-gray-100">فارسی</li>
-            <li className="px-4 py-2 hover:bg-gray-100">انگلیسی</li>
-          </ul> 
-          */}
+    <div className="text-custom-teal mt-5 flex w-full items-center justify-end gap-6">
+      <span className="text-custom-gray text-base">زبان گفتار:</span>
+
+      <div className="relative" ref={dropdownRef}>
+        <Button
+          className="flex items-center justify-between gap-2 border-2 border-[#2dd4bf]"
+          onClick={toggleDropdown}
+        >
+          <span>{selectedLang}</span>
+          <span className="ml-2">
+            {isOpen ? <ArrowIconUp /> : <ArrowIconDown />}
+          </span>
+        </Button>
+
+        {isOpen && (
+          <ul className="absolute top-full right-0 z-20 mt-2 w-full min-w-[120px] rounded-md border bg-white py-1 text-sm text-gray-700 shadow-md">
+            {languages.map((lang) => (
+              <li
+                key={lang}
+                onClick={() => handleSelect(lang)}
+                className="cursor-pointer px-4 py-2 hover:bg-gray-100"
+              >
+                {lang}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );

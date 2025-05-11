@@ -3,7 +3,6 @@ import UserMenu from "./UserMenu";
 function Header() {
   const handleLogout = () => {
     console.log("خروج کلیک شد");
-    // اینجا می‌تونی منطق لاگ‌اوت رو پیاده‌سازی کنی
   };
 
   return (
