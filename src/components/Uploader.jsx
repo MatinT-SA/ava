@@ -18,13 +18,13 @@ function Uploader() {
   return (
     <div className="relative mt-20 w-full max-w-3xl space-y-4" dir="rtl">
       {/* Tabs - OUTSIDE the upload box, on the top-right */}
-      <div className="-mb-2 flex justify-start">
+      <div className="-mb-0 flex justify-start">
         <div className="flex flex-row gap-2">
           {tabs.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center gap-2 px-4 py-2 text-sm font-medium transition-all ${activeTab === tab.id ? "text-white shadow" : "text-custom-gray hover:text-primary"} `}
+              className={`flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium transition-all ${activeTab === tab.id ? "text-white shadow" : "text-custom-gray hover:text-primary"} `}
               style={{
                 backgroundColor:
                   activeTab === tab.id ? tab.color : "transparent",
