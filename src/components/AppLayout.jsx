@@ -4,7 +4,7 @@ import Header from "./Header";
 function AppLayout({ children }) {
   return (
     <div className="flex h-screen bg-white">
-      <div className="w-48 shrink-0 rounded-tl-2xl rounded-bl-2xl border-l border-gray-200 p-4">
+      <div className="w-44 shrink-0 rounded-tl-2xl rounded-bl-2xl border-l border-gray-200 p-4">
         <Sidebar />
       </div>
 
