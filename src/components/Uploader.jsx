@@ -25,26 +25,32 @@ function Uploader() {
       {/* Tabs + Goftar */}
       <div className="flex items-center justify-between">
         <div className="flex flex-row gap-2">
-          {tabs.map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`flex cursor-pointer items-center justify-center gap-2 px-4 py-3 text-sm font-medium transition-all ${
-                activeTab === tab.id
-                  ? "text-white shadow"
-                  : "text-custom-gray hover:text-primary"
-              }`}
-              style={{
-                backgroundColor:
-                  activeTab === tab.id ? tab.color : "transparent",
-                borderRadius: activeTab === tab.id ? "10px 10px 0 0" : "0",
-                border: "none",
-              }}
-            >
-              {tab.icon}
-              {tab.label}
-            </button>
-          ))}
+          {tabs.map((tab) => {
+            const isActive = activeTab === tab.id;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`flex cursor-pointer items-center justify-center gap-2 px-4 py-3 text-sm font-medium transition-all ${
+                  isActive
+                    ? "text-white shadow"
+                    : "text-custom-gray hover:text-primary"
+                }`}
+                style={{
+                  backgroundColor: isActive ? tab.color : "transparent",
+                  borderRadius: isActive ? "10px 10px 0 0" : "0",
+                  border: "none",
+                }}
+              >
+                <span
+                  className={`${isActive ? "text-white" : "text-custom-gray"}`}
+                >
+                  {tab.icon}
+                </span>
+                {tab.label}
+              </button>
+            );
+          })}
         </div>
       </div>
 
@@ -95,6 +101,7 @@ function Uploader() {
         </div>
       </div>
 
+      {/* Goftar */}
       <div className="ml-auto">
         <Goftar />
       </div>

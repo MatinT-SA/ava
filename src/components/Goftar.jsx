@@ -33,13 +33,11 @@ function Goftar() {
 
       <div className="relative" ref={dropdownRef}>
         <Button
-          className="flex items-center justify-between gap-2 border-2 border-[#2dd4bf]"
+          className="flex items-center justify-between gap-6 border-2 border-[#2dd4bf] pr-9"
           onClick={toggleDropdown}
         >
           <span>{selectedLang}</span>
-          <span className="ml-2">
-            {isOpen ? <ArrowIconUp /> : <ArrowIconDown />}
-          </span>
+          <span>{isOpen ? <ArrowIconUp /> : <ArrowIconDown />}</span>
         </Button>
 
         {isOpen && (

@@ -11,11 +11,7 @@ function Main() {
         زبان فارسی را یاد گرفته است و می‌تواند متن صحبت‌ها را بنویسد.
       </p>
 
-      {/* Upload section */}
       <Uploader />
-
-      {/* Goftar at bottom */}
-      {/* <Goftar /> */}
     </div>
   );
 }
