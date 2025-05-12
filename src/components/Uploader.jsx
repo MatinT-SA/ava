@@ -21,7 +21,7 @@ function Uploader() {
   const activeColor = tabs.find((tab) => tab.id === activeTab)?.color;
 
   return (
-    <div className="relative mt-10 h-[477px] w-[653px] max-w-3xl" dir="rtl">
+    <div className="relative mt-10 h-[429px] w-[653px] max-w-3xl" dir="rtl">
       {/* Tabs + Goftar */}
       <div className="flex items-center justify-between">
         <div className="flex flex-row gap-2">
@@ -56,13 +56,12 @@ function Uploader() {
 
       {/* Upload Box */}
       <div
-        className="relative h-[477px] w-[653px]"
+        className="relative h-[429px] w-[653px]"
         dir="rtl"
         style={{
-          borderRadius:
-            activeTab === "record" ? "1.5rem 0 1.5rem 1.5rem" : "1.5rem",
+          borderRadius: activeTab === "record" ? "25px 0 25px 25px" : "25px",
           borderColor: activeColor,
-          borderWidth: "2px",
+          borderWidth: "1px",
           borderStyle: "solid",
         }}
       >
