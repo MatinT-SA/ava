@@ -32,7 +32,6 @@ export default function ArchiveTable() {
         </tbody>
       </table>
 
-      {/* pagination زیر جدول */}
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}

@@ -62,7 +62,6 @@ export default function ArchiveRow({ item }) {
       <td className="px-4 py-2">{item.fileType}</td>
       <td className="px-4 py-2">{item.duration}</td>
 
-      {/* عملیات */}
       <td className="px-4 py-2">
         <div className="flex items-center justify-center gap-5 text-gray-500">
           <button>
@@ -71,14 +70,16 @@ export default function ArchiveRow({ item }) {
               className="h-5 w-5 cursor-pointer hover:text-blue-600"
             />
           </button>
-          <button title="ویرایش">
+          <button>
             <WordIcon className="h-5 w-5 cursor-pointer hover:text-green-600" />
           </button>
-          <button title="اشتراک‌گذاری">
+          <button>
             <CopyIcon className="h-5 w-5 cursor-pointer hover:text-cyan-600" />
           </button>
-          <button title="حذف">
-            <DeleteIcon className="h-5 w-5 cursor-pointer hover:text-red-600" />
+          <button className="group">
+            <div className="flex h-8 w-8 items-center justify-center rounded-full transition-colors group-hover:bg-[#DC3545]">
+              <DeleteIcon className="h-5 w-5 text-gray-500 group-hover:text-white" />
+            </div>
           </button>
         </div>
       </td>

@@ -21,7 +21,7 @@ function Uploader() {
   const activeColor = tabs.find((tab) => tab.id === activeTab)?.color;
 
   return (
-    <div className="relative mt-7 w-full max-w-3xl" dir="rtl">
+    <div className="relative mt-7 h-[477px] w-[653px] max-w-3xl" dir="rtl">
       {/* Tabs + Goftar */}
       <div className="flex items-center justify-between">
         <div className="flex flex-row gap-2">
@@ -29,7 +29,7 @@ function Uploader() {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium transition-all ${
+              className={`flex cursor-pointer items-center justify-center gap-2 px-4 py-3 text-sm font-medium transition-all ${
                 activeTab === tab.id
                   ? "text-white shadow"
                   : "text-custom-gray hover:text-primary"
@@ -50,7 +50,8 @@ function Uploader() {
 
       {/* Upload Box */}
       <div
-        className="relative w-full rounded-3xl border bg-white p-6 shadow-md"
+        className="relative h-[477px] w-[653px]"
+        dir="rtl"
         style={{
           borderRadius:
             activeTab === "record" ? "1.5rem 0 1.5rem 1.5rem" : "1.5rem",
@@ -59,7 +60,7 @@ function Uploader() {
           borderStyle: "solid",
         }}
       >
-        <div className="text-custom-gray flex flex-col items-center justify-center space-y-4 py-10 text-center">
+        <div className="text-custom-gray flex h-full flex-col items-center justify-center space-y-4 self-center py-10 text-center">
           {activeTab === "record" && (
             <>
               <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#00B3A1]">

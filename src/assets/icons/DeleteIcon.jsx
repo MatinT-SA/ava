@@ -3,7 +3,7 @@ import React from "react";
 function DeleteIcon() {
   return (
     <svg
-      className="cursor-pointer"
+      className="cursor-pointer stroke-gray-500 hover:stroke-white" // Apply hover on the whole svg
       width="11"
       height="16"
       viewBox="0 0 11 16"
@@ -13,39 +13,39 @@ function DeleteIcon() {
       <path
         d="M1.49172 2.56934H9.94577C10.2182 2.56934 10.4375 2.78457 10.4375 3.05192V14.5175C10.4375 14.7848 10.2182 15.0001 9.94577 15.0001H1.49172C1.21931 15.0001 1 14.7848 1 14.5175V3.05192C1 2.78457 1.21931 2.56934 1.49172 2.56934V2.56934Z"
         stroke="#8F8F8F"
-        stroke-miterlimit="6.2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeMiterlimit="6.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M1.03578 1.42236H10.4302"
         stroke="#8F8F8F"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M3.04933 4.17505V13.3949"
         stroke="#8F8F8F"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M5.71863 4.17505V13.3949"
         stroke="#8F8F8F"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M8.38811 4.17505V13.3949"
         stroke="#8F8F8F"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M4.35373 1H7.11263"
         stroke="#8F8F8F"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
