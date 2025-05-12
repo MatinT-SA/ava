@@ -21,7 +21,7 @@ function Uploader() {
   const activeColor = tabs.find((tab) => tab.id === activeTab)?.color;
 
   return (
-    <div className="relative mt-7 h-[477px] w-[653px] max-w-3xl" dir="rtl">
+    <div className="relative mt-10 h-[477px] w-[653px] max-w-3xl" dir="rtl">
       {/* Tabs + Goftar */}
       <div className="flex items-center justify-between">
         <div className="flex flex-row gap-2">
@@ -70,7 +70,7 @@ function Uploader() {
           {activeTab === "record" && (
             <>
               <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#00B3A1]">
-                <MicIcon className="text-primary text-4xl" />
+                <MicIcon className="text-4xl text-white" />
               </div>
               <p>
                 برای شروع به صحبت، دکمه را فشار دهید
@@ -81,7 +81,7 @@ function Uploader() {
           {activeTab === "upload" && (
             <>
               <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#118AD3]">
-                <UploadIcon className="text-primary text-4xl" />
+                <UploadIcon className="text-4xl text-white" />
               </div>
               <p>
                 برای بارگذاری فایل گفتاری (صوتی/تصویری)، دکمه را فشار دهید
