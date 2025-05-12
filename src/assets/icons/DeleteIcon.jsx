@@ -3,6 +3,7 @@ import React from "react";
 function DeleteIcon() {
   return (
     <svg
+      className="cursor-pointer"
       width="11"
       height="16"
       viewBox="0 0 11 16"

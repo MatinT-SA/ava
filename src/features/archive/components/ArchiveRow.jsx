@@ -6,6 +6,7 @@ import DeleteIcon from "../../../assets/icons/DeleteIcon";
 import CopyIcon from "../../../assets/icons/CopyIcon";
 import WordIcon from "../../../assets/icons/WordIcon";
 import DownloadIcon from "../../../assets/icons/DownloadIcon";
+import DownloadIconWithTooltip from "../../../components/DownloadIconWithTooltip/DownloadIconWithTooltip";
 
 function getSourceTypeMeta(type) {
   switch (type) {
@@ -45,6 +46,7 @@ function getSourceTypeMeta(type) {
 }
 
 export default function ArchiveRow({ item }) {
+  console.log(item);
   const { icon, color, label } = getSourceTypeMeta(item.sourceType);
 
   return (
@@ -63,17 +65,20 @@ export default function ArchiveRow({ item }) {
       {/* عملیات */}
       <td className="px-4 py-2">
         <div className="flex items-center justify-center gap-5 text-gray-500">
-          <button title="مشاهده">
-            <DownloadIcon className="h-5 w-5 hover:text-blue-600" />
+          <button>
+            <DownloadIconWithTooltip
+              file={{ sizeInBytes: item.sizeInBytes }}
+              className="h-5 w-5 cursor-pointer hover:text-blue-600"
+            />
           </button>
           <button title="ویرایش">
-            <WordIcon className="h-5 w-5 hover:text-green-600" />
+            <WordIcon className="h-5 w-5 cursor-pointer hover:text-green-600" />
           </button>
           <button title="اشتراک‌گذاری">
-            <CopyIcon className="h-5 w-5 hover:text-cyan-600" />
+            <CopyIcon className="h-5 w-5 cursor-pointer hover:text-cyan-600" />
           </button>
           <button title="حذف">
-            <DeleteIcon className="h-5 w-5 hover:text-red-600" />
+            <DeleteIcon className="h-5 w-5 cursor-pointer hover:text-red-600" />
           </button>
         </div>
       </td>
