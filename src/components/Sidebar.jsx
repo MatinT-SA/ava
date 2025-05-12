@@ -1,6 +1,6 @@
-import React from "react";
 import Logo from "./Logo";
-import { FaMicrophoneAlt, FaArchive } from "react-icons/fa";
+import SpeechIcon from "../assets/icons/SpeechIcon";
+import ArchiveIcon from "../assets/icons/ArchiveIcon";
 
 function Sidebar() {
   return (
@@ -12,12 +12,12 @@ function Sidebar() {
 
       <nav className="mt-25 flex h-full flex-col items-center gap-8">
         <div className="flex cursor-pointer items-center gap-3 rounded-md px-3 py-2 hover:bg-gray-800">
-          <FaMicrophoneAlt className="text-lg" />
+          <SpeechIcon className="text-lg" />
           <span>تبدیل گفتار</span>
         </div>
 
         <div className="flex cursor-pointer items-center gap-3 rounded-md px-3 py-2 hover:bg-gray-800">
-          <FaArchive className="text-lg" />
+          <ArchiveIcon className="text-lg" />
           <span>آرشیو</span>
         </div>
       </nav>
