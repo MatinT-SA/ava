@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
-import Button from "./Button";
-import ArrowIconDown from "../assets/icons/ArrowIconDown";
-import ArrowIconUp from "../assets/icons/ArrowIconUp";
+import Button from "../../components/Button";
+import ArrowIconDown from "../../assets/icons/ArrowIconDown";
+import ArrowIconUp from "../../assets/icons/ArrowIconUp";
 
 function Goftar() {
   const [isOpen, setIsOpen] = useState(false);

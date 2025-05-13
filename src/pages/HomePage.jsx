@@ -1,4 +1,4 @@
-import Main from "../components/Main";
+import Main from "../features/speechConversion/Main";
 
 function HomePage() {
   return <Main />;

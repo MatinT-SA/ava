@@ -8,7 +8,7 @@ export default function UserMenu({ onLogout }) {
     <DropdownMenu label="مهمان" icon={<UserIcon />}>
       <Button
         onClick={onLogout}
-        className="flex items-center justify-start gap-2 hover:bg-gray-100"
+        className="flex items-center justify-start gap-2"
       >
         <LogoutIcon />
         خروج

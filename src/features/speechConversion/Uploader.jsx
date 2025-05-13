@@ -1,9 +1,9 @@
 import { useState } from "react";
-import UploadIcon from "../assets/icons/UploadIcon";
-import MicIcon from "../assets/icons/MicIcon";
-import Input from "./Input";
+import UploadIcon from "../../assets/icons/UploadIcon";
+import MicIcon from "../../assets/icons/MicIcon";
+import Input from "../../components/Input";
 import Goftar from "./Goftar";
-import LinkIcon from "../assets/icons/LinkIcon";
+import LinkIcon from "../../assets/icons/LinkIcon";
 
 const tabs = [
   { id: "record", label: "ضبط صدا", icon: <MicIcon />, color: "#00BA9F" },

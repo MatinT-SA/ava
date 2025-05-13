@@ -8,7 +8,7 @@ export default function Button({
   return (
     <button
       onClick={onClick}
-      className={`rounded-full px-4 py-2 ${className}`}
+      className={`cursor-pointer rounded-full px-4 py-2 ${className}`}
       type={type}
       {...rest}
     >
