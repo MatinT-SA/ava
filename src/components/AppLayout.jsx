@@ -34,19 +34,28 @@ function AppLayout({ children }) {
   return (
     <div className="flex h-screen bg-white">
       {/* اگر سایدبار باید نمایش داده بشه، از position fixed استفاده میکنیم */}
-      {isSidebarVisible && <div onClick={closeSidebar}></div>}
+      {isSidebarVisible && isMobileView && (
+        <div
+          className="fixed top-0 right-0 bottom-0 left-0 z-40 bg-black opacity-30"
+          onClick={closeSidebar}
+        ></div>
+      )}
 
       {/* نمایش سایدبار در اندازه‌های کوچکتر از 1024px */}
       <div
         className={`fixed top-0 right-0 z-50 flex h-full w-44 flex-col gap-10 rounded-tl-2xl rounded-bl-2xl p-2 text-white opacity-95 transition-transform ${
-          isSidebarVisible ? "translate-x-0" : "translate-x-full"
+          isSidebarVisible && isMobileView
+            ? "translate-x-0"
+            : "translate-x-full"
         } lg:block lg:translate-x-0`}
       >
         <Sidebar closeSidebar={closeSidebar} isMobileView={isMobileView} />
       </div>
 
       <div
-        className={`flex flex-1 flex-col overflow-hidden ${isSidebarVisible && isMobileView ? "fixed inset-0 z-40 bg-black opacity-30" : ""}`}
+        className={`flex flex-1 flex-col overflow-hidden ${
+          !isMobileView && "lg:mr-44" // فقط زمانی که موبایل نیست، فضای 44px رو برای سایدبار در نظر می‌گیریم
+        }`}
       >
         {/* ارسال وضعیت‌ها به Header برای مدیریت همبرگر و سایدبار */}
         <Header

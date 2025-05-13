@@ -5,8 +5,8 @@ import ArchivePage from "./features/archive/ArchivePage";
 function App() {
   return (
     <AppLayout>
-      <HomePage />
-      {/* <ArchivePage /> */}
+      {/* <HomePage /> */}
+      <ArchivePage />
     </AppLayout>
   );
 }
