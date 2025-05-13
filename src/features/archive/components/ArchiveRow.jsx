@@ -5,7 +5,6 @@ import UploadIcon from "../../../assets/icons/UploadIcon";
 import DeleteIcon from "../../../assets/icons/DeleteIcon";
 import CopyIcon from "../../../assets/icons/CopyIcon";
 import WordIcon from "../../../assets/icons/WordIcon";
-import DownloadIcon from "../../../assets/icons/DownloadIcon";
 import DownloadIconWithTooltip from "../../../components/DownloadIconWithTooltip/DownloadIconWithTooltip";
 
 function getSourceTypeMeta(type) {
@@ -51,8 +50,10 @@ export default function ArchiveRow({ item }) {
 
   return (
     <tr className="border-b bg-white text-sm text-gray-700">
-      <td className="flex items-center gap-2 px-4 py-2">
+      <td>
         <span className={`text-lg ${color}`}>{icon}</span>
+      </td>
+      <td className="flex items-center gap-12 px-4 py-2">
         <div className="flex flex-col">
           <span className="font-medium">
             {item.sourceType === "link" ? item.fileUrl : item.fileName}
