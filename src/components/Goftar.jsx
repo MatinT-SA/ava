@@ -29,11 +29,11 @@ function Goftar() {
 
   return (
     <div className="text-custom-teal mt-5 flex w-full items-center justify-end gap-6">
-      <span className="text-custom-gray text-base">زبان گفتار:</span>
+      <span className="text-custom-gray text-sm">زبان گفتار:</span>
 
       <div className="relative" ref={dropdownRef}>
         <Button
-          className="flex items-center justify-between gap-6 border-2 border-[#2dd4bf] pr-9"
+          className="flex items-center justify-between gap-6 border-2 border-[#2dd4bf] pr-9 text-sm"
           onClick={toggleDropdown}
         >
           <span>{selectedLang}</span>
