@@ -5,6 +5,7 @@
   --color-custom-teal: #00ba9f;
   --color-custom-gray: #969696;
   --color-green-pagination: #07b49b;
+  --color-red-delete: #dc3545;
 }
 
 @font-face {
@@ -27,17 +28,16 @@
     background-position: center;
   }
 
-  .sidebar-item.active {
-    background-color: red;
-    color: white;
-  }
-
   .copy-icon {
     transition: fill 0.3s ease;
   }
 
   .copy-icon:hover path {
     fill: var(--color-green-pagination);
+  }
+
+  .delete-icon {
+    transition: fill 0.3s ease;
   }
 }
 
@@ -61,4 +61,12 @@ body {
   display: flex;
   flex-direction: column;
   font-family: "Vazir", sans-serif;
+}
+
+/* Responsiveness */
+
+@media (min-width: 1800px) {
+  html {
+    font-size: 180%;
+  }
 }

@@ -1,7 +1,7 @@
-function CopyIcon() {
+function CopyIcon({ className = "" }) {
   return (
     <svg
-      className="copy-icon"
+      className={`copy-icon ${className}`}
       width="16"
       height="18"
       viewBox="0 0 16 18"

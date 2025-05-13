@@ -73,22 +73,22 @@ export default function ArchiveRow({ item }) {
       <td className="px-4 py-2 text-xs">{item.duration}</td>
 
       <td className="px-4 py-2">
-        <div className="flex items-center justify-center gap-5 text-gray-500">
+        <div className="flex items-center justify-center gap-5">
           <button>
             <DownloadIconWithTooltip
               file={{ sizeInBytes: item.sizeInBytes }}
-              className="h-5 w-5 hover:text-blue-600"
+              className="h-4 w-4"
             />
           </button>
           <button>
-            <WordIcon className="h-5 w-5 hover:text-blue-600" />
+            <WordIcon className="h-4 w-4" />
           </button>
           <button>
-            <CopyIcon className="h-5 w-5 text-gray-500 hover:text-green-500" />
+            <CopyIcon className="h-4 w-4" />
           </button>
           <button className="group">
-            <div className="flex h-8 w-8 items-center justify-center rounded-full transition-colors group-hover:bg-[#DC3545]">
-              <DeleteIcon className="h-5 w-5 text-gray-500 group-hover:text-white" />
+            <div className="group-hover:bg-red-delete flex h-7 w-7 items-center justify-center rounded-full transition-colors">
+              <DeleteIcon className="text-custom-gray h-4 w-4 transition-colors group-hover:text-white" />
             </div>
           </button>
         </div>

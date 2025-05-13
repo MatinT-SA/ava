@@ -20,10 +20,10 @@ function convertToPersianNumbers(str) {
     .join("");
 }
 
-export default function DownloadIconWithTooltip({ file }) {
+export default function DownloadIconWithTooltip({ file, className }) {
   return (
     <div className={styles.iconWrapper}>
-      <DownloadIcon />
+      <DownloadIcon className={className} />
       {file?.sizeInBytes && (
         <div className={styles.tooltip}>{formatBytes(file.sizeInBytes)}</div>
       )}

@@ -1,9 +1,9 @@
 import React from "react";
 
-function DownloadIcon() {
+function DownloadIcon({ className = "" }) {
   return (
     <svg
-      className="copy-icon"
+      className={`copy-icon ${className}`}
       width="14"
       height="15"
       viewBox="0 0 14 15"

@@ -1,8 +1,9 @@
 import React from "react";
 
-function WordIcon() {
+function WordIcon({ className = "" }) {
   return (
     <svg
+      className={className}
       width="13"
       height="18"
       viewBox="0 0 13 18"

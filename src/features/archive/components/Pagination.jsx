@@ -38,7 +38,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className="flex h-8 w-8 cursor-pointer items-center justify-center rounded px-6 pl-0 text-black hover:bg-gray-200 disabled:opacity-40"
+        className="flex h-8 w-8 cursor-pointer items-center justify-center rounded px-6 pl-0 text-black disabled:opacity-40"
       >
         <ArrowIconRight />
       </button>
@@ -55,7 +55,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
             className={`flex h-8 w-8 cursor-pointer items-center justify-center text-sm text-black ${
               page === currentPage
                 ? "bg-green-pagination rounded-full text-white"
-                : "rounded hover:bg-gray-200"
+                : "rounded"
             }`}
           >
             {convertToPersianNumber(page)}
@@ -66,7 +66,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="flex h-8 w-8 cursor-pointer items-center justify-center rounded px-6 pr-0 text-black hover:bg-gray-200 disabled:opacity-40"
+        className="flex h-8 w-8 cursor-pointer items-center justify-center rounded px-6 pr-0 text-black disabled:opacity-40"
       >
         <ArrowIconLeft />
       </button>
