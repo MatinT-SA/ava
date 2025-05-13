@@ -36,15 +36,16 @@ function AppLayout({ children }) {
       {/* اگر سایدبار باید نمایش داده بشه، از position fixed استفاده میکنیم */}
       {isSidebarVisible && <div onClick={closeSidebar}></div>}
 
-      {/* نمایش سایدبار در اندازه‌های بزرگتر از 1024px */}
+      {/* نمایش سایدبار در اندازه‌های کوچکتر از 1024px */}
       <div
-        className={`w-44 shrink-0 rounded-tl-2xl rounded-bl-2xl border-l border-gray-200 p-4 lg:block ${isSidebarVisible ? "block" : "hidden"}`}
+        className={`fixed top-0 right-0 z-50 flex h-full w-44 flex-col gap-10 rounded-tl-2xl rounded-bl-2xl p-2 text-white opacity-95 transition-transform ${
+          isSidebarVisible ? "translate-x-0" : "translate-x-full"
+        } lg:block lg:translate-x-0`}
       >
         <Sidebar closeSidebar={closeSidebar} isMobileView={isMobileView} />
       </div>
 
       <div className="flex flex-1 flex-col overflow-hidden">
-        {/* ارسال وضعیت‌ها به Header برای مدیریت همبرگر و سایدبار */}
         <Header
           toggleSidebar={toggleSidebar}
           isMobileView={isMobileView}
