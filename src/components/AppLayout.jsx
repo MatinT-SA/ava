@@ -45,13 +45,22 @@ function AppLayout({ children }) {
         <Sidebar closeSidebar={closeSidebar} isMobileView={isMobileView} />
       </div>
 
-      <div className="flex flex-1 flex-col overflow-hidden">
+      <div
+        className={`flex flex-1 flex-col overflow-hidden ${isSidebarVisible && isMobileView ? "fixed inset-0 z-40 bg-black opacity-30" : ""}`}
+      >
+        {/* ارسال وضعیت‌ها به Header برای مدیریت همبرگر و سایدبار */}
         <Header
           toggleSidebar={toggleSidebar}
           isMobileView={isMobileView}
           isSidebarVisible={isSidebarVisible}
         />
-        <main className="flex-1 overflow-y-auto">{children}</main>
+        <main
+          className={`flex-1 overflow-y-auto ${
+            isSidebarVisible && isMobileView ? "bg-opacity-50" : ""
+          }`}
+        >
+          {children}
+        </main>
       </div>
     </div>
   );
