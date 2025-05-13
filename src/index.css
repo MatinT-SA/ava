@@ -4,6 +4,7 @@
   --color-sidebar-item-hover: #02816e;
   --color-custom-teal: #00ba9f;
   --color-custom-gray: #969696;
+  --color-green-pagination: #07b49b;
 }
 
 @font-face {
@@ -29,6 +30,14 @@
   .sidebar-item.active {
     background-color: red;
     color: white;
+  }
+
+  .copy-icon {
+    transition: fill 0.3s ease;
+  }
+
+  .copy-icon:hover path {
+    fill: var(--color-green-pagination);
   }
 }
 

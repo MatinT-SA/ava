@@ -3,7 +3,6 @@ import React from "react";
 function WordIcon() {
   return (
     <svg
-      className="cursor-pointer"
       width="13"
       height="18"
       viewBox="0 0 13 18"

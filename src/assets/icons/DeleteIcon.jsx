@@ -3,7 +3,7 @@ import React from "react";
 function DeleteIcon() {
   return (
     <svg
-      className="cursor-pointer stroke-gray-500 hover:stroke-white" // Apply hover on the whole svg
+      className="stroke-gray-500 hover:stroke-white" // Apply hover on the whole svg
       width="11"
       height="16"
       viewBox="0 0 11 16"

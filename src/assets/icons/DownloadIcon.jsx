@@ -3,7 +3,7 @@ import React from "react";
 function DownloadIcon() {
   return (
     <svg
-      className="cursor-pointer"
+      className="copy-icon"
       width="14"
       height="15"
       viewBox="0 0 14 15"

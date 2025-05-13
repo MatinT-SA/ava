@@ -1,9 +1,7 @@
-import React from "react";
-
 function CopyIcon() {
   return (
     <svg
-      className="cursor-pointer"
+      className="copy-icon"
       width="16"
       height="18"
       viewBox="0 0 16 18"

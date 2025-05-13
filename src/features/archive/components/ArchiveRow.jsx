@@ -77,14 +77,14 @@ export default function ArchiveRow({ item }) {
           <button>
             <DownloadIconWithTooltip
               file={{ sizeInBytes: item.sizeInBytes }}
-              className="h-5 w-5 cursor-pointer hover:text-blue-600"
+              className="h-5 w-5 hover:text-blue-600"
             />
           </button>
           <button>
-            <WordIcon className="h-5 w-5 cursor-pointer hover:text-green-600" />
+            <WordIcon className="h-5 w-5 hover:text-blue-600" />
           </button>
           <button>
-            <CopyIcon className="h-5 w-5 cursor-pointer hover:text-cyan-600" />
+            <CopyIcon className="h-5 w-5 text-gray-500 hover:text-green-500" />
           </button>
           <button className="group">
             <div className="flex h-8 w-8 items-center justify-center rounded-full transition-colors group-hover:bg-[#DC3545]">
