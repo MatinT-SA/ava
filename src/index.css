@@ -1,6 +1,10 @@
 @import "tailwindcss";
 
 @theme {
+  /* breakpoints */
+  --breakpoint-xplus: 1800px;
+
+  /* colors */
   --color-sidebar-item-hover: #02816e;
   --color-custom-teal: #00ba9f;
   --color-custom-gray: #969696;
