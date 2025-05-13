@@ -21,7 +21,10 @@ function Uploader() {
   const activeColor = tabs.find((tab) => tab.id === activeTab)?.color;
 
   return (
-    <div className="relative mt-10 h-[429px] w-[653px] max-w-3xl" dir="rtl">
+    <div
+      className="relative mt-10 h-[429px] w-[653px] max-w-3xl pb-6"
+      dir="rtl"
+    >
       {/* Tabs + Goftar */}
       <div className="flex items-center justify-between">
         <div className="flex flex-row gap-2">
@@ -101,7 +104,7 @@ function Uploader() {
       </div>
 
       {/* Goftar */}
-      <div className="ml-auto">
+      <div>
         <Goftar />
       </div>
     </div>
