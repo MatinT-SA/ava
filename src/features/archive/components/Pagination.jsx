@@ -7,7 +7,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   finalPages.push(1);
 
   if (currentPage - 2 > 1) {
-    finalPages.push("...");
+    finalPages.push(". . .");
   }
 
   if (currentPage - 1 > 1) {
@@ -26,7 +26,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   }
 
   if (currentPage + 2 < totalPages - 1) {
-    finalPages.push("...");
+    finalPages.push(". . .");
   }
 
   if (totalPages > 1) {
@@ -38,21 +38,21 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className="flex h-8 w-8 cursor-pointer items-center justify-center rounded px-6 pl-0 text-black disabled:opacity-40"
+        className="flex h-8 w-8 cursor-pointer items-center justify-center rounded px-5 pl-0 text-black disabled:opacity-40"
       >
         <ArrowIconRight />
       </button>
 
       {finalPages.map((page, index) =>
-        page === "..." ? (
+        page === ". . ." ? (
           <span key={index} className="px-2 text-black">
-            ...
+            . . .
           </span>
         ) : (
           <button
             key={index}
             onClick={() => onPageChange(page)}
-            className={`flex h-8 w-8 cursor-pointer items-center justify-center text-sm text-black ${
+            className={`flex h-5 w-5 cursor-pointer items-center justify-center text-sm text-black ${
               page === currentPage
                 ? "bg-green-pagination rounded-full text-white"
                 : "rounded"
@@ -66,7 +66,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="flex h-8 w-8 cursor-pointer items-center justify-center rounded px-6 pr-0 text-black disabled:opacity-40"
+        className="flex h-8 w-8 cursor-pointer items-center justify-center rounded px-5 pr-0 text-black disabled:opacity-40"
       >
         <ArrowIconLeft />
       </button>
