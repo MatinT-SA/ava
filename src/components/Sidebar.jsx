@@ -11,12 +11,12 @@ function Sidebar() {
       </div>
 
       <nav className="mt-25 flex h-full flex-col items-stretch gap-8">
-        <div className="flex cursor-pointer items-center justify-start gap-4 rounded-md py-2.5 pr-5 hover:bg-[#02816E]">
+        <div className="hover:bg-sidebar-item-hover flex cursor-pointer items-center justify-start gap-4 rounded-md py-2.5 pr-5">
           <SpeechIcon />
           <span>تبدیل گفتار</span>
         </div>
 
-        <div className="flex cursor-pointer items-center justify-start gap-8 rounded-md py-2.5 pr-5 hover:bg-[#02816E]">
+        <div className="hover:bg-sidebar-item-hover flex cursor-pointer items-center justify-start gap-8 rounded-md py-2.5 pr-5">
           <ArchiveIcon />
           <span>آرشیو</span>
         </div>

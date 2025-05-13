@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+@theme {
+  --color-sidebar-item-hover: #02816e;
+  --color-custom-teal: #00ba9f;
+  --color-custom-gray: #969696;
+}
+
 @font-face {
   font-family: "Vazir";
   src:
@@ -10,20 +16,6 @@
   font-style: normal;
 }
 
-@layer utilities {
-  .text-custom-teal {
-    color: #00ba9f;
-  }
-
-  .text-custom-gray {
-    color: #969696;
-  }
-
-  .bg-blue-tab {
-    color: #118ad3;
-  }
-}
-
 @layer components {
   .sidebar-bg {
     background-image:
@@ -32,6 +24,11 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+  }
+
+  .sidebar-item.active {
+    background-color: red;
+    color: white;
   }
 }
 
