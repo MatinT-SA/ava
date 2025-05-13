@@ -1,10 +1,18 @@
+import { FiX } from "react-icons/fi"; // آیکون ضربدر
 import Logo from "./Logo";
 import SpeechIcon from "../assets/icons/SpeechIcon";
 import ArchiveIcon from "../assets/icons/ArchiveIcon";
 
-function Sidebar() {
+function Sidebar({ closeSidebar, isMobileView }) {
   return (
-    <aside className="sidebar-bg rounde fixed top-0 right-0 flex h-full w-44 flex-col gap-10 rounded-tl-2xl rounded-bl-2xl p-2 text-white opacity-95">
+    <aside className="sidebar-bg fixed top-0 right-0 flex h-full w-44 flex-col gap-10 rounded rounded-tl-2xl rounded-bl-2xl p-2 text-white opacity-95">
+      {/* دکمه ضربدر فقط زمانی نمایش داده بشه که صفحه کوچکتر از 1024px باشه */}
+      {isMobileView && (
+        <button onClick={closeSidebar} className="absolute top-4 right-4 p-2">
+          <FiX className="h-6 w-6 text-gray-700" />
+        </button>
+      )}
+
       <div className="mt-12 flex items-center justify-center gap-3">
         <Logo />
         <span className="text-2xl font-bold">آوا</span>
