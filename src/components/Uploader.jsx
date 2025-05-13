@@ -17,7 +17,7 @@ const tabs = [
 ];
 
 function Uploader() {
-  const [activeTab, setActiveTab] = useState("upload");
+  const [activeTab, setActiveTab] = useState("record");
   const activeColor = tabs.find((tab) => tab.id === activeTab)?.color;
 
   return (
@@ -31,7 +31,7 @@ function Uploader() {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex cursor-pointer items-center justify-center gap-2 px-4 py-3 text-sm font-medium transition-all ${
+                className={`flex cursor-pointer items-center justify-center gap-2 px-6 py-3 text-sm font-medium transition-all ${
                   isActive
                     ? "text-white shadow"
                     : "text-custom-gray hover:text-primary"
