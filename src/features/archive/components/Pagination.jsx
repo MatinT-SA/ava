@@ -2,32 +2,36 @@ import ArrowIconRight from "../../../assets/icons/ArrowIconRight";
 import ArrowIconLeft from "../../../assets/icons/ArrowIconLeft";
 
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
-  const pageNumbers = [];
+  const finalPages = [];
 
-  const getMiddlePages = () => {
-    const pages = [];
-    for (let i = currentPage + 1; i >= currentPage - 2; i--) {
-      if (i > 0 && i <= totalPages && !pages.includes(i)) {
-        pages.push(i);
-      }
-    }
-    return pages.sort((a, b) => b - a);
-  };
+  finalPages.push(1);
 
-  if (totalPages > 1 && currentPage < totalPages) {
-    pageNumbers.push(totalPages);
+  if (currentPage - 2 > 1) {
+    finalPages.push("...");
   }
 
-  const middle = getMiddlePages();
-  pageNumbers.push("...");
-  pageNumbers.push(...middle);
-  pageNumbers.push("...");
-
-  if (currentPage > 1) {
-    pageNumbers.push(1);
+  if (currentPage - 1 > 1) {
+    finalPages.push(currentPage - 1);
   }
 
-  const finalPages = pageNumbers.reverse();
+  if (currentPage !== 1 && currentPage !== totalPages) {
+    finalPages.push(currentPage);
+  }
+
+  if (currentPage + 1 < totalPages) {
+    finalPages.push(currentPage + 1);
+  }
+  if (currentPage + 2 < totalPages) {
+    finalPages.push(currentPage + 2);
+  }
+
+  if (currentPage + 2 < totalPages - 1) {
+    finalPages.push("...");
+  }
+
+  if (totalPages > 1) {
+    finalPages.push(totalPages);
+  }
 
   return (
     <div className="rtl mt-10 flex items-center justify-center gap-2">
@@ -48,7 +52,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
           <button
             key={index}
             onClick={() => onPageChange(page)}
-            className={`flex h-8 w-8 cursor-pointer items-center justify-center border-none text-sm text-black ${
+            className={`flex h-8 w-8 cursor-pointer items-center justify-center text-sm text-black ${
               page === currentPage
                 ? "rounded-full bg-[#07B49B] text-white"
                 : "rounded hover:bg-gray-200"
