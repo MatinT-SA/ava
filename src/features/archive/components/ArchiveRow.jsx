@@ -46,22 +46,31 @@ export default function ArchiveRow({ item }) {
   const { icon, color } = getSourceTypeMeta(item.sourceType);
 
   return (
-    <tr className="bg-white text-sm text-gray-700">
+    <tr className="bg-white text-gray-700">
       <td>
         <span className={`text-lg ${color}`}>{icon}</span>
       </td>
-      <td className="flex items-center px-8 py-2">
+      <td className="flex items-center px-8 py-2 text-base">
         <div className="flex flex-col">
-          <span className="font-medium">
-            {item.sourceType === "link" ? item.fileUrl : item.fileName}
-          </span>
+          {item.sourceType === "link" ? (
+            <a
+              href={item.fileUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="break-all text-blue-600 hover:underline"
+            >
+              {item.fileUrl}
+            </a>
+          ) : (
+            <span>{item.fileName}</span>
+          )}
         </div>
       </td>
-      <td className="px-4 py-2">{item.uploadDate}</td>
-      <td className="px-4 py-2" style={{ direction: "ltr" }}>
+      <td className="px-4 py-2 text-xs">{item.uploadDate}</td>
+      <td className="px-4 py-2 text-xs" style={{ direction: "ltr" }}>
         {item.fileType}
       </td>
-      <td className="px-4 py-2">{item.duration}</td>
+      <td className="px-4 py-2 text-xs">{item.duration}</td>
 
       <td className="px-4 py-2">
         <div className="flex items-center justify-center gap-5 text-gray-500">
