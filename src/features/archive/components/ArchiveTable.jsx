@@ -16,6 +16,8 @@ export default function ArchiveTable() {
 
   return (
     <div className="overflow-x-auto rounded-xl bg-white px-12 py-6">
+      <h1 className="text-custom-teal mb-6 text-xl font-bold">آرشیو من</h1>
+
       <table className="w-full border-separate border-spacing-y-2 text-right">
         <thead>
           <tr className="rounded-md text-sm text-gray-600">
