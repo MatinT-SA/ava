@@ -46,7 +46,7 @@ export default function ArchiveRow({ item }) {
   const { icon, color } = getSourceTypeMeta(item.sourceType);
 
   return (
-    <tr className="bg-white text-black">
+    <tr className="bg-white text-center text-black">
       <td>
         <span className={`text-lg ${color}`}>{icon}</span>
       </td>
@@ -72,8 +72,8 @@ export default function ArchiveRow({ item }) {
       </td>
       <td className="px-4 py-2 text-xs">{item.duration}</td>
 
-      <td className="px-4 py-2">
-        <div className="flex items-center justify-center gap-5">
+      <td className="py-2 pl-2">
+        <div className="flex items-center gap-3">
           <button>
             <DownloadIconWithTooltip
               file={{ sizeInBytes: item.sizeInBytes }}
