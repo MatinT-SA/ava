@@ -49,6 +49,10 @@
   .delete-icon {
     transition: fill 0.3s ease;
   }
+
+  .bg-sidebar-item-active {
+    background-color: var(--color-sidebar-item-hover);
+  }
 }
 
 :root {

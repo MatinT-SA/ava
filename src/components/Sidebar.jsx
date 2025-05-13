@@ -1,5 +1,6 @@
 import { FiX } from "react-icons/fi";
 import Logo from "./Logo";
+import SidebarItem from "./SidebarItem";
 import SpeechIcon from "../assets/icons/SpeechIcon";
 import ArchiveIcon from "../assets/icons/ArchiveIcon";
 
@@ -18,15 +19,8 @@ function Sidebar({ closeSidebar, isMobileView }) {
       </div>
 
       <nav className="mt-25 flex h-full flex-col items-stretch gap-8">
-        <div className="hover:bg-sidebar-item-hover flex cursor-pointer items-center justify-start gap-4 rounded-md py-2.5 pr-5">
-          <SpeechIcon />
-          <span>تبدیل گفتار</span>
-        </div>
-
-        <div className="hover:bg-sidebar-item-hover flex cursor-pointer items-center justify-start gap-8 rounded-md py-2.5 pr-5">
-          <ArchiveIcon />
-          <span>آرشیو</span>
-        </div>
+        <SidebarItem to="/" icon={SpeechIcon} label="تبدیل گفتار" />
+        <SidebarItem to="/archive" icon={ArchiveIcon} label="آرشیو" />
       </nav>
     </aside>
   );
