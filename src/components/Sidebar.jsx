@@ -16,7 +16,7 @@ function Sidebar() {
           <span>تبدیل گفتار</span>
         </div>
 
-        <div className="flex cursor-pointer items-center justify-start gap-4 rounded-md py-2.5 pr-5 hover:bg-[#02816E]">
+        <div className="flex cursor-pointer items-center justify-start gap-8 rounded-md py-2.5 pr-5 hover:bg-[#02816E]">
           <ArchiveIcon />
           <span>آرشیو</span>
         </div>
