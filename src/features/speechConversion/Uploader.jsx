@@ -25,7 +25,6 @@ function Uploader() {
       className="xs:h-[200px] xs:w-[300px] relative mt-10 max-w-3xl pb-6 sm:h-[350px] sm:w-[480px] md:h-[429px] md:w-[653px] xl:h-[429px] xl:w-[653px] 2xl:h-[789px] 2xl:w-[1200px]"
       dir="rtl"
     >
-      {/* Tabs + Goftar */}
       <div className="flex items-center justify-between">
         <div className="flex flex-row gap-2">
           {tabs.map((tab) => {

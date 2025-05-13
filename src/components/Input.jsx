@@ -1,4 +1,3 @@
-// import { FaLink } from "react-icons/fa";
 import LinkIcon from "../assets/icons/LinkIcon";
 
 function Input() {

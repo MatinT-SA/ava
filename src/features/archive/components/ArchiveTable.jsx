@@ -18,7 +18,6 @@ export default function ArchiveTable() {
     <div className="overflow-x-auto rounded-xl bg-white px-12 py-6">
       <h1 className="text-custom-teal mb-6 text-2xl">آرشیو من</h1>
 
-      {/* Scrollable Table with Always Visible Scroll Bar */}
       <div className="w-full overflow-x-auto sm:overflow-x-visible">
         <table className="w-full min-w-[700px] border-separate border-spacing-y-4 text-center">
           <thead>

@@ -1,5 +1,3 @@
-import React from "react";
-
 function WordIcon({ className = "" }) {
   return (
     <svg

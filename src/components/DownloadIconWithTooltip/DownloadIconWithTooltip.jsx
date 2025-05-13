@@ -1,4 +1,3 @@
-// DownloadIconWithTooltip.jsx
 import styles from "./DownloadIconWithTooltip.module.css";
 import DownloadIcon from "../../assets/icons/DownloadIcon";
 
