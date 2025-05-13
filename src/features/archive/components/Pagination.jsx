@@ -30,7 +30,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   const finalPages = pageNumbers.reverse();
 
   return (
-    <div className="rtl mt-6 flex items-center justify-center gap-2">
+    <div className="rtl mt-10 flex items-center justify-center gap-2">
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
