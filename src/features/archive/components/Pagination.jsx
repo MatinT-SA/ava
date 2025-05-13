@@ -34,7 +34,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   }
 
   return (
-    <div className="rtl mt-10 flex items-center justify-center gap-1 text-sm">
+    <div className="rtl mt-10 flex items-center justify-center gap-1.5 text-sm">
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}

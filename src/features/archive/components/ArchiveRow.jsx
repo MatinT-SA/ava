@@ -46,7 +46,7 @@ export default function ArchiveRow({ item }) {
   const { icon, color } = getSourceTypeMeta(item.sourceType);
 
   return (
-    <tr className="bg-white text-gray-700">
+    <tr className="bg-white text-black">
       <td>
         <span className={`text-lg ${color}`}>{icon}</span>
       </td>
