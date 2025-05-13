@@ -4,7 +4,7 @@ import ArchiveIcon from "../assets/icons/ArchiveIcon";
 
 function Sidebar() {
   return (
-    <aside className="sidebar-bg rounde fixed top-0 right-0 flex h-full w-44 flex-col gap-10 rounded-tl-2xl rounded-bl-2xl p-2 text-white">
+    <aside className="sidebar-bg rounde fixed top-0 right-0 flex h-full w-44 flex-col gap-10 rounded-tl-2xl rounded-bl-2xl p-2 text-white opacity-95">
       <div className="mt-12 flex items-center justify-center gap-3">
         <Logo />
         <span className="text-2xl font-bold">آوا</span>
