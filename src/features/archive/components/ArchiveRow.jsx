@@ -17,7 +17,6 @@ function getSourceTypeMeta(type) {
           </div>
         ),
         color: "text-emerald-500",
-        label: "آپلود",
       };
     case "link":
       return {
@@ -27,7 +26,6 @@ function getSourceTypeMeta(type) {
           </div>
         ),
         color: "text-cyan-600",
-        label: "لینک",
       };
     case "record":
       return {
@@ -37,16 +35,15 @@ function getSourceTypeMeta(type) {
           </div>
         ),
         color: "text-pink-500",
-        label: "ضبط صدا",
       };
     default:
-      return { icon: "❓", color: "text-gray-400", label: "نامشخص" };
+      return { icon: "❓", color: "text-gray-400" };
   }
 }
 
 export default function ArchiveRow({ item }) {
   console.log(item);
-  const { icon, color, label } = getSourceTypeMeta(item.sourceType);
+  const { icon, color } = getSourceTypeMeta(item.sourceType);
 
   return (
     <tr className="border-b bg-white text-sm text-gray-700">
@@ -58,7 +55,6 @@ export default function ArchiveRow({ item }) {
           <span className="font-medium">
             {item.sourceType === "link" ? item.fileUrl : item.fileName}
           </span>
-          <span className={`text-xs ${color}`}>{label}</span>
         </div>
       </td>
       <td className="px-4 py-2">{item.uploadDate}</td>
