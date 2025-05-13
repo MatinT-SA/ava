@@ -54,7 +54,9 @@ export default function ArchiveRow({ item }) {
       <td className="flex items-center gap-2 px-4 py-2">
         <span className={`text-lg ${color}`}>{icon}</span>
         <div className="flex flex-col">
-          <span className="font-medium">{item.fileName}</span>
+          <span className="font-medium">
+            {item.sourceType === "link" ? item.fileUrl : item.fileName}
+          </span>
           <span className={`text-xs ${color}`}>{label}</span>
         </div>
       </td>
