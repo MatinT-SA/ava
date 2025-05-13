@@ -22,7 +22,7 @@ function Uploader() {
 
   return (
     <div
-      className="relative mt-10 h-[429px] w-[653px] max-w-3xl pb-6"
+      className="xplus:h-[789px] xplus:w-[1200px] h-[429px] w-[653px] max-w-3xl pb-6"
       dir="rtl"
     >
       {/* Tabs + Goftar */}
@@ -59,7 +59,7 @@ function Uploader() {
 
       {/* Upload Box */}
       <div
-        className="relative h-[429px] w-[653px]"
+        className="xplus:h-[789px] xplus:w-[1200px] relative h-[429px] w-[653px]"
         dir="rtl"
         style={{
           borderRadius: activeTab === "record" ? "25px 0 25px 25px" : "25px",
