@@ -9,16 +9,16 @@ function AppLayout({ children }) {
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 1024) {
-        setIsSidebarVisible(true); // همیشه سایدبار باید نمایش داده بشه
-        setIsMobileView(false); // وقتی بزرگتر از 1024px هستیم، همبرگر باید پنهان بشه
+        setIsSidebarVisible(true);
+        setIsMobileView(false);
       } else {
         setIsSidebarVisible(false);
-        setIsMobileView(true); // برای نمایش همبرگر در اندازه‌های موبایل
+        setIsMobileView(true);
       }
     };
 
     window.addEventListener("resize", handleResize);
-    handleResize(); // اجرای اولیه هنگام بارگذاری
+    handleResize();
 
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -27,26 +27,16 @@ function AppLayout({ children }) {
     setIsSidebarVisible((prevState) => !prevState);
   };
 
-  const closeSidebar = () => {
-    setIsSidebarVisible(false); // بستن سایدبار
-  };
-
   return (
     <div className="flex h-screen bg-white">
-      {/* نمایش سایدبار در اندازه‌های بزرگتر از 1024px */}
-      <div
-        className={`w-44 shrink-0 rounded-tl-2xl rounded-bl-2xl border-l border-gray-200 p-4 lg:block ${isSidebarVisible ? "block" : "hidden"}`}
-      >
-        <Sidebar closeSidebar={closeSidebar} isMobileView={isMobileView} />
-      </div>
+      <Sidebar
+        isOpen={isSidebarVisible}
+        closeSidebar={toggleSidebar}
+        isMobileView={isMobileView}
+      />
 
       <div className="flex flex-1 flex-col overflow-hidden">
-        {/* ارسال وضعیت‌ها به Header برای مدیریت همبرگر و سایدبار */}
-        <Header
-          toggleSidebar={toggleSidebar}
-          isMobileView={isMobileView}
-          isSidebarVisible={isSidebarVisible}
-        />
+        <Header toggleSidebar={toggleSidebar} isMobileView={isMobileView} />
         <main className="flex-1 overflow-y-auto">{children}</main>
       </div>
     </div>

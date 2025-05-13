@@ -1,12 +1,15 @@
-import { FiX } from "react-icons/fi"; // آیکون ضربدر
+import { FiX } from "react-icons/fi";
 import Logo from "./Logo";
 import SpeechIcon from "../assets/icons/SpeechIcon";
 import ArchiveIcon from "../assets/icons/ArchiveIcon";
 
-function Sidebar({ closeSidebar, isMobileView }) {
+function Sidebar({ closeSidebar, isMobileView, isOpen }) {
   return (
-    <aside className="sidebar-bg fixed top-0 right-0 flex h-full w-44 flex-col gap-10 rounded rounded-tl-2xl rounded-bl-2xl p-2 text-white opacity-95">
-      {/* دکمه ضربدر فقط زمانی نمایش داده بشه که صفحه کوچکتر از 1024px باشه */}
+    <aside
+      className={`sidebar-bg fixed top-0 right-0 z-50 flex h-full w-44 transform flex-col gap-10 rounded-tl-2xl rounded-bl-2xl p-2 text-white opacity-95 transition-transform duration-300 ease-in-out ${
+        isOpen ? "translate-x-0" : "translate-x-full"
+      }`}
+    >
       {isMobileView && (
         <button onClick={closeSidebar} className="absolute top-4 right-4 p-2">
           <FiX className="h-6 w-6 text-gray-700" />
