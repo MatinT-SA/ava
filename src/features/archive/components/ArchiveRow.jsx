@@ -42,7 +42,6 @@ function getSourceTypeMeta(type) {
 }
 
 export default function ArchiveRow({ item }) {
-  console.log(item);
   const { icon, color } = getSourceTypeMeta(item.sourceType);
 
   return (
