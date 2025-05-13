@@ -18,11 +18,11 @@ export default function ArchiveTable() {
     <div className="overflow-x-auto rounded-xl bg-white px-12 py-6">
       <h1 className="text-custom-teal mb-6 text-xl font-bold">آرشیو من</h1>
 
-      <table className="w-full border-separate border-spacing-y-2 text-right">
+      <table className="w-full border-separate border-spacing-y-4 text-right">
         <thead>
           <tr className="rounded-md text-sm text-gray-600">
             <th></th>
-            <th className="px-4 py-2 text-right">نام فایل</th>
+            <th className="px-8 py-2 text-right">نام فایل</th>
             <th className="px-4 py-2 text-right">تاریخ بارگذاری</th>
             <th className="px-4 py-2 text-right">نوع فایل</th>
             <th className="px-4 py-2 text-right">مدت زمان</th>
