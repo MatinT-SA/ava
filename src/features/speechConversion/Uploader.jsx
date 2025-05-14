@@ -1,9 +1,11 @@
 import { useState } from "react";
 import UploadIcon from "../../assets/icons/UploadIcon";
 import MicIcon from "../../assets/icons/MicIcon";
+import LinkIcon from "../../assets/icons/LinkIcon";
+
 import Input from "../../components/Input";
 import Goftar from "./Goftar";
-import LinkIcon from "../../assets/icons/LinkIcon";
+import UploadFile from "./UploadFile";
 
 const tabs = [
   { id: "record", label: "ضبط صدا", icon: <MicIcon />, color: "#00BA9F" },
@@ -11,7 +13,7 @@ const tabs = [
     id: "upload",
     label: "بارگذاری فایل",
     icon: <UploadIcon />,
-    color: "#118AD3",
+    color: "var(--color-blue-upload)",
   },
   {
     id: "link",
@@ -24,6 +26,7 @@ const tabs = [
 function Uploader() {
   const [activeTab, setActiveTab] = useState("record");
   const [linkInput, setLinkInput] = useState("");
+  const [uploadedFile, setUploadedFile] = useState(null);
   const activeColor = tabs.find((tab) => tab.id === activeTab)?.color;
 
   return (
@@ -74,6 +77,7 @@ function Uploader() {
         }}
       >
         <div className="text-custom-gray flex h-full flex-col items-center justify-center space-y-4 self-center py-10 text-center">
+          {/* Record */}
           {activeTab === "record" && (
             <>
               <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#00B3A1]">
@@ -85,17 +89,19 @@ function Uploader() {
               </p>
             </>
           )}
+
+          {/* Upload file */}
           {activeTab === "upload" && (
             <>
-              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#118AD3]">
-                <UploadIcon className="text-4xl text-white" />
-              </div>
-              <p>
+              <UploadFile onFileSelect={(file) => setUploadedFile(file)} />
+              <p className="text-center">
                 برای بارگذاری فایل گفتاری (صوتی/تصویری)، دکمه را فشار دهید
                 <br /> متن پیاده شده آن، در اینجا ظاهر می شود
               </p>
             </>
           )}
+
+          {/* Link */}
           {activeTab === "link" && (
             <>
               <Input

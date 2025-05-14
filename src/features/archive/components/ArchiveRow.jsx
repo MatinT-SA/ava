@@ -12,7 +12,7 @@ function getSourceTypeMeta(type) {
     case "upload":
       return {
         icon: (
-          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#118AD3]">
+          <div className="bg-blue-upload flex h-8 w-8 items-center justify-center rounded-full">
             <UploadIcon className="h-4 w-4 text-white" />
           </div>
         ),
