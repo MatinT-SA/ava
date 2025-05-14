@@ -68,15 +68,10 @@ function Uploader() {
 
       {/* Upload Box */}
       <div
-        className="xs:h-[200px] xs:w-[300px] relative sm:h-[350px] sm:w-[480px] md:h-[429px] md:w-[653px] xl:h-[429px] xl:w-[653px] 2xl:h-[789px] 2xl:w-[1200px]"
+        className={`upload-box xs:h-[200px] xs:w-[300px] relative sm:h-[350px] sm:w-[480px] md:h-[429px] md:w-[653px] xl:h-[429px] xl:w-[653px] 2xl:h-[789px] 2xl:w-[1200px] ${activeTab === "link" ? "link-active" : ""}`}
         dir="rtl"
         style={{
-          borderRadius:
-            activeTab === "record"
-              ? "25px 0 25px 25px"
-              : activeTab === "link"
-                ? "0px 0px 25px 25px"
-                : "25px",
+          borderRadius: activeTab === "record" ? "25px 0 25px 25px" : "25px",
           borderColor: activeColor,
           borderWidth: "1px",
           borderStyle: "solid",

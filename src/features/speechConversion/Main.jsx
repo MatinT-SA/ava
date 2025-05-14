@@ -1,5 +1,4 @@
 import Uploader from "./Uploader";
-import Goftar from "./Goftar";
 
 function Main() {
   return (

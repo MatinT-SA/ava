@@ -87,9 +87,16 @@ body {
   }
 }
 
+@media (max-width: 768px) {
+  .upload-box.link-active {
+    border-radius: 0px 0px 25px 25px !important; /* گوشه بالا سمت چپ تیز می‌شود */
+  }
+}
+
+/* برای دیوایس‌های بزرگتر از 768px */
 @media (min-width: 768px) {
-  .upload-box {
-    border-radius: 25px !important; /* هر چهار گوشه گرد */
+  .upload-box.link-active {
+    border-radius: 25px !important; /* همه گوشه‌ها گرد می‌شوند */
   }
 }
 
