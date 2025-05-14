@@ -87,6 +87,12 @@ body {
   }
 }
 
+@media (min-width: 768px) {
+  .upload-box {
+    border-radius: 25px !important; /* هر چهار گوشه گرد */
+  }
+}
+
 @media (max-width: 640px) {
   html {
     font-size: 70%;
