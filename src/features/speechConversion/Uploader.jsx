@@ -6,6 +6,7 @@ import LinkIcon from "../../assets/icons/LinkIcon";
 import Input from "../../components/Input";
 import Goftar from "./Goftar";
 import UploadFile from "./UploadFile";
+import Recorder from "./Recorder";
 
 const tabs = [
   { id: "record", label: "ضبط صدا", icon: <MicIcon />, color: "#00BA9F" },
@@ -78,17 +79,7 @@ function Uploader() {
       >
         <div className="text-custom-gray flex h-full flex-col items-center justify-center space-y-4 self-center py-10 text-center">
           {/* Record */}
-          {activeTab === "record" && (
-            <>
-              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#00B3A1]">
-                <MicIcon className="text-4xl text-white" />
-              </div>
-              <p>
-                برای شروع به صحبت، دکمه را فشار دهید
-                <br /> متن پیاده شده آن، در اینجا ظاهر شود
-              </p>
-            </>
-          )}
+          {activeTab === "record" && <Recorder />}
 
           {/* Upload file */}
           {activeTab === "upload" && (

@@ -1,58 +1,32 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
+import MicIcon from "../../assets/icons/MicIcon";
 
-function Recorder({ selectedLanguage }) {
+function Recorder() {
   const [isRecording, setIsRecording] = useState(false);
-  const [audioURL, setAudioURL] = useState(null);
-  const [transcript, setTranscript] = useState("");
-  const mediaRecorderRef = useRef(null);
-  const audioChunks = useRef([]);
 
-  const startRecording = async () => {
-    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-    mediaRecorderRef.current = new MediaRecorder(stream);
-    mediaRecorderRef.current.ondataavailable = (event) => {
-      audioChunks.current.push(event.data);
-    };
-    mediaRecorderRef.current.onstop = () => {
-      const audioBlob = new Blob(audioChunks.current, { type: "audio/webm" });
-      const url = URL.createObjectURL(audioBlob);
-      setAudioURL(url);
-      audioChunks.current = [];
-
-      // TODO: send `audioBlob` + `selectedLanguage` to backend or API
-      // then setTranscript(...)
-    };
-    mediaRecorderRef.current.start();
-    setIsRecording(true);
-  };
-
-  const stopRecording = () => {
-    mediaRecorderRef.current.stop();
-    setIsRecording(false);
+  const handleRecordToggle = () => {
+    setIsRecording((prev) => !prev);
   };
 
   return (
-    <div className="text-center">
-      <button
-        onClick={isRecording ? stopRecording : startRecording}
-        className={`rounded-full px-4 py-2 text-white ${isRecording ? "bg-red-500" : "bg-green-500"}`}
+    <>
+      <div
+        className="flex h-14 w-14 cursor-pointer items-center justify-center rounded-full"
+        style={{
+          backgroundColor: isRecording
+            ? "var(--color-red-link)"
+            : "var(--color-custom-teal)",
+        }}
+        onClick={handleRecordToggle}
       >
-        {isRecording ? "توقف" : "شروع ضبط"}
-      </button>
-
-      {audioURL && (
-        <div className="mt-4">
-          <audio controls src={audioURL} />
-        </div>
+        <MicIcon className="text-4xl text-white" />
+      </div>
+      {isRecording ? (
+        <p>ضبط در حال انجام است...</p>
+      ) : (
+        <p>برای شروع به صحبت، دکمه را فشار دهید</p>
       )}
-
-      {transcript && (
-        <div className="mt-4 rounded border bg-gray-50 p-4 text-right">
-          <strong>متن پیاده شده:</strong>
-          <p>{transcript}</p>
-        </div>
-      )}
-    </div>
+    </>
   );
 }
 
