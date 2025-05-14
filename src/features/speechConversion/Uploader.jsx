@@ -13,11 +13,17 @@ const tabs = [
     icon: <UploadIcon />,
     color: "#118AD3",
   },
-  { id: "link", label: "لینک", icon: <LinkIcon />, color: "#FF1654" },
+  {
+    id: "link",
+    label: "لینک",
+    icon: <LinkIcon />,
+    color: "var(--color-red-link)",
+  },
 ];
 
 function Uploader() {
   const [activeTab, setActiveTab] = useState("record");
+  const [linkInput, setLinkInput] = useState("");
   const activeColor = tabs.find((tab) => tab.id === activeTab)?.color;
 
   return (
@@ -92,7 +98,10 @@ function Uploader() {
           )}
           {activeTab === "link" && (
             <>
-              <Input />
+              <Input
+                value={linkInput}
+                onChange={(e) => setLinkInput(e.target.value)}
+              />
               <p>
                 نشانی اینترنتی فایل حاوی گفتار (صوتی/تصویری) را وارد
                 <br /> و دکمه را فشار دهید

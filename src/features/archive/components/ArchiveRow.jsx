@@ -21,7 +21,7 @@ function getSourceTypeMeta(type) {
     case "link":
       return {
         icon: (
-          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#FF1654]">
+          <div className="bg-red-link flex h-8 w-8 items-center justify-center rounded-full">
             <LinkIcon className="h-4 w-4 text-white" />
           </div>
         ),
