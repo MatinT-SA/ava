@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import AppLayout from "./components/AppLayout";
-import ArchivePage from "./features/archive/ArchivePage";
+import ArchivePage from "./pages/ArchivePage";
 
 function App() {
   return (

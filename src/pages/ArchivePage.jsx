@@ -1,5 +1,4 @@
-// src/features/archive/ArchivePage.jsx
-import ArchiveTable from "./components/ArchiveTable";
+import ArchiveTable from "../features/archive/components/ArchiveTable";
 
 export default function ArchivePage() {
   return (
