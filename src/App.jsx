@@ -6,12 +6,12 @@ import ArchivePage from "./pages/ArchivePage";
 function App() {
   return (
     <Router>
-      <AppLayout>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/archive" element={<ArchivePage />} />
-        </Routes>
-      </AppLayout>
+      <Routes>
+        <Route path="/" element={<AppLayout />}>
+          <Route index element={<HomePage />} />
+          <Route path="archive" element={<ArchivePage />} />
+        </Route>
+      </Routes>
     </Router>
   );
 }

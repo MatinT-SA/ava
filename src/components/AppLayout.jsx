@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
+import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
 
-function AppLayout({ children }) {
+function AppLayout() {
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
   const [isMobileView, setIsMobileView] = useState(false);
 
@@ -60,12 +61,8 @@ function AppLayout({ children }) {
           isMobileView={isMobileView}
           isSidebarVisible={isSidebarVisible}
         />
-        <main
-          className={`flex-1 overflow-y-auto ${
-            isSidebarVisible && isMobileView ? "bg-opacity-50" : ""
-          }`}
-        >
-          {children}
+        <main className="flex-1 overflow-y-auto">
+          <Outlet />
         </main>
       </div>
     </div>
