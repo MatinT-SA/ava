@@ -9,6 +9,7 @@ import WordIcon from "../../../assets/icons/WordIcon";
 import DownloadIconWithTooltip from "../../../components/DownloadIconWithTooltip/DownloadIconWithTooltip";
 
 import TimecodedTranscript from "../../../components/TimecodedTranscipt";
+import CustomAudioPlayer from "../../../components/CustomAudioPlayer";
 
 import {
   deleteArchiveItem,
@@ -202,16 +203,7 @@ export default function ArchiveRow({ item, onDelete }) {
                 )}
               </div>
 
-              {item.audioUrl && (
-                <audio
-                  controls
-                  src={item.audioUrl}
-                  className="mt-4 w-full rounded-md"
-                  preload="metadata"
-                >
-                  مرورگر شما از تگ صوتی پشتیبانی نمی‌کند.
-                </audio>
-              )}
+              {item.audioUrl && <CustomAudioPlayer src={item.audioUrl} />}
             </div>
           </td>
         </tr>
