@@ -8,6 +8,13 @@ export const fakeArchiveData = [
     duration: "۲:۰۰",
     sourceType: "upload",
     sizeInBytes: 2048000,
+    transcriptSimple: `متن ساده فایل 1.`,
+    transcriptTimed: [
+      { start: "00:00", end: "00:40", text: "شروع فایل 1" },
+      { start: "00:40", end: "01:20", text: "متن میانی فایل 1" },
+      { start: "01:20", end: "02:00", text: "پایان فایل 1" },
+    ],
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
   },
   {
     id: 2,
@@ -18,6 +25,13 @@ export const fakeArchiveData = [
     duration: "۳:۳۰",
     sourceType: "link",
     sizeInBytes: 3072000,
+    transcriptSimple: `متن ساده فایل 2.`,
+    transcriptTimed: [
+      { start: "00:00", end: "01:10", text: "بخش اول فایل 2" },
+      { start: "01:10", end: "02:20", text: "بخش دوم فایل 2" },
+      { start: "02:20", end: "03:30", text: "بخش پایانی فایل 2" },
+    ],
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
   },
   {
     id: 3,
@@ -28,6 +42,13 @@ export const fakeArchiveData = [
     duration: "۱:۴۵",
     sourceType: "record",
     sizeInBytes: 1024000,
+    transcriptSimple: `متن ساده فایل 3.`,
+    transcriptTimed: [
+      { start: "00:00", end: "00:30", text: "شروع فایل 3" },
+      { start: "00:30", end: "01:15", text: "ادامه فایل 3" },
+      { start: "01:15", end: "01:45", text: "پایان فایل 3" },
+    ],
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
   },
   {
     id: 4,
@@ -38,6 +59,13 @@ export const fakeArchiveData = [
     duration: "۵:۰۰",
     sourceType: "upload",
     sizeInBytes: 5242880,
+    transcriptSimple: `متن ساده فایل 4.`,
+    transcriptTimed: [
+      { start: "00:00", end: "01:40", text: "مقدمه فایل 4" },
+      { start: "01:40", end: "03:20", text: "متن اصلی فایل 4" },
+      { start: "03:20", end: "05:00", text: "خاتمه فایل 4" },
+    ],
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3",
   },
   {
     id: 5,
@@ -48,6 +76,13 @@ export const fakeArchiveData = [
     duration: "۴:۲۰",
     sourceType: "link",
     sizeInBytes: 4194304,
+    transcriptSimple: `متن ساده فایل 5.`,
+    transcriptTimed: [
+      { start: "00:00", end: "01:26", text: "آغاز فایل 5" },
+      { start: "01:26", end: "02:50", text: "میان فایل 5" },
+      { start: "02:50", end: "04:20", text: "پایان فایل 5" },
+    ],
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3",
   },
   {
     id: 6,
@@ -58,6 +93,13 @@ export const fakeArchiveData = [
     duration: "۲:۱۰",
     sourceType: "record",
     sizeInBytes: 2621440,
+    transcriptSimple: `متن ساده فایل 6.`,
+    transcriptTimed: [
+      { start: "00:00", end: "00:45", text: "شروع فایل 6" },
+      { start: "00:45", end: "01:30", text: "میان فایل 6" },
+      { start: "01:30", end: "02:10", text: "پایان فایل 6" },
+    ],
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3",
   },
   {
     id: 7,
@@ -68,6 +110,13 @@ export const fakeArchiveData = [
     duration: "۳:۰۰",
     sourceType: "upload",
     sizeInBytes: 3145728,
+    transcriptSimple: `متن ساده فایل 7.`,
+    transcriptTimed: [
+      { start: "00:00", end: "01:00", text: "شروع فایل 7" },
+      { start: "01:00", end: "02:00", text: "میان فایل 7" },
+      { start: "02:00", end: "03:00", text: "پایان فایل 7" },
+    ],
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3",
   },
   {
     id: 8,
@@ -78,6 +127,13 @@ export const fakeArchiveData = [
     duration: "۲:۳۰",
     sourceType: "link",
     sizeInBytes: 2097152,
+    transcriptSimple: `متن ساده فایل 8.`,
+    transcriptTimed: [
+      { start: "00:00", end: "00:50", text: "شروع فایل 8" },
+      { start: "00:50", end: "01:40", text: "میان فایل 8" },
+      { start: "01:40", end: "02:30", text: "پایان فایل 8" },
+    ],
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3",
   },
   {
     id: 9,
@@ -88,6 +144,13 @@ export const fakeArchiveData = [
     duration: "۱:۱۵",
     sourceType: "record",
     sizeInBytes: 1536000,
+    transcriptSimple: `متن ساده فایل 9.`,
+    transcriptTimed: [
+      { start: "00:00", end: "00:35", text: "شروع فایل 9" },
+      { start: "00:35", end: "00:55", text: "میان فایل 9" },
+      { start: "00:55", end: "01:15", text: "پایان فایل 9" },
+    ],
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3",
   },
   {
     id: 10,
@@ -98,6 +161,13 @@ export const fakeArchiveData = [
     duration: "۶:۰۰",
     sourceType: "upload",
     sizeInBytes: 10485760,
+    transcriptSimple: `متن ساده فایل 10.`,
+    transcriptTimed: [
+      { start: "00:00", end: "02:00", text: "شروع فایل 10" },
+      { start: "02:00", end: "04:00", text: "میان فایل 10" },
+      { start: "04:00", end: "06:00", text: "پایان فایل 10" },
+    ],
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3",
   },
   {
     id: 11,
@@ -108,6 +178,13 @@ export const fakeArchiveData = [
     duration: "۴:۴۰",
     sourceType: "link",
     sizeInBytes: 5242880,
+    transcriptSimple: `متن ساده فایل 11.`,
+    transcriptTimed: [
+      { start: "00:00", end: "01:33", text: "شروع فایل 11" },
+      { start: "01:33", end: "03:06", text: "میان فایل 11" },
+      { start: "03:06", end: "04:40", text: "پایان فایل 11" },
+    ],
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-11.mp3",
   },
   {
     id: 12,
@@ -118,6 +195,13 @@ export const fakeArchiveData = [
     duration: "۳:۰۰",
     sourceType: "record",
     sizeInBytes: 2097152,
+    transcriptSimple: `متن ساده فایل 12.`,
+    transcriptTimed: [
+      { start: "00:00", end: "01:00", text: "شروع فایل 12" },
+      { start: "01:00", end: "02:00", text: "میان فایل 12" },
+      { start: "02:00", end: "03:00", text: "پایان فایل 12" },
+    ],
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-12.mp3",
   },
   {
     id: 13,
@@ -128,6 +212,13 @@ export const fakeArchiveData = [
     duration: "۵:۳۰",
     sourceType: "upload",
     sizeInBytes: 7340032,
+    transcriptSimple: `متن ساده فایل 13.`,
+    transcriptTimed: [
+      { start: "00:00", end: "01:50", text: "شروع فایل 13" },
+      { start: "01:50", end: "03:40", text: "میان فایل 13" },
+      { start: "03:40", end: "05:30", text: "پایان فایل 13" },
+    ],
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-13.mp3",
   },
   {
     id: 14,
@@ -138,6 +229,13 @@ export const fakeArchiveData = [
     duration: "۶:۱۰",
     sourceType: "link",
     sizeInBytes: 3145728,
+    transcriptSimple: `متن ساده فایل 14.`,
+    transcriptTimed: [
+      { start: "00:00", end: "02:03", text: "شروع فایل 14" },
+      { start: "02:03", end: "04:06", text: "میان فایل 14" },
+      { start: "04:06", end: "06:10", text: "پایان فایل 14" },
+    ],
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-14.mp3",
   },
   {
     id: 15,
@@ -148,6 +246,13 @@ export const fakeArchiveData = [
     duration: "۴:۰۰",
     sourceType: "record",
     sizeInBytes: 4096000,
+    transcriptSimple: `متن ساده فایل 15.`,
+    transcriptTimed: [
+      { start: "00:00", end: "01:20", text: "شروع فایل 15" },
+      { start: "01:20", end: "02:40", text: "میان فایل 15" },
+      { start: "02:40", end: "04:00", text: "پایان فایل 15" },
+    ],
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-15.mp3",
   },
   {
     id: 16,
@@ -158,6 +263,13 @@ export const fakeArchiveData = [
     duration: "۷:۰۰",
     sourceType: "upload",
     sizeInBytes: 8388608,
+    transcriptSimple: `متن ساده فایل 16.`,
+    transcriptTimed: [
+      { start: "00:00", end: "02:20", text: "شروع فایل 16" },
+      { start: "02:20", end: "04:40", text: "میان فایل 16" },
+      { start: "04:40", end: "07:00", text: "پایان فایل 16" },
+    ],
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-16.mp3",
   },
   {
     id: 17,
@@ -168,6 +280,13 @@ export const fakeArchiveData = [
     duration: "۲:۰۰",
     sourceType: "link",
     sizeInBytes: 2097152,
+    transcriptSimple: `متن ساده فایل 17.`,
+    transcriptTimed: [
+      { start: "00:00", end: "00:40", text: "شروع فایل 17" },
+      { start: "00:40", end: "01:20", text: "میان فایل 17" },
+      { start: "01:20", end: "02:00", text: "پایان فایل 17" },
+    ],
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-17.mp3",
   },
   {
     id: 18,
@@ -178,6 +297,13 @@ export const fakeArchiveData = [
     duration: "۲:۳۰",
     sourceType: "record",
     sizeInBytes: 3145728,
+    transcriptSimple: `متن ساده فایل 18.`,
+    transcriptTimed: [
+      { start: "00:00", end: "01:00", text: "شروع فایل 18" },
+      { start: "01:00", end: "02:00", text: "میان فایل 18" },
+      { start: "02:00", end: "02:30", text: "پایان فایل 18" },
+    ],
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-18.mp3",
   },
   {
     id: 19,
@@ -188,6 +314,13 @@ export const fakeArchiveData = [
     duration: "۳:۴۰",
     sourceType: "upload",
     sizeInBytes: 5242880,
+    transcriptSimple: `متن ساده فایل 19.`,
+    transcriptTimed: [
+      { start: "00:00", end: "01:13", text: "شروع فایل 19" },
+      { start: "01:13", end: "02:26", text: "میان فایل 19" },
+      { start: "02:26", end: "03:40", text: "پایان فایل 19" },
+    ],
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-19.mp3",
   },
   {
     id: 20,
@@ -198,6 +331,31 @@ export const fakeArchiveData = [
     duration: "۵:۰۰",
     sourceType: "link",
     sizeInBytes: 5242880,
+    transcriptSimple: `متن ساده فایل 20.`,
+    transcriptTimed: [
+      { start: "00:00", end: "01:40", text: "شروع فایل 20" },
+      { start: "01:40", end: "03:20", text: "میان فایل 20" },
+      { start: "03:20", end: "05:00", text: "پایان فایل 20" },
+    ],
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-20.mp3",
+  },
+
+  {
+    id: 20,
+    fileName: "File 20",
+    fileUrl: "https://example.com/20",
+    uploadDate: "۱۴۰۲-۰۸-۰۲",
+    fileType: ".mp3",
+    duration: "۵:۰۰",
+    sourceType: "link",
+    sizeInBytes: 5242880,
+    transcriptSimple: `متن ساده فایل 20.`,
+    transcriptTimed: [
+      { start: "00:00", end: "01:40", text: "شروع فایل 20" },
+      { start: "01:40", end: "03:20", text: "میان فایل 20" },
+      { start: "03:20", end: "05:00", text: "پایان فایل 20" },
+    ],
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-20.mp3",
   },
   {
     id: 21,
@@ -208,6 +366,13 @@ export const fakeArchiveData = [
     duration: "۴:۳۰",
     sourceType: "record",
     sizeInBytes: 2621440,
+    transcriptSimple: `متن ساده فایل 21.`,
+    transcriptTimed: [
+      { start: "00:00", end: "01:30", text: "شروع فایل 21" },
+      { start: "01:30", end: "03:00", text: "میان فایل 21" },
+      { start: "03:00", end: "04:30", text: "پایان فایل 21" },
+    ],
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-21.mp3",
   },
   {
     id: 22,
@@ -218,6 +383,13 @@ export const fakeArchiveData = [
     duration: "۵:۳۰",
     sourceType: "upload",
     sizeInBytes: 9437184,
+    transcriptSimple: `متن ساده فایل 22.`,
+    transcriptTimed: [
+      { start: "00:00", end: "01:50", text: "شروع فایل 22" },
+      { start: "01:50", end: "03:40", text: "میان فایل 22" },
+      { start: "03:40", end: "05:30", text: "پایان فایل 22" },
+    ],
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-22.mp3",
   },
   {
     id: 23,
@@ -228,6 +400,13 @@ export const fakeArchiveData = [
     duration: "۴:۵۰",
     sourceType: "link",
     sizeInBytes: 4194304,
+    transcriptSimple: `متن ساده فایل 23.`,
+    transcriptTimed: [
+      { start: "00:00", end: "01:35", text: "شروع فایل 23" },
+      { start: "01:35", end: "03:10", text: "میان فایل 23" },
+      { start: "03:10", end: "04:50", text: "پایان فایل 23" },
+    ],
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-23.mp3",
   },
   {
     id: 24,
@@ -238,6 +417,13 @@ export const fakeArchiveData = [
     duration: "۶:۳۰",
     sourceType: "record",
     sizeInBytes: 5242880,
+    transcriptSimple: `متن ساده فایل 24.`,
+    transcriptTimed: [
+      { start: "00:00", end: "02:10", text: "شروع فایل 24" },
+      { start: "02:10", end: "04:20", text: "میان فایل 24" },
+      { start: "04:20", end: "06:30", text: "پایان فایل 24" },
+    ],
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-24.mp3",
   },
   {
     id: 25,
@@ -248,6 +434,13 @@ export const fakeArchiveData = [
     duration: "۶:۰۰",
     sourceType: "upload",
     sizeInBytes: 15728640,
+    transcriptSimple: `متن ساده فایل 25.`,
+    transcriptTimed: [
+      { start: "00:00", end: "02:00", text: "شروع فایل 25" },
+      { start: "02:00", end: "04:00", text: "میان فایل 25" },
+      { start: "04:00", end: "06:00", text: "پایان فایل 25" },
+    ],
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-25.mp3",
   },
   {
     id: 26,
@@ -258,6 +451,13 @@ export const fakeArchiveData = [
     duration: "۷:۳۰",
     sourceType: "link",
     sizeInBytes: 6291456,
+    transcriptSimple: `متن ساده فایل 26.`,
+    transcriptTimed: [
+      { start: "00:00", end: "02:30", text: "شروع فایل 26" },
+      { start: "02:30", end: "05:00", text: "میان فایل 26" },
+      { start: "05:00", end: "07:30", text: "پایان فایل 26" },
+    ],
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-26.mp3",
   },
   {
     id: 27,
@@ -268,6 +468,13 @@ export const fakeArchiveData = [
     duration: "۳:۴۰",
     sourceType: "record",
     sizeInBytes: 3145728,
+    transcriptSimple: `متن ساده فایل 27.`,
+    transcriptTimed: [
+      { start: "00:00", end: "01:15", text: "شروع فایل 27" },
+      { start: "01:15", end: "02:50", text: "میان فایل 27" },
+      { start: "02:50", end: "03:40", text: "پایان فایل 27" },
+    ],
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-27.mp3",
   },
   {
     id: 28,
@@ -278,6 +485,13 @@ export const fakeArchiveData = [
     duration: "۵:۱۰",
     sourceType: "upload",
     sizeInBytes: 8388608,
+    transcriptSimple: `متن ساده فایل 28.`,
+    transcriptTimed: [
+      { start: "00:00", end: "01:43", text: "شروع فایل 28" },
+      { start: "01:43", end: "03:26", text: "میان فایل 28" },
+      { start: "03:26", end: "05:10", text: "پایان فایل 28" },
+    ],
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-28.mp3",
   },
   {
     id: 29,
@@ -288,6 +502,13 @@ export const fakeArchiveData = [
     duration: "۲:۵۰",
     sourceType: "link",
     sizeInBytes: 2097152,
+    transcriptSimple: `متن ساده فایل 29.`,
+    transcriptTimed: [
+      { start: "00:00", end: "00:56", text: "شروع فایل 29" },
+      { start: "00:56", end: "01:52", text: "میان فایل 29" },
+      { start: "01:52", end: "02:50", text: "پایان فایل 29" },
+    ],
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-29.mp3",
   },
   {
     id: 30,
@@ -298,6 +519,13 @@ export const fakeArchiveData = [
     duration: "۴:۲۰",
     sourceType: "record",
     sizeInBytes: 4194304,
+    transcriptSimple: `متن ساده فایل 30.`,
+    transcriptTimed: [
+      { start: "00:00", end: "01:26", text: "شروع فایل 30" },
+      { start: "01:26", end: "02:53", text: "میان فایل 30" },
+      { start: "02:53", end: "04:20", text: "پایان فایل 30" },
+    ],
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-30.mp3",
   },
   {
     id: 31,
@@ -308,6 +536,13 @@ export const fakeArchiveData = [
     duration: "۶:۰۰",
     sourceType: "upload",
     sizeInBytes: 10485760,
+    transcriptSimple: `متن ساده فایل 31.`,
+    transcriptTimed: [
+      { start: "00:00", end: "02:00", text: "شروع فایل 31" },
+      { start: "02:00", end: "04:00", text: "میان فایل 31" },
+      { start: "04:00", end: "06:00", text: "پایان فایل 31" },
+    ],
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-31.mp3",
   },
   {
     id: 32,
@@ -318,5 +553,12 @@ export const fakeArchiveData = [
     duration: "۳:۳۰",
     sourceType: "link",
     sizeInBytes: 6291456,
+    transcriptSimple: `متن ساده فایل 32.`,
+    transcriptTimed: [
+      { start: "00:00", end: "01:10", text: "شروع فایل 32" },
+      { start: "01:10", end: "02:20", text: "میان فایل 32" },
+      { start: "02:20", end: "03:30", text: "پایان فایل 32" },
+    ],
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-32.mp3",
   },
 ];

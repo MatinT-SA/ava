@@ -15,23 +15,21 @@ export default function ArchiveTable() {
   useEffect(() => {
     async function loadData() {
       setIsLoading(true);
-
+      setError("");
       try {
         const data = await fetchArchiveItems();
-
         if (Array.isArray(data) && data.length > 0) {
           setArchiveItems(data);
         } else {
           setArchiveItems(fakeArchiveData);
         }
       } catch (err) {
-        console.error("API error. Using mock data.", err);
+        setError("خطا در دریافت آرشیو. داده‌های فیک نمایش داده می‌شوند.");
         setArchiveItems(fakeArchiveData);
       } finally {
         setIsLoading(false);
       }
     }
-
     loadData();
   }, []);
 
