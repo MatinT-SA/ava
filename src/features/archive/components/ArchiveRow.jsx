@@ -15,6 +15,8 @@ import {
   fetchTranscriptById,
 } from "../../../services/apiService";
 
+import { copyTextToClipboard } from "../../../utils/CopyTextToClipboard";
+
 const TOKEN = "a85d08400c622b50b18b61e239b9903645297196";
 
 function getSourceTypeMeta(type) {
@@ -119,11 +121,7 @@ export default function ArchiveRow({ item, onDelete }) {
         <td className="px-4 py-2 text-xs">{item.duration}</td>
         <td className="py-2 pl-2">
           <div className="flex items-center justify-center gap-3">
-            <button
-              aria-label="دانلود فایل"
-              title="دانلود فایل"
-              className="hover:text-[#00BA9F]"
-            >
+            <button aria-label="دانلود فایل" className="hover:text-[#00BA9F]">
               <DownloadIconWithTooltip
                 file={{ sizeInBytes: item.sizeInBytes }}
                 className="h-5 w-5"
@@ -140,6 +138,7 @@ export default function ArchiveRow({ item, onDelete }) {
             <button
               aria-label="کپی"
               title="کپی"
+              onClick={() => copyTextToClipboard(transcriptSimple)}
               className="hover:text-[#00BA9F]"
             >
               <CopyIcon className="h-5 w-5" />
