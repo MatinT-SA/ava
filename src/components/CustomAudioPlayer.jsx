@@ -88,7 +88,7 @@ export default function CustomAudioPlayer({ src }) {
   return (
     <div
       dir="ltr"
-      className="custom-audio-player flex items-center space-x-3 self-center"
+      className="custom-audio-player bg-light-gray flex items-center space-x-1 self-center rounded-md px-2"
       style={{ maxWidth: 519 }}
     >
       <audio ref={audioRef} src={src} preload="metadata" />

@@ -97,6 +97,7 @@ export default function ArchiveRow({ item, onDelete }) {
 
   return (
     <>
+      {/* سطر اصلی فقط خودش */}
       <tr className="border-b border-gray-200 bg-white text-center text-black">
         <td className="px-2 py-3">
           <span className={`text-lg ${color}`}>{icon}</span>
@@ -158,14 +159,15 @@ export default function ArchiveRow({ item, onDelete }) {
         </td>
       </tr>
 
+      {/* ردیف آکاردیون، فقط محتویات اضافی، کل عرض */}
       {isExpanded && (
         <tr>
           <td
             colSpan={7}
-            className="rtl rounded-b-md bg-[#f5fafa] p-6 text-right"
+            className="rounded-[10px] border border-red-500 p-6 text-right"
           >
             <div className="flex flex-col space-y-4">
-              <div className="rtl flex space-x-6 border-b border-gray-300">
+              <div className="rtl flex space-x-6 border-b">
                 <button
                   onClick={() => setActiveTab("simple")}
                   className={`px-6 py-2 text-base transition-colors ${
