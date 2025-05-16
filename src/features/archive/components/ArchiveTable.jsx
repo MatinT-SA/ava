@@ -40,6 +40,10 @@ export default function ArchiveTable() {
     startIndex + itemsPerPage,
   );
 
+  function handleDelete(id) {
+    setArchiveItems((prevItems) => prevItems.filter((item) => item.id !== id));
+  }
+
   return (
     <div className="overflow-x-auto rounded-xl bg-white px-12 py-6">
       <h1 className="text-custom-teal mb-6 text-2xl">آرشیو من</h1>
@@ -67,7 +71,11 @@ export default function ArchiveTable() {
               </thead>
               <tbody>
                 {currentItems.map((item) => (
-                  <ArchiveRow key={item.id} item={item} />
+                  <ArchiveRow
+                    key={item.id}
+                    item={item}
+                    onDelete={handleDelete}
+                  />
                 ))}
               </tbody>
             </table>

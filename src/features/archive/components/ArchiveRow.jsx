@@ -10,6 +10,10 @@ import DownloadIconWithTooltip from "../../../components/DownloadIconWithTooltip
 
 import TimecodedTranscript from "../../../components/TimecodedTranscipt";
 
+import { deleteArchiveItem } from "../../../services/apiService";
+
+const TOKEN = "a85d08400c622b50b18b61e239b9903645297196";
+
 function getSourceTypeMeta(type) {
   switch (type) {
     case "upload":
@@ -44,38 +48,73 @@ function getSourceTypeMeta(type) {
   }
 }
 
-export default function ArchiveRow({ item }) {
+export default function ArchiveRow({ item, onDelete }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const { icon, color } = getSourceTypeMeta(item.sourceType);
 
-  // فرض می‌گیریم item شامل این فیلدها هم هست:
-  // item.transcriptSimple - متن ساده
-  // item.transcriptTimed - متن زمان‌بندی شده (می‌تونی یه رشته یا آرایه باشه)
-  // item.audioUrl - لینک صوت
+  const [activeTab, setActiveTab] = useState("simple");
 
-  const [activeTab, setActiveTab] = useState("simple"); // simple یا timed
+  // حالا state های جدید برای متن
+  const [transcriptSimple, setTranscriptSimple] = useState(null);
+  const [transcriptTimed, setTranscriptTimed] = useState(null);
+  const [isLoadingTranscript, setIsLoadingTranscript] = useState(false);
+  const [transcriptError, setTranscriptError] = useState(null);
+
+  async function handleToggleExpand() {
+    if (!isExpanded) {
+      if (transcriptSimple === null && transcriptTimed === null) {
+        setIsLoadingTranscript(true);
+        setTranscriptError(null);
+        try {
+          const res = await fetch(
+            `https://harf.roshan-ai.ir/api/requests/${item.id}/transcript/`,
+            {
+              headers: { Authorization: `Token ${TOKEN}` },
+            },
+          );
+          if (!res.ok) throw new Error("خطا در دریافت متن");
+          const data = await res.json();
+          setTranscriptSimple(data.transcriptSimple);
+          setTranscriptTimed(data.transcriptTimed);
+        } catch (err) {
+          setTranscriptError("خطا در دریافت متن");
+        } finally {
+          setIsLoadingTranscript(false);
+        }
+      }
+    }
+    setIsExpanded((prev) => !prev);
+  }
+
+  async function handleDelete() {
+    try {
+      await deleteArchiveItem(item.id);
+      console.log("آیتم با موفقیت حذف شد");
+      onDelete(item.id); // ✅ به والد اطلاع بده که این آیتم حذف بشه
+    } catch (err) {
+      console.error("خطا در حذف آیتم:", err);
+    }
+  }
 
   return (
     <>
-      <tr className="bg-white text-center text-black">
-        <td>
+      <tr className="border-b border-gray-200 bg-white text-center text-black">
+        <td className="px-2 py-3">
           <span className={`text-lg ${color}`}>{icon}</span>
         </td>
-        <td className="flex items-center px-8 py-2 text-base">
-          <div className="flex flex-col">
-            {item.sourceType === "link" ? (
-              <a
-                href={item.fileUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="break-all text-blue-600 hover:underline"
-              >
-                {item.fileUrl}
-              </a>
-            ) : (
-              <span>{item.fileName}</span>
-            )}
-          </div>
+        <td className="flex max-w-xs items-center px-8 py-2 text-base break-words">
+          {item.sourceType === "link" ? (
+            <a
+              href={item.fileUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="break-all text-blue-600 hover:underline"
+            >
+              {item.fileUrl}
+            </a>
+          ) : (
+            <span>{item.fileName}</span>
+          )}
         </td>
         <td className="px-4 py-2 text-xs">{item.uploadDate}</td>
         <td className="px-4 py-2 text-xs" style={{ direction: "ltr" }}>
@@ -83,20 +122,38 @@ export default function ArchiveRow({ item }) {
         </td>
         <td className="px-4 py-2 text-xs">{item.duration}</td>
         <td className="py-2 pl-2">
-          <div className="flex items-center gap-3">
-            <button>
+          <div className="flex items-center justify-center gap-3">
+            <button
+              aria-label="دانلود فایل"
+              title="دانلود فایل"
+              className="hover:text-[#00BA9F]"
+            >
               <DownloadIconWithTooltip
                 file={{ sizeInBytes: item.sizeInBytes }}
-                className="h-4 w-4"
+                className="h-5 w-5"
               />
             </button>
-            <button onClick={() => setIsExpanded((prev) => !prev)}>
-              <WordIcon className="h-4 w-4" />
+            <button
+              aria-label="نمایش متن"
+              title="نمایش متن"
+              onClick={handleToggleExpand}
+              className="hover:text-[#00BA9F]"
+            >
+              <WordIcon className="h-5 w-5" />
             </button>
-            <button>
-              <CopyIcon className="h-4 w-4" />
+            <button
+              aria-label="کپی"
+              title="کپی"
+              className="hover:text-[#00BA9F]"
+            >
+              <CopyIcon className="h-5 w-5" />
             </button>
-            <button className="group">
+            <button
+              aria-label="حذف"
+              title="حذف"
+              onClick={handleDelete}
+              className="group"
+            >
               <div className="group-hover:bg-red-delete flex h-7 w-7 items-center justify-center rounded-full transition-colors">
                 <DeleteIcon className="text-custom-gray h-4 w-4 transition-colors group-hover:text-white" />
               </div>
@@ -105,53 +162,56 @@ export default function ArchiveRow({ item }) {
         </td>
       </tr>
 
-      {/* ردیف اکاردئون باز شونده */}
       {isExpanded && (
         <tr>
-          <td colSpan={7} className="bg-[#f5fafa] p-6 text-right">
+          <td
+            colSpan={7}
+            className="rtl rounded-b-md bg-[#f5fafa] p-6 text-right"
+          >
             <div className="flex flex-col space-y-4">
-              {/* تب ها */}
-              <div className="rtl flex space-x-4 border-b border-gray-300">
+              <div className="rtl flex space-x-6 border-b border-gray-300">
                 <button
                   onClick={() => setActiveTab("simple")}
-                  className={`px-4 py-2 ${
+                  className={`px-6 py-2 text-base transition-colors ${
                     activeTab === "simple"
                       ? "border-b-2 border-[#00BA9F] font-bold text-[#00BA9F]"
-                      : "text-gray-600"
+                      : "text-gray-600 hover:text-[#00BA9F]"
                   }`}
                 >
                   متن ساده
                 </button>
                 <button
                   onClick={() => setActiveTab("timed")}
-                  className={`px-4 py-2 ${
+                  className={`px-6 py-2 text-base transition-colors ${
                     activeTab === "timed"
                       ? "border-b-2 border-[#00BA9F] font-bold text-[#00BA9F]"
-                      : "text-gray-600"
+                      : "text-gray-600 hover:text-[#00BA9F]"
                   }`}
                 >
                   متن زمان‌بندی شده
                 </button>
               </div>
 
-              {/* محتوا */}
               <div
                 style={{ maxHeight: "250px", overflowY: "auto" }}
-                className="text-justify text-sm leading-7"
+                className="text-justify text-sm leading-7 whitespace-pre-wrap"
               >
-                {activeTab === "simple" ? (
-                  <pre>{item.transcriptSimple}</pre>
+                {isLoadingTranscript ? (
+                  <p>در حال بارگذاری متن...</p>
+                ) : transcriptError ? (
+                  <p className="text-red-500">{transcriptError}</p>
+                ) : activeTab === "simple" ? (
+                  <pre>{transcriptSimple}</pre>
                 ) : (
-                  <TimecodedTranscript data={item.transcriptTimed} />
+                  <TimecodedTranscript data={transcriptTimed} />
                 )}
               </div>
 
-              {/* پلیر صوت */}
               {item.audioUrl && (
                 <audio
                   controls
                   src={item.audioUrl}
-                  className="mt-4 w-full"
+                  className="mt-4 w-full rounded-md"
                   preload="metadata"
                 >
                   مرورگر شما از تگ صوتی پشتیبانی نمی‌کند.
