@@ -10,7 +10,10 @@ import DownloadIconWithTooltip from "../../../components/DownloadIconWithTooltip
 
 import TimecodedTranscript from "../../../components/TimecodedTranscipt";
 
-import { deleteArchiveItem } from "../../../services/apiService";
+import {
+  deleteArchiveItem,
+  fetchTranscriptById,
+} from "../../../services/apiService";
 
 const TOKEN = "a85d08400c622b50b18b61e239b9903645297196";
 
@@ -66,14 +69,7 @@ export default function ArchiveRow({ item, onDelete }) {
         setIsLoadingTranscript(true);
         setTranscriptError(null);
         try {
-          const res = await fetch(
-            `https://harf.roshan-ai.ir/api/requests/${item.id}/transcript/`,
-            {
-              headers: { Authorization: `Token ${TOKEN}` },
-            },
-          );
-          if (!res.ok) throw new Error("خطا در دریافت متن");
-          const data = await res.json();
+          const data = await fetchTranscriptById(item.id);
           setTranscriptSimple(data.transcriptSimple);
           setTranscriptTimed(data.transcriptTimed);
         } catch (err) {

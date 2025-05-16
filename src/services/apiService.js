@@ -19,6 +19,26 @@ export async function fetchArchiveItems() {
   return data;
 }
 
+// Fetching transcript data for a specific archive item
+export async function fetchTranscriptById(id) {
+  const response = await fetch(`${BASE_URL}/requests/${id}/transcript/`, {
+    method: "GET",
+    headers: {
+      Authorization: `Token ${TOKEN}`,
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(
+      `خطا در دریافت متن آرشیو با شناسه ${id}: ${response.status}`,
+    );
+  }
+
+  const data = await response.json();
+  return data;
+}
+
 // Fetching details of a specific archive item
 export async function fetchArchiveItemDetails(id) {
   const response = await fetch(`${BASE_URL}/requests/${id}/`, {
