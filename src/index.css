@@ -14,6 +14,7 @@
   --color-sidebar-item-hover: #02816e;
   --color-custom-teal: #00ba9f;
   --color-green-pagination: #07b49b;
+  --color-green-archive-icons: #40c6b8;
   --color-red-delete: #dc3545;
   --color-red-link: #ff1654;
   --color-blue-upload: #118ad3;
@@ -97,7 +98,6 @@ body {
   }
 }
 
-/* برای دیوایس‌های بزرگتر از 768px */
 @media (min-width: 768px) {
   .upload-box.link-active {
     border-radius: 25px !important; /* همه گوشه‌ها گرد می‌شوند */

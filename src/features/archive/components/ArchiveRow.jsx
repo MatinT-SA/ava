@@ -18,8 +18,6 @@ import {
 
 import { copyTextToClipboard } from "../../../utils/CopyTextToClipboard";
 
-const TOKEN = "a85d08400c622b50b18b61e239b9903645297196";
-
 function getSourceTypeMeta(type) {
   switch (type) {
     case "upload":
@@ -30,6 +28,7 @@ function getSourceTypeMeta(type) {
           </div>
         ),
         color: "text-emerald-500",
+        borderColor: "var(--color-blue-upload)",
       };
     case "link":
       return {
@@ -39,15 +38,17 @@ function getSourceTypeMeta(type) {
           </div>
         ),
         color: "text-cyan-600",
+        borderColor: "var(--color-red-link)",
       };
     case "record":
       return {
         icon: (
-          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#00B3A1]">
+          <div className="bg-green-archive-icons flex h-8 w-8 items-center justify-center rounded-full">
             <MicIcon className="h-4 w-4 text-white" />
           </div>
         ),
         color: "text-pink-500",
+        borderColor: "var(--color-custom-teal)",
       };
     default:
       return { icon: "❓", color: "text-gray-400" };
@@ -56,11 +57,10 @@ function getSourceTypeMeta(type) {
 
 export default function ArchiveRow({ item, onDelete }) {
   const [isExpanded, setIsExpanded] = useState(false);
-  const { icon, color } = getSourceTypeMeta(item.sourceType);
+  const { icon, color, borderColor } = getSourceTypeMeta(item.sourceType);
 
   const [activeTab, setActiveTab] = useState("simple");
 
-  // حالا state های جدید برای متن
   const [transcriptSimple, setTranscriptSimple] = useState(null);
   const [transcriptTimed, setTranscriptTimed] = useState(null);
   const [isLoadingTranscript, setIsLoadingTranscript] = useState(false);
@@ -88,39 +88,52 @@ export default function ArchiveRow({ item, onDelete }) {
   async function handleDelete() {
     try {
       await deleteArchiveItem(item.id);
-      console.log("آیتم با موفقیت حذف شد");
-      onDelete(item.id); // ✅ به والد اطلاع بده که این آیتم حذف بشه
+      onDelete(item.id);
     } catch (err) {
       console.error("خطا در حذف آیتم:", err);
     }
   }
 
+  // فرمت تاریخ به شکل YYYY/MM/DD یا هر قالب دلخواه
+  function formatDate(dateStr) {
+    const date = new Date(dateStr);
+    if (isNaN(date)) return dateStr; // اگر فرمت تاریخ اشتباه بود، خود رشته را نمایش بده
+    return date.toLocaleDateString("fa-IR");
+  }
+
+  // فرمت مدت زمان (فرض بر ثانیه بودن)
+  function formatDuration(duration) {
+    if (!duration) return "-";
+    const mins = Math.floor(duration / 60);
+    const secs = duration % 60;
+    return `${mins} دقیقه و ${secs} ثانیه`;
+  }
+
   return (
     <>
-      {/* سطر اصلی فقط خودش */}
-      <tr className="border-b border-gray-200 bg-white text-center text-black">
+      <tr
+        className="border text-center text-black"
+        style={
+          isExpanded
+            ? {
+                border: `1px solid ${borderColor}`,
+                borderBottom: "none",
+                borderRadius: "10px",
+              }
+            : {}
+        }
+      >
         <td className="px-2 py-3">
           <span className={`text-lg ${color}`}>{icon}</span>
         </td>
         <td className="flex max-w-xs items-center px-8 py-2 text-base break-words">
-          {item.sourceType === "link" ? (
-            <a
-              href={item.fileUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="break-all text-blue-600 hover:underline"
-            >
-              {item.fileUrl}
-            </a>
-          ) : (
-            <span>{item.fileName}</span>
-          )}
+          <span>{item.fileName}</span>
         </td>
-        <td className="px-4 py-2 text-xs">{item.uploadDate}</td>
+        <td className="px-4 py-2 text-xs">{formatDate(item.uploadDate)}</td>
         <td className="px-4 py-2 text-xs" style={{ direction: "ltr" }}>
           {item.fileType}
         </td>
-        <td className="px-4 py-2 text-xs">{item.duration}</td>
+        <td className="px-4 py-2 text-xs">{formatDuration(item.duration)}</td>
         <td className="py-2 pl-2">
           <div className="flex items-center justify-center gap-3">
             <button aria-label="دانلود فایل" className="hover:text-[#00BA9F]">
@@ -142,6 +155,7 @@ export default function ArchiveRow({ item, onDelete }) {
               title="کپی"
               onClick={() => copyTextToClipboard(transcriptSimple)}
               className="hover:text-[#00BA9F]"
+              disabled={!transcriptSimple}
             >
               <CopyIcon className="h-5 w-5" />
             </button>
@@ -159,12 +173,12 @@ export default function ArchiveRow({ item, onDelete }) {
         </td>
       </tr>
 
-      {/* ردیف آکاردیون، فقط محتویات اضافی، کل عرض */}
       {isExpanded && (
         <tr>
           <td
             colSpan={7}
-            className="rounded-[10px] border border-red-500 p-6 text-right"
+            className="rounded-b-[10px] border border-t-0 border-t-transparent p-6 text-right"
+            style={{ borderColor }}
           >
             <div className="flex flex-col space-y-4">
               <div className="rtl flex space-x-6 border-b">

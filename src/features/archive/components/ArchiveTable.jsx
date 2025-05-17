@@ -2,10 +2,15 @@ import { useState, useEffect } from "react";
 import ArchiveRow from "./ArchiveRow";
 import Pagination from "./Pagination";
 import { fetchArchiveItems } from "../../../services/apiService";
-import { fakeArchiveData } from "../data/fakeArchiveData";
 
 export default function ArchiveTable() {
-  const [archiveItems, setArchiveItems] = useState([]);
+  // حالا archiveData یک آبجکت کامل با نتایج و اطلاعات صفحه بندی هست
+  const [archiveData, setArchiveData] = useState({
+    count: 0,
+    next: null,
+    previous: null,
+    results: [],
+  });
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
@@ -13,35 +18,32 @@ export default function ArchiveTable() {
   const itemsPerPage = 5;
 
   useEffect(() => {
-    async function loadData() {
+    async function loadData(page = 1) {
       setIsLoading(true);
       setError("");
       try {
-        const data = await fetchArchiveItems();
-        if (Array.isArray(data) && data.length > 0) {
-          setArchiveItems(data);
-        } else {
-          setArchiveItems(fakeArchiveData);
-        }
+        // فرض می کنیم fetchArchiveItems می تونه صفحه را بگیرد
+        const data = await fetchArchiveItems(page);
+        setArchiveData(data);
       } catch (err) {
-        setError("خطا در دریافت آرشیو. داده‌های فیک نمایش داده می‌شوند.");
-        setArchiveItems(fakeArchiveData);
+        setError("خطا در دریافت آرشیو");
       } finally {
         setIsLoading(false);
       }
     }
-    loadData();
-  }, []);
 
-  const totalPages = Math.ceil(archiveItems.length / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentItems = archiveItems.slice(
-    startIndex,
-    startIndex + itemsPerPage,
-  );
+    loadData(currentPage);
+  }, [currentPage]);
+
+  const totalPages = Math.ceil(archiveData.count / itemsPerPage);
 
   function handleDelete(id) {
-    setArchiveItems((prevItems) => prevItems.filter((item) => item.id !== id));
+    // برای حذف، فقط آرایه results رو به روز می کنیم
+    setArchiveData((prevData) => ({
+      ...prevData,
+      results: prevData.results.filter((item) => item.id !== id),
+      count: prevData.count - 1,
+    }));
   }
 
   return (
@@ -70,7 +72,7 @@ export default function ArchiveTable() {
                 </tr>
               </thead>
               <tbody>
-                {currentItems.map((item) => (
+                {archiveData.results.map((item) => (
                   <ArchiveRow
                     key={item.id}
                     item={item}

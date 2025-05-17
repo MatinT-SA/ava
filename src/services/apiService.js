@@ -1,63 +1,45 @@
-const BASE_URL = "https://harf.roshan-ai.ir/api";
+const BASE_URL = "/api";
 const TOKEN = "a85d08400c622b50b18b61e239b9903645297196";
 
 // fetching the transcript data from the API
-export async function fetchArchiveItems() {
-  const response = await fetch(`${BASE_URL}/requests/`, {
-    method: "GET",
+export async function fetchArchiveItems(page = 1) {
+  const response = await fetch(`${BASE_URL}/requests/?page=${page}`, {
     headers: {
-      Authorization: `Token ${TOKEN}`,
-      "Content-Type": "application/json",
+      Authorization: `Token ${TOKEN}`, // ✅ نه Bearer
     },
   });
 
-  if (!response.ok) {
-    throw new Error(`خطا در دریافت آرشیو: ${response.status}`);
-  }
-
-  const data = await response.json();
-  return data;
+  if (!response.ok) throw new Error("خطا در دریافت داده");
+  return response.json();
 }
 
-// Fetching transcript data for a specific archive item
+// گرفتن متن یک آیتم
 export async function fetchTranscriptById(id) {
   const response = await fetch(`${BASE_URL}/requests/${id}/transcript/`, {
-    method: "GET",
     headers: {
       Authorization: `Token ${TOKEN}`,
-      "Content-Type": "application/json",
     },
   });
 
-  if (!response.ok) {
-    throw new Error(
-      `خطا در دریافت متن آرشیو با شناسه ${id}: ${response.status}`,
-    );
-  }
+  if (!response.ok) throw new Error(`خطا در دریافت متن آرشیو با شناسه ${id}`);
 
-  const data = await response.json();
-  return data;
+  return response.json();
 }
 
-// Fetching details of a specific archive item
+// گرفتن جزئیات یک آیتم
 export async function fetchArchiveItemDetails(id) {
   const response = await fetch(`${BASE_URL}/requests/${id}/`, {
-    method: "GET",
     headers: {
       Authorization: `Token ${TOKEN}`,
-      "Content-Type": "application/json",
     },
   });
 
-  if (!response.ok) {
-    throw new Error(`خطا در دریافت جزئیات آرشیو: ${response.status}`);
-  }
+  if (!response.ok) throw new Error(`خطا در دریافت جزئیات آرشیو`);
 
-  const data = await response.json();
-  return data;
+  return response.json();
 }
 
-// Deleting archive item
+// حذف یک آیتم
 export async function deleteArchiveItem(id) {
   const res = await fetch(`${BASE_URL}/requests/${id}/`, {
     method: "DELETE",
@@ -66,9 +48,7 @@ export async function deleteArchiveItem(id) {
     },
   });
 
-  if (!res.ok) {
-    throw new Error(`خطا در حذف فایل با شناسه ${id}`);
-  }
+  if (!res.ok) throw new Error(`خطا در حذف فایل با شناسه ${id}`);
 
   return true;
 }
