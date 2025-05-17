@@ -10,7 +10,6 @@ import TextIcon from "../../../assets/icons/TextIcon";
 import TimeIcon from "../../../assets/icons/TimeIcon";
 import DownloadIconWithTooltip from "../../../components/DownloadIconWithTooltip/DownloadIconWithTooltip";
 
-// import TimecodedTranscript from "../../../components/TimecodedTranscipt";
 import CustomAudioPlayer from "../../../components/CustomAudioPlayer";
 import SegmentsViewer from "./SegmentsViewer";
 
