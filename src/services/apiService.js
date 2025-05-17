@@ -1,11 +1,11 @@
 const BASE_URL = "/api";
 const TOKEN = "a85d08400c622b50b18b61e239b9903645297196";
 
-// fetching the transcript data from the API
+// fetching archive items
 export async function fetchArchiveItems(page = 1) {
   const response = await fetch(`${BASE_URL}/requests/?page=${page}`, {
     headers: {
-      Authorization: `Token ${TOKEN}`, // ✅ نه Bearer
+      Authorization: `Token ${TOKEN}`,
     },
   });
 
@@ -13,7 +13,7 @@ export async function fetchArchiveItems(page = 1) {
   return response.json();
 }
 
-// گرفتن متن یک آیتم
+// fetching the text of one item
 export async function fetchTranscriptById(id) {
   const response = await fetch(`${BASE_URL}/requests/${id}/transcript/`, {
     headers: {
@@ -26,7 +26,7 @@ export async function fetchTranscriptById(id) {
   return response.json();
 }
 
-// گرفتن جزئیات یک آیتم
+// Fetching details of one item
 export async function fetchArchiveItemDetails(id) {
   const response = await fetch(`${BASE_URL}/requests/${id}/`, {
     headers: {
@@ -39,7 +39,7 @@ export async function fetchArchiveItemDetails(id) {
   return response.json();
 }
 
-// حذف یک آیتم
+// Deleting an item
 export async function deleteArchiveItem(id) {
   const res = await fetch(`${BASE_URL}/requests/${id}/`, {
     method: "DELETE",
