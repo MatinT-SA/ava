@@ -126,7 +126,7 @@ export default function ArchiveRow({ item, onDelete }) {
         <td className="px-2 py-3">
           <span className={`text-lg ${color}`}>{icon}</span>
         </td>
-        <td className="max-w-xs px-4 py-2 text-right break-words">
+        <td className="max-w-sm px-4 py-2 text-right break-words">
           <span>{removingExtension(item.filename)}</span>
         </td>
         <td className="px-4 py-2 text-xs">{formatDate(item.processed)}</td>
