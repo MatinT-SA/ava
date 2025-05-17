@@ -85,6 +85,28 @@ body {
   font-family: "Vazir", sans-serif;
 }
 
+/* Scrollbar */
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 5px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #ccc transparent;
+}
+
 /* Responsiveness */
 
 @media (min-width: 1800px) {

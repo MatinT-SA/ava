@@ -9,7 +9,7 @@ export default function SegmentsViewer({ segments }) {
       {segments.map((seg, index) => (
         <div
           key={index}
-          className={`rounded-[15px] px-10 py-3 text-black ${
+          className={`ml-4 rounded-[15px] px-10 py-3 text-black ${
             index % 2 === 0 ? "bg-gray-segments" : "bg-white"
           }`}
         >

@@ -217,7 +217,7 @@ export default function ArchiveRow({ item, onDelete }) {
 
               <div
                 style={{ maxHeight: "250px", overflowY: "auto" }}
-                className="text-justify text-sm leading-7 whitespace-pre-wrap"
+                className="custom-scrollbar text-justify text-sm leading-7 whitespace-pre-wrap"
               >
                 {isLoadingTranscript ? (
                   <p>در حال بارگذاری متن...</p>
