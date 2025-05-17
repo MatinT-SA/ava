@@ -4,7 +4,6 @@ import Pagination from "./Pagination";
 import { fetchArchiveItems } from "../../../services/apiService";
 
 export default function ArchiveTable() {
-  // حالا archiveData یک آبجکت کامل با نتایج و اطلاعات صفحه بندی هست
   const [archiveData, setArchiveData] = useState({
     count: 0,
     next: null,
@@ -22,7 +21,6 @@ export default function ArchiveTable() {
       setIsLoading(true);
       setError("");
       try {
-        // فرض می کنیم fetchArchiveItems می تونه صفحه را بگیرد
         const data = await fetchArchiveItems(page);
         setArchiveData(data);
       } catch (err) {
@@ -38,7 +36,6 @@ export default function ArchiveTable() {
   const totalPages = Math.ceil(archiveData.count / itemsPerPage);
 
   function handleDelete(id) {
-    // برای حذف، فقط آرایه results رو به روز می کنیم
     setArchiveData((prevData) => ({
       ...prevData,
       results: prevData.results.filter((item) => item.id !== id),

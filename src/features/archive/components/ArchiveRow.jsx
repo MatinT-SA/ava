@@ -18,6 +18,7 @@ import {
 
 import { copyTextToClipboard } from "../../../utils/CopyTextToClipboard";
 import { formatDuration } from "../../../utils/FormatDuration";
+import { guessSourceTypeFromUrl } from "./GuessSourceFileFromUrl";
 
 function getSourceTypeMeta(type) {
   switch (type) {
@@ -59,7 +60,10 @@ function getSourceTypeMeta(type) {
 export default function ArchiveRow({ item, onDelete }) {
   console.log(item);
   const [isExpanded, setIsExpanded] = useState(false);
-  const { icon, color, borderColor } = getSourceTypeMeta(item.sourceType);
+  const guessedType = guessSourceTypeFromUrl(item.url);
+  const { icon, color, borderColor } = getSourceTypeMeta(
+    item.type || guessedType,
+  );
 
   const [activeTab, setActiveTab] = useState("simple");
 
