@@ -4,17 +4,7 @@ import PlayIcon from "../assets/icons/PlayIcon";
 import PauseIcon from "../assets/icons/PauseIcon";
 import VolumeIcon from "../assets/icons/VolumeIcon";
 import MuteIcon from "../assets/icons/MuteIcon";
-
-function formatTimeToFarsi(seconds) {
-  if (isNaN(seconds)) return "۰۰:۰۰";
-  const m = Math.floor(seconds / 60);
-  const s = Math.floor(seconds % 60);
-  const toFarsiDigits = (num) =>
-    num.toString().replace(/\d/g, (d) => "۰۱۲۳۴۵۶۷۸۹"[d]);
-  return `${toFarsiDigits(m.toString().padStart(2, "0"))}:${toFarsiDigits(
-    s.toString().padStart(2, "0"),
-  )}`;
-}
+import { formatTimeToFarsi } from "../utils/FormatTimeToFarsi";
 
 export default function CustomAudioPlayer({ src }) {
   const audioRef = useRef(null);

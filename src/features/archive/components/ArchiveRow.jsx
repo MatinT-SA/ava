@@ -17,6 +17,7 @@ import {
 } from "../../../services/apiService";
 
 import { copyTextToClipboard } from "../../../utils/CopyTextToClipboard";
+import { formatDuration } from "../../../utils/FormatDuration";
 
 function getSourceTypeMeta(type) {
   switch (type) {
@@ -56,6 +57,7 @@ function getSourceTypeMeta(type) {
 }
 
 export default function ArchiveRow({ item, onDelete }) {
+  console.log(item);
   const [isExpanded, setIsExpanded] = useState(false);
   const { icon, color, borderColor } = getSourceTypeMeta(item.sourceType);
 
@@ -65,6 +67,8 @@ export default function ArchiveRow({ item, onDelete }) {
   const [transcriptTimed, setTranscriptTimed] = useState(null);
   const [isLoadingTranscript, setIsLoadingTranscript] = useState(false);
   const [transcriptError, setTranscriptError] = useState(null);
+
+  const fileType = "." + item.filename?.split(".").pop().toLowerCase();
 
   async function handleToggleExpand() {
     if (!isExpanded) {
@@ -94,19 +98,10 @@ export default function ArchiveRow({ item, onDelete }) {
     }
   }
 
-  // فرمت تاریخ به شکل YYYY/MM/DD یا هر قالب دلخواه
   function formatDate(dateStr) {
     const date = new Date(dateStr);
-    if (isNaN(date)) return dateStr; // اگر فرمت تاریخ اشتباه بود، خود رشته را نمایش بده
+    if (isNaN(date)) return dateStr;
     return date.toLocaleDateString("fa-IR");
-  }
-
-  // فرمت مدت زمان (فرض بر ثانیه بودن)
-  function formatDuration(duration) {
-    if (!duration) return "-";
-    const mins = Math.floor(duration / 60);
-    const secs = duration % 60;
-    return `${mins} دقیقه و ${secs} ثانیه`;
   }
 
   return (
@@ -127,11 +122,11 @@ export default function ArchiveRow({ item, onDelete }) {
           <span className={`text-lg ${color}`}>{icon}</span>
         </td>
         <td className="flex max-w-xs items-center px-8 py-2 text-base break-words">
-          <span>{item.fileName}</span>
+          <span>{item.filename}</span>
         </td>
-        <td className="px-4 py-2 text-xs">{formatDate(item.uploadDate)}</td>
+        <td className="px-4 py-2 text-xs">{formatDate(item.processed)}</td>
         <td className="px-4 py-2 text-xs" style={{ direction: "ltr" }}>
-          {item.fileType}
+          {fileType}
         </td>
         <td className="px-4 py-2 text-xs">{formatDuration(item.duration)}</td>
         <td className="py-2 pl-2">
