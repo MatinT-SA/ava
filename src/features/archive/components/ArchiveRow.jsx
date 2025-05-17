@@ -125,7 +125,7 @@ export default function ArchiveRow({ item, onDelete }) {
         <td className="px-2 py-3">
           <span className={`text-lg ${color}`}>{icon}</span>
         </td>
-        <td className="flex max-w-xs items-center px-8 py-2 text-base break-words">
+        <td className="max-w-xs px-4 py-2 break-words">
           <span>{item.filename}</span>
         </td>
         <td className="px-4 py-2 text-xs">{formatDate(item.processed)}</td>
@@ -133,6 +133,7 @@ export default function ArchiveRow({ item, onDelete }) {
           {fileType}
         </td>
         <td className="px-4 py-2 text-xs">{formatDuration(item.duration)}</td>
+
         <td className="py-2 pl-2">
           <div className="flex items-center justify-center gap-3">
             <button aria-label="دانلود فایل" className="hover:text-[#00BA9F]">
