@@ -4,7 +4,7 @@ import PlayIcon from "../assets/icons/PlayIcon";
 import PauseIcon from "../assets/icons/PauseIcon";
 import VolumeIcon from "../assets/icons/VolumeIcon";
 import MuteIcon from "../assets/icons/MuteIcon";
-import { formatTimeToFarsi } from "../utils/FormatTimeToFarsi";
+import { formatTimeToFarsi } from "../utils/formatTimeToFarsi";
 
 export default function CustomAudioPlayer({ src }) {
   const audioRef = useRef(null);

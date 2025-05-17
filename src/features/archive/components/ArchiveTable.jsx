@@ -14,7 +14,7 @@ export default function ArchiveTable() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
 
-  const itemsPerPage = 5;
+  const itemsPerPage = 9;
 
   useEffect(() => {
     async function loadData(page = 1) {

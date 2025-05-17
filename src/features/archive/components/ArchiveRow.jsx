@@ -16,9 +16,10 @@ import {
   fetchTranscriptById,
 } from "../../../services/apiService";
 
-import { copyTextToClipboard } from "../../../utils/CopyTextToClipboard";
-import { formatDuration } from "../../../utils/FormatDuration";
-import { guessSourceTypeFromUrl } from "./GuessSourceFileFromUrl";
+import { copyTextToClipboard } from "../../../utils/copyTextToClipboard";
+import { formatDuration } from "../../../utils/formatDuration";
+import { guessSourceTypeFromUrl } from "../../../utils/guessSourceFileFromUrl";
+import { removingExtension } from "../../../utils/removingExtension";
 
 function getSourceTypeMeta(type) {
   switch (type) {
@@ -125,8 +126,8 @@ export default function ArchiveRow({ item, onDelete }) {
         <td className="px-2 py-3">
           <span className={`text-lg ${color}`}>{icon}</span>
         </td>
-        <td className="max-w-xs px-4 py-2 break-words">
-          <span>{item.filename}</span>
+        <td className="max-w-xs px-4 py-2 text-right break-words">
+          <span>{removingExtension(item.filename)}</span>
         </td>
         <td className="px-4 py-2 text-xs">{formatDate(item.processed)}</td>
         <td className="px-4 py-2 text-xs" style={{ direction: "ltr" }}>

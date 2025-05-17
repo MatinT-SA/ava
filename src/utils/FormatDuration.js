@@ -1,4 +1,4 @@
-import { toFarsiDigits } from "./ToFarsiDigits";
+import { toFarsiDigits } from "./toFarsiDigits";
 
 export function formatDuration(durationStr) {
   if (!durationStr) return "-";
