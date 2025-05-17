@@ -13,10 +13,12 @@ export default function SegmentsViewer({ segments }) {
             index % 2 === 0 ? "bg-gray-segments" : "bg-white"
           }`}
         >
-          <p className="text-black">
-            {formatDuration(seg.start)} {"   "} {formatDuration(seg.end)}
-          </p>
-          <p>{seg.text}</p>
+          <div className="flex items-start justify-between gap-4">
+            <p className="min-w-[120px] font-semibold whitespace-nowrap text-black">
+              {formatDuration(seg.start)} — {formatDuration(seg.end)}
+            </p>
+            <p className="flex-1">{seg.text}</p>
+          </div>
         </div>
       ))}
     </div>
