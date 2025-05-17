@@ -1,7 +1,7 @@
 const BASE_URL = "/api";
 const TOKEN = "a85d08400c622b50b18b61e239b9903645297196";
 
-// fetching archive items
+// Fetching list of archive items
 export async function fetchArchiveItems(page = 1) {
   const response = await fetch(`${BASE_URL}/requests/?page=${page}`, {
     headers: {
@@ -13,20 +13,7 @@ export async function fetchArchiveItems(page = 1) {
   return response.json();
 }
 
-// fetching the text of one item
-export async function fetchTranscriptById(id) {
-  const response = await fetch(`${BASE_URL}/requests/${id}/transcript/`, {
-    headers: {
-      Authorization: `Token ${TOKEN}`,
-    },
-  });
-
-  if (!response.ok) throw new Error(`خطا در دریافت متن آرشیو با شناسه ${id}`);
-
-  return response.json();
-}
-
-// Fetching details of one item
+// Fetching details of a single archive item
 export async function fetchArchiveItemDetails(id) {
   const response = await fetch(`${BASE_URL}/requests/${id}/`, {
     headers: {
@@ -34,12 +21,12 @@ export async function fetchArchiveItemDetails(id) {
     },
   });
 
-  if (!response.ok) throw new Error(`خطا در دریافت جزئیات آرشیو`);
-
+  if (!response.ok)
+    throw new Error(`خطا در دریافت جزئیات آرشیو با شناسه ${id}`);
   return response.json();
 }
 
-// Deleting an item
+// Deleting an archive item
 export async function deleteArchiveItem(id) {
   const res = await fetch(`${BASE_URL}/requests/${id}/`, {
     method: "DELETE",
@@ -49,6 +36,5 @@ export async function deleteArchiveItem(id) {
   });
 
   if (!res.ok) throw new Error(`خطا در حذف فایل با شناسه ${id}`);
-
   return true;
 }

@@ -6,20 +6,25 @@ import UploadIcon from "../../../assets/icons/UploadIcon";
 import DeleteIcon from "../../../assets/icons/DeleteIcon";
 import CopyIcon from "../../../assets/icons/CopyIcon";
 import WordIcon from "../../../assets/icons/WordIcon";
+import TextIcon from "../../../assets/icons/TextIcon";
+import TimeIcon from "../../../assets/icons/TimeIcon";
 import DownloadIconWithTooltip from "../../../components/DownloadIconWithTooltip/DownloadIconWithTooltip";
 
-import TimecodedTranscript from "../../../components/TimecodedTranscipt";
+// import TimecodedTranscript from "../../../components/TimecodedTranscipt";
 import CustomAudioPlayer from "../../../components/CustomAudioPlayer";
+import SegmentsViewer from "./SegmentsViewer";
 
 import {
   deleteArchiveItem,
-  fetchTranscriptById,
+  fetchArchiveItemDetails,
 } from "../../../services/apiService";
 
 import { copyTextToClipboard } from "../../../utils/copyTextToClipboard";
 import { formatDuration } from "../../../utils/formatDuration";
 import { guessSourceTypeFromUrl } from "../../../utils/guessSourceFileFromUrl";
 import { removingExtension } from "../../../utils/removingExtension";
+
+// فرض بر این است که fetchTranscriptById توی جایی import شده یا باید تعریف کنی
 
 function getSourceTypeMeta(type) {
   switch (type) {
@@ -60,6 +65,7 @@ function getSourceTypeMeta(type) {
 
 export default function ArchiveRow({ item, onDelete }) {
   console.log(item);
+  const [segments, setSegments] = useState(null);
   const [isExpanded, setIsExpanded] = useState(false);
   const guessedType = guessSourceTypeFromUrl(item.url);
   const { icon, color, borderColor } = getSourceTypeMeta(
@@ -73,7 +79,7 @@ export default function ArchiveRow({ item, onDelete }) {
   const [isLoadingTranscript, setIsLoadingTranscript] = useState(false);
   const [transcriptError, setTranscriptError] = useState(null);
 
-  const fileType = "." + item.filename?.split(".").pop().toLowerCase();
+  const fileType = "." + (item.filename?.split(".").pop().toLowerCase() || "");
 
   async function handleToggleExpand() {
     if (!isExpanded) {
@@ -81,10 +87,13 @@ export default function ArchiveRow({ item, onDelete }) {
         setIsLoadingTranscript(true);
         setTranscriptError(null);
         try {
-          const data = await fetchTranscriptById(item.id);
+          console.log("[handleToggleExpand] Fetching transcript...");
+          const data = await fetchArchiveItemDetails(item.id);
           setTranscriptSimple(data.transcriptSimple);
           setTranscriptTimed(data.transcriptTimed);
+          setSegments(data.segments); // 👈 این خط اضافه بشه
         } catch (err) {
+          console.error("[handleToggleExpand] Error fetching transcript:", err);
           setTranscriptError("خطا در دریافت متن");
         } finally {
           setIsLoadingTranscript(false);
@@ -185,22 +194,24 @@ export default function ArchiveRow({ item, onDelete }) {
               <div className="rtl flex space-x-6 border-b">
                 <button
                   onClick={() => setActiveTab("simple")}
-                  className={`px-6 py-2 text-base transition-colors ${
+                  className={`flex items-center gap-2 px-6 py-2 text-base transition-colors ${
                     activeTab === "simple"
-                      ? "border-b-2 border-[#00BA9F] font-bold text-[#00BA9F]"
-                      : "text-gray-600 hover:text-[#00BA9F]"
+                      ? "border-b-2 border-black font-bold text-black"
+                      : "text-gray-600"
                   }`}
                 >
+                  <TextIcon />
                   متن ساده
                 </button>
                 <button
                   onClick={() => setActiveTab("timed")}
-                  className={`px-6 py-2 text-base transition-colors ${
+                  className={`flex items-center gap-2 px-6 py-2 text-base transition-colors ${
                     activeTab === "timed"
-                      ? "border-b-2 border-[#00BA9F] font-bold text-[#00BA9F]"
-                      : "text-gray-600 hover:text-[#00BA9F]"
+                      ? "border-b-2 border-black font-bold text-black"
+                      : "text-gray-600"
                   }`}
                 >
+                  <TimeIcon />
                   متن زمان‌بندی شده
                 </button>
               </div>
@@ -216,7 +227,7 @@ export default function ArchiveRow({ item, onDelete }) {
                 ) : activeTab === "simple" ? (
                   <pre>{transcriptSimple}</pre>
                 ) : (
-                  <TimecodedTranscript data={transcriptTimed} />
+                  <SegmentsViewer segments={segments} />
                 )}
               </div>
 
