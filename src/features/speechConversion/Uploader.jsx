@@ -1,4 +1,5 @@
 import { useState } from "react";
+import toast from "react-hot-toast";
 import UploadIcon from "../../assets/icons/UploadIcon";
 import MicIcon from "../../assets/icons/MicIcon";
 import LinkIcon from "../../assets/icons/LinkIcon";
@@ -7,6 +8,8 @@ import Input from "../../components/Input";
 import Goftar from "./Goftar";
 import UploadFile from "./UploadFile";
 import Recorder from "./Recorder";
+
+import { transcribeFromUrl } from "../../services/apiService";
 
 const tabs = [
   { id: "record", label: "ضبط صدا", icon: <MicIcon />, color: "#00BA9F" },
@@ -28,7 +31,30 @@ function Uploader() {
   const [activeTab, setActiveTab] = useState("record");
   const [linkInput, setLinkInput] = useState("");
   const [uploadedFile, setUploadedFile] = useState(null);
+  const [transcript, setTranscript] = useState(null);
+  const [loading, setLoading] = useState(false);
+
   const activeColor = tabs.find((tab) => tab.id === activeTab)?.color;
+
+  const handleSubmitLink = async () => {
+    if (!linkInput.trim()) {
+      toast.error("لطفاً یک لینک معتبر وارد کنید.");
+      return;
+    }
+
+    setLoading(true);
+    setTranscript(null);
+
+    try {
+      const data = await transcribeFromUrl(linkInput);
+      setTranscript(data.transcript);
+      toast.success("فایل با موفقیت پردازش شد 🎉");
+    } catch (err) {
+      toast.error("خطا: " + err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div
@@ -99,7 +125,18 @@ function Uploader() {
                 value={linkInput}
                 onChange={(e) => setLinkInput(e.target.value)}
               />
-              <p>
+              <button
+                onClick={handleSubmitLink}
+                disabled={loading}
+                className={`mt-3 rounded-full px-6 py-2 text-white ${
+                  loading
+                    ? "cursor-not-allowed bg-gray-400"
+                    : "bg-red-600 hover:bg-red-700"
+                }`}
+              >
+                {loading ? "در حال پردازش..." : "ارسال"}
+              </button>
+              <p className="mt-2 text-sm text-gray-600">
                 نشانی اینترنتی فایل حاوی گفتار (صوتی/تصویری) را وارد
                 <br /> و دکمه را فشار دهید
               </p>
