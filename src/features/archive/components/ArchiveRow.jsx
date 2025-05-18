@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { toast } from "react-hot-toast";
 import LinkIcon from "../../../assets/icons/LinkIcon";
 import MicIcon from "../../../assets/icons/MicIcon";
 import UploadIcon from "../../../assets/icons/UploadIcon";
@@ -110,8 +111,10 @@ export default function ArchiveRow({ item, onDelete }) {
     try {
       await deleteArchiveItem(item.id);
       onDelete(item.id);
+      toast.success("آیتم با موفقیت حذف شد.");
     } catch (err) {
       console.error("خطا در حذف آیتم:", err);
+      toast.error("خطا در حذف آیتم.");
     }
   }
 
