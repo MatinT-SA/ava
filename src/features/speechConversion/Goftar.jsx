@@ -1,11 +1,11 @@
+// Goftar.jsx
 import { useState, useRef, useEffect } from "react";
 import Button from "../../components/Button";
 import ArrowIconDown from "../../assets/icons/ArrowIconDown";
 import ArrowIconUp from "../../assets/icons/ArrowIconUp";
 
-function Goftar() {
+function Goftar({ selectedLang, onLangChange }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedLang, setSelectedLang] = useState("فارسی");
   const dropdownRef = useRef(null);
 
   const languages = ["فارسی", "انگلیسی"];
@@ -13,7 +13,7 @@ function Goftar() {
   const toggleDropdown = () => setIsOpen((prev) => !prev);
 
   const handleSelect = (lang) => {
-    setSelectedLang(lang);
+    onLangChange(lang);
     setIsOpen(false);
   };
 

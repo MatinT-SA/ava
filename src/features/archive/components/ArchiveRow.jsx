@@ -64,7 +64,7 @@ function getSourceTypeMeta(type) {
 }
 
 export default function ArchiveRow({ item, onDelete }) {
-  console.log(item);
+  // console.log(item);
   const [currentTime, setCurrentTime] = useState(0);
   const [segments, setSegments] = useState(null);
   const [currentSegmentIndex, setCurrentSegmentIndex] = useState(3);
