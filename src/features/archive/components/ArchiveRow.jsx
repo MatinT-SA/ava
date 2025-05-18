@@ -161,12 +161,16 @@ export default function ArchiveRow({ item, onDelete }) {
 
         <td className="py-2 pl-2">
           <div className="flex items-center justify-center gap-3">
-            <button aria-label="دانلود فایل" className="hover:text-[#00BA9F]">
+            <a
+              aria-label="دانلود فایل"
+              className="hover:text-[#00BA9F]"
+              href={item.url}
+            >
               <DownloadIconWithTooltip
                 file={{ sizeInBytes: item.sizeInBytes }}
                 className="h-5 w-5"
               />
-            </button>
+            </a>
             <button
               aria-label="نمایش متن"
               title="نمایش متن"
