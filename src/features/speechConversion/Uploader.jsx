@@ -8,12 +8,7 @@ import Input from "../../components/Input";
 import Goftar from "./Goftar";
 import UploadFile from "./UploadFile";
 import Recorder from "./Recorder";
-import {
-  // transcribeAudioFile,
-  transcribeFilesFromMediaUrls,
-} from "../../services/apiService";
-
-// import { transcribeFromUrl } from "../../services/apiService";
+import { transcribeFilesFromMediaUrls } from "../../services/apiService";
 
 const tabs = [
   { id: "record", label: "ضبط صدا", icon: <MicIcon />, color: "#00BA9F" },
@@ -51,14 +46,8 @@ function Uploader() {
     setLoading(true);
     setTranscript(null);
 
-    // console.log("شروع ارسال درخواست به API با لینک:", linkInput);
-    // console.log("زبان انتخاب شده (استفاده نمی‌شود):", selectedLang);
-
     try {
-      // فقط آرایه لینک‌ها رو می‌فرستیم، بدون زبان
       const data = await transcribeFilesFromMediaUrls([linkInput]);
-
-      // console.log("پاسخ کامل API:", data);
 
       if (data.transcripts && data.transcripts.length > 0) {
         setTranscript(data.transcripts[0].text);
@@ -76,18 +65,18 @@ function Uploader() {
   };
 
   // Recording audio
-  async function handleAudioRecorded(fileUrl) {
-    setLoading(true);
-    try {
-      const data = await transcribeFilesFromMediaUrls([fileUrl]);
-      // فرض کن جواب api به این شکل باشه که متن پیاده شده تو data.transcripts[0].text هست
-      setTranscript(data.transcripts?.[0]?.text || "متنی یافت نشد");
-    } catch (error) {
-      toast.error(error.message);
-    } finally {
-      setLoading(false);
-    }
-  }
+  // async function handleAudioRecorded(fileUrl) {
+  //   setLoading(true);
+  //   try {
+  //     const data = await transcribeFilesFromMediaUrls([fileUrl]);
+  //     // فرض کن جواب api به این شکل باشه که متن پیاده شده تو data.transcripts[0].text هست
+  //     setTranscript(data.transcripts?.[0]?.text || "متنی یافت نشد");
+  //   } catch (error) {
+  //     toast.error(error.message);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // }
 
   return (
     <div
