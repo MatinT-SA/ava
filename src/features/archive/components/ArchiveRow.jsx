@@ -181,10 +181,9 @@ export default function ArchiveRow({ item, onDelete }) {
             </button>
             <button
               aria-label="کپی"
-              title="کپی"
               onClick={() => copyTextToClipboard(transcriptSimple)}
-              className="hover:text-[#00BA9F]"
-              disabled={!transcriptSimple}
+              className={`hover:text-[#00BA9F] ${!isExpanded ? "cursor-not-allowed" : ""}`}
+              disabled={!isExpanded}
             >
               <CopyIcon className="h-5 w-5" />
             </button>
