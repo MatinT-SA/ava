@@ -64,7 +64,9 @@ function getSourceTypeMeta(type) {
 
 export default function ArchiveRow({ item, onDelete }) {
   console.log(item);
+  const [currentTime, setCurrentTime] = useState(0);
   const [segments, setSegments] = useState(null);
+  const [currentSegmentIndex, setCurrentSegmentIndex] = useState(3);
   const [isExpanded, setIsExpanded] = useState(false);
   const guessedType = guessSourceTypeFromUrl(item.url);
   const { icon, color, borderColor } = getSourceTypeMeta(
@@ -74,25 +76,27 @@ export default function ArchiveRow({ item, onDelete }) {
   const [activeTab, setActiveTab] = useState("simple");
 
   const [transcriptSimple, setTranscriptSimple] = useState(null);
-  const [transcriptTimed, setTranscriptTimed] = useState(null);
   const [isLoadingTranscript, setIsLoadingTranscript] = useState(false);
   const [transcriptError, setTranscriptError] = useState(null);
 
   const fileType = "." + (item.filename?.split(".").pop().toLowerCase() || "");
+  const activeSegmentIndex = Array.isArray(segments)
+    ? segments.findIndex(
+        (seg) => currentTime >= seg.start && currentTime <= seg.end,
+      )
+    : -1;
 
   async function handleToggleExpand() {
     if (!isExpanded) {
-      if (transcriptSimple === null && transcriptTimed === null) {
+      if (transcriptSimple === null) {
         setIsLoadingTranscript(true);
-        setTranscriptError(null);
         try {
-          console.log("[handleToggleExpand] Fetching transcript...");
           const data = await fetchArchiveItemDetails(item.id);
-          setTranscriptSimple(data.transcriptSimple);
-          setTranscriptTimed(data.transcriptTimed);
-          setSegments(data.segments); // 👈 این خط اضافه بشه
+          setTranscriptSimple(
+            data.segments.map((segment) => segment.text).join(" "),
+          );
+          setSegments(data.segments);
         } catch (err) {
-          console.error("[handleToggleExpand] Error fetching transcript:", err);
           setTranscriptError("خطا در دریافت متن");
         } finally {
           setIsLoadingTranscript(false);
@@ -116,6 +120,18 @@ export default function ArchiveRow({ item, onDelete }) {
     if (isNaN(date)) return dateStr;
     return date.toLocaleDateString("fa-IR");
   }
+
+  // Handling play time
+  const handleTimeUpdate = (currentTime) => {
+    // console.log(currentTime);
+    if (!segments) return;
+    const index = segments.findIndex(
+      (seg) => currentTime >= seg.start && currentTime <= seg.end,
+    );
+    if (index !== -1 && index !== currentSegmentIndex) {
+      setCurrentSegmentIndex(index);
+    }
+  };
 
   return (
     <>
@@ -190,24 +206,25 @@ export default function ArchiveRow({ item, onDelete }) {
             style={{ borderColor }}
           >
             <div className="flex flex-col space-y-4">
-              <div className="rtl flex space-x-6 border-b">
+              <div className="rtl flex space-x-6 border-b px-12">
                 <button
                   onClick={() => setActiveTab("simple")}
-                  className={`flex items-center gap-2 px-6 py-2 text-base transition-colors ${
+                  className={`flex items-center gap-2 px-3 py-2 transition-colors ${
                     activeTab === "simple"
                       ? "border-b-2 border-black font-bold text-black"
-                      : "text-gray-600"
+                      : "text-black"
                   }`}
                 >
                   <TextIcon />
                   متن ساده
                 </button>
+
                 <button
                   onClick={() => setActiveTab("timed")}
-                  className={`flex items-center gap-2 px-6 py-2 text-base transition-colors ${
+                  className={`flex items-center gap-2 px-6 py-2 transition-colors ${
                     activeTab === "timed"
                       ? "border-b-2 border-black font-bold text-black"
-                      : "text-gray-600"
+                      : "text-black"
                   }`}
                 >
                   <TimeIcon />
@@ -217,20 +234,30 @@ export default function ArchiveRow({ item, onDelete }) {
 
               <div
                 style={{ maxHeight: "250px", overflowY: "auto" }}
-                className="custom-scrollbar text-justify text-sm leading-7 whitespace-pre-wrap"
+                className="custom-scrollbar text-justify leading-8"
               >
                 {isLoadingTranscript ? (
                   <p>در حال بارگذاری متن...</p>
                 ) : transcriptError ? (
                   <p className="text-red-500">{transcriptError}</p>
                 ) : activeTab === "simple" ? (
-                  <pre>{transcriptSimple}</pre>
+                  <p className="px-15 text-black">{transcriptSimple}</p>
                 ) : (
-                  <SegmentsViewer segments={segments} />
+                  <SegmentsViewer
+                    segments={segments}
+                    activeSegmentIndex={activeSegmentIndex}
+                  />
                 )}
               </div>
 
-              {item.audioUrl && <CustomAudioPlayer src={item.audioUrl} />}
+              {item.url && (
+                <CustomAudioPlayer
+                  setCurrentTime={setCurrentTime}
+                  currentTime={currentTime}
+                  src={item.url}
+                  onTimeUpdate={(time) => setCurrentTime(time)}
+                />
+              )}
             </div>
           </td>
         </tr>

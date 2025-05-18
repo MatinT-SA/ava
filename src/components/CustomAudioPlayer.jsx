@@ -6,11 +6,15 @@ import VolumeIcon from "../assets/icons/VolumeIcon";
 import MuteIcon from "../assets/icons/MuteIcon";
 import { formatTimeToFarsi } from "../utils/formatTimeToFarsi";
 
-export default function CustomAudioPlayer({ src }) {
+export default function CustomAudioPlayer({
+  src,
+  onTimeUpdate,
+  currentTime,
+  setCurrentTime,
+}) {
   const audioRef = useRef(null);
 
   const [isPlaying, setIsPlaying] = useState(false);
-  const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(1);
   const [isMuted, setIsMuted] = useState(false);
@@ -78,10 +82,19 @@ export default function CustomAudioPlayer({ src }) {
   return (
     <div
       dir="ltr"
-      className="custom-audio-player bg-light-gray flex items-center space-x-1 self-center rounded-md px-2"
+      className="custom-audio-player bg-light-gray mt-10 flex items-center space-x-1 self-center rounded-md px-2"
       style={{ maxWidth: 519 }}
     >
-      <audio ref={audioRef} src={src} preload="metadata" />
+      <audio
+        ref={audioRef}
+        src={src}
+        preload="metadata"
+        onTimeUpdate={(e) => {
+          if (onTimeUpdate) {
+            onTimeUpdate(e.target.currentTime);
+          }
+        }}
+      />
 
       {/* Stop Button */}
       <button onClick={handleStop} aria-label="توقف پخش" className="p-1">
@@ -109,11 +122,12 @@ export default function CustomAudioPlayer({ src }) {
         step={0.01}
         value={currentTime}
         onChange={handleSeek}
-        className="flex-1 cursor-pointer"
+        className="flex-grow cursor-pointer"
         style={{
           accentColor: "#00BA9F",
-          height: "4px",
+          height: "1px",
           borderRadius: "2px",
+          minWidth: "345px",
         }}
       />
 
@@ -126,7 +140,7 @@ export default function CustomAudioPlayer({ src }) {
       <button
         onClick={toggleMute}
         aria-label={isMuted ? "بی‌صدا کردن لغو" : "بی‌صدا کردن"}
-        className="p-1"
+        className="ml-3 p-1"
       >
         {isMuted ? (
           <MuteIcon className="h-5 w-5 text-gray-700 hover:text-red-500" />
@@ -143,11 +157,12 @@ export default function CustomAudioPlayer({ src }) {
         step={0.01}
         value={isMuted ? 0 : volume}
         onChange={handleVolumeChange}
-        className="w-24 cursor-pointer"
+        className="flex-grow cursor-pointer"
         style={{
           accentColor: "#00BA9F",
-          height: "4px",
+          height: "2.5px",
           borderRadius: "2px",
+          minWidth: "70px",
         }}
       />
     </div>
