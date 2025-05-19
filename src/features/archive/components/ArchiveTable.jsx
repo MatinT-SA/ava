@@ -14,14 +14,15 @@ export default function ArchiveTable() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
 
-  const itemsPerPage = 9;
+  const itemsPerPage = 10;
 
   useEffect(() => {
-    async function loadData(page = 1) {
+    async function loadData() {
       setIsLoading(true);
       setError("");
+
       try {
-        const data = await fetchArchiveItems(page);
+        const data = await fetchArchiveItems(currentPage); // 👈 ارسال شماره صفحه
         setArchiveData(data);
       } catch (err) {
         setError("خطا در دریافت آرشیو");
@@ -30,7 +31,7 @@ export default function ArchiveTable() {
       }
     }
 
-    loadData(currentPage);
+    loadData();
   }, [currentPage]);
 
   const totalPages = Math.ceil(archiveData.count / itemsPerPage);

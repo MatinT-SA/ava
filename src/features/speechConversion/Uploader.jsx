@@ -83,7 +83,7 @@ function Uploader() {
       dir="rtl"
     >
       <div className="flex items-center justify-between">
-        <div className="flex flex-row gap-2">
+        <div className="flex flex-row">
           {tabs.map((tab) => {
             const isActive = activeTab === tab.id;
             return (
@@ -115,7 +115,7 @@ function Uploader() {
 
       {/* Upload Box */}
       <div
-        className={`upload-box xs:h-[200px] xs:w-[300px] relative sm:h-[350px] sm:w-[480px] md:h-[429px] md:w-[653px] xl:h-[429px] xl:w-[653px] 2xl:h-[789px] 2xl:w-[1200px] ${activeTab === "link" ? "link-active" : ""}`}
+        className={`upload-box xs:h-[200px] xs:w-[300px] relative overflow-y-auto sm:h-[350px] sm:w-[480px] md:h-[429px] md:w-[653px] xl:h-[429px] xl:w-[653px] 2xl:h-[789px] 2xl:w-[1200px] ${activeTab === "link" ? "link-active" : ""}`}
         dir="rtl"
         style={{
           borderRadius: activeTab === "record" ? "25px 0 25px 25px" : "25px",
@@ -143,7 +143,7 @@ function Uploader() {
               )}
 
               {transcript && (
-                <div className="relative mt-4 text-center text-gray-700">
+                <div className="relative mt-4 px-10 text-center leading-8 text-gray-700">
                   <p>متن پیاده شده: {transcript}</p>
                   <button
                     onClick={() => setTranscript("")}
