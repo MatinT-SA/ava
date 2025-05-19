@@ -57,7 +57,7 @@ export default function ArchiveTable() {
       {!isLoading && (
         <>
           <div className="w-full overflow-x-auto sm:overflow-x-visible">
-            <table className="w-full min-w-[700px] border-separate border-spacing-y-4 text-center">
+            <table className="w-full min-w-[700px] border-collapse border-spacing-y-4 text-center">
               <thead>
                 <tr className="rounded-md text-sm font-bold text-black">
                   <th></th>

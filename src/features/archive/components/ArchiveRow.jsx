@@ -138,69 +138,134 @@ export default function ArchiveRow({ item, onDelete }) {
 
   return (
     <>
-      <tr
-        className="border text-center text-black"
-        style={
-          isExpanded
-            ? {
-                border: `1px solid ${borderColor}`,
-                borderBottom: "none",
-                borderRadius: "10px",
-              }
-            : {}
-        }
-      >
-        <td className="px-2 py-3">
-          <span className={`text-lg ${color}`}>{icon}</span>
+      <tr className="text-center text-black">
+        <td
+          className={`px-2 py-3 ${isExpanded ? "border-t border-r" : ""}`}
+          style={isExpanded ? { borderColor } : {}}
+        >
+          {isExpanded ? (
+            <div className="overflow-hidden rounded-tl-[10px]">
+              <span className={`text-lg ${color}`}>{icon}</span>
+            </div>
+          ) : (
+            <span className={`text-lg ${color}`}>{icon}</span>
+          )}
         </td>
-        <td className="max-w-sm px-4 py-2 text-right break-words">
+
+        <td
+          className={`max-w-sm px-4 py-2 text-right break-words ${isExpanded ? "border-t" : ""}`}
+          style={isExpanded ? { borderColor } : {}}
+        >
           <span>{removingExtension(item.filename)}</span>
         </td>
-        <td className="px-4 py-2 text-xs">{formatDate(item.processed)}</td>
-        <td className="px-4 py-2 text-xs" style={{ direction: "ltr" }}>
+
+        <td
+          className={`px-4 py-2 text-xs ${isExpanded ? "border-t" : ""}`}
+          style={isExpanded ? { borderColor } : {}}
+        >
+          {formatDate(item.processed)}
+        </td>
+
+        <td
+          className={`px-4 py-2 text-xs ${isExpanded ? "border-t" : ""}`}
+          style={{
+            direction: "ltr",
+            ...(isExpanded ? { borderColor } : {}),
+          }}
+        >
           {fileType}
         </td>
-        <td className="px-4 py-2 text-xs">{formatDuration(item.duration)}</td>
 
-        <td className="py-2 pl-2">
-          <div className="flex items-center justify-center gap-3">
-            <a
-              aria-label="دانلود فایل"
-              className="hover:text-[#00BA9F]"
-              href={item.url}
-            >
-              <DownloadIconWithTooltip
-                file={{ sizeInBytes: item.sizeInBytes }}
-                className="h-5 w-5"
-              />
-            </a>
-            <button
-              aria-label="نمایش متن"
-              title="نمایش متن"
-              onClick={handleToggleExpand}
-              className="hover:text-[#00BA9F]"
-            >
-              <WordIcon className="h-5 w-5" />
-            </button>
-            <button
-              aria-label="کپی"
-              onClick={() => copyTextToClipboard(transcriptSimple)}
-              className={`hover:text-[#00BA9F] ${!isExpanded ? "cursor-not-allowed" : ""}`}
-              disabled={!isExpanded}
-            >
-              <CopyIcon className="h-5 w-5" />
-            </button>
-            <button
-              aria-label="حذف"
-              title="حذف"
-              onClick={handleDelete}
-              className="group"
-            >
-              <div className="group-hover:bg-red-delete flex h-7 w-7 items-center justify-center rounded-full transition-colors">
-                <DeleteIcon className="text-custom-gray h-4 w-4 transition-colors group-hover:text-white" />
-              </div>
-            </button>
-          </div>
+        <td
+          className={`px-4 py-2 text-xs ${isExpanded ? "border-t" : ""}`}
+          style={isExpanded ? { borderColor } : {}}
+        >
+          {formatDuration(item.duration)}
+        </td>
+
+        <td
+          className={`py-2 pl-2 ${isExpanded ? "border-t border-l" : ""}`}
+          style={isExpanded ? { borderColor } : {}}
+        >
+          {isExpanded ? (
+            <div className="flex items-center justify-center gap-3 overflow-hidden rounded-tr-[10px]">
+              <a
+                aria-label="دانلود فایل"
+                className="hover:text-[#00BA9F]"
+                href={item.url}
+              >
+                <DownloadIconWithTooltip
+                  file={{ sizeInBytes: item.sizeInBytes }}
+                  className="h-5 w-5"
+                />
+              </a>
+              <button
+                aria-label="نمایش متن"
+                title="نمایش متن"
+                onClick={handleToggleExpand}
+                className="hover:text-[#00BA9F]"
+              >
+                <WordIcon className="h-5 w-5" />
+              </button>
+              <button
+                aria-label="کپی"
+                onClick={() => copyTextToClipboard(transcriptSimple)}
+                className={`hover:text-[#00BA9F] ${!isExpanded ? "cursor-not-allowed" : ""}`}
+                disabled={!isExpanded}
+              >
+                <CopyIcon className="h-5 w-5" />
+              </button>
+              <button
+                aria-label="حذف"
+                title="حذف"
+                onClick={handleDelete}
+                className="group"
+              >
+                <div className="group-hover:bg-red-delete flex h-7 w-7 items-center justify-center rounded-full transition-colors">
+                  <DeleteIcon className="text-custom-gray h-4 w-4 transition-colors group-hover:text-white" />
+                </div>
+              </button>
+            </div>
+          ) : (
+            <div className="flex items-center justify-center gap-3">
+              <a
+                aria-label="دانلود فایل"
+                className="hover:text-[#00BA9F]"
+                href={item.url}
+              >
+                <DownloadIconWithTooltip
+                  file={{ sizeInBytes: item.sizeInBytes }}
+                  className="h-5 w-5"
+                />
+              </a>
+              <button
+                aria-label="نمایش متن"
+                title="نمایش متن"
+                onClick={handleToggleExpand}
+                className="hover:text-[#00BA9F]"
+              >
+                <WordIcon className="h-5 w-5" />
+              </button>
+              <button
+                aria-label="کپی"
+                onClick={() => copyTextToClipboard(transcriptSimple)}
+                className={`hover:text-[#00BA9F] ${!isExpanded ? "cursor-not-allowed" : ""}`}
+                disabled={!isExpanded}
+              >
+                <CopyIcon className="h-5 w-5" />
+              </button>
+              <button
+                aria-label="حذف"
+                title="حذف"
+                onClick={handleDelete}
+                className="group"
+              >
+                <div className="group-hover:bg-red-delete flex h-7 w-7 items-center justify-center rounded-full transition-colors">
+                  <DeleteIcon className="text-custom-gray h-4 w-4 transition-colors group-hover:text-white" />
+                </div>
+              </button>
+            </div>
+          )}
         </td>
       </tr>
 
