@@ -19,7 +19,7 @@ export default function SegmentsViewer({ segments, activeSegmentIndex }) {
             <div
               className="flex gap-4"
               style={{
-                color: isActive ? "#2563EB" : "#000", // آبی برای فعال، مشکی برای غیرفعال
+                color: isActive ? "#2563EB" : "#000",
                 fontWeight: isActive ? "bold" : "normal",
               }}
             >

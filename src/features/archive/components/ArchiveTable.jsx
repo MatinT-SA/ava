@@ -22,7 +22,7 @@ export default function ArchiveTable() {
       setError("");
 
       try {
-        const data = await fetchArchiveItems(currentPage); // 👈 ارسال شماره صفحه
+        const data = await fetchArchiveItems(currentPage);
         setArchiveData(data);
       } catch (err) {
         setError("خطا در دریافت آرشیو");

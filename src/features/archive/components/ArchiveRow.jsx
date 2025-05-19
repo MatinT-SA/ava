@@ -23,8 +23,8 @@ import { copyTextToClipboard } from "../../../utils/copyTextToClipboard";
 import { formatDuration } from "../../../utils/formatDuration";
 import { guessSourceTypeFromUrl } from "../../../utils/guessSourceFileFromUrl";
 import { removingExtension } from "../../../utils/removingExtension";
-
-// فرض بر این است که fetchTranscriptById توی جایی import شده یا باید تعریف کنی
+import { getFileExtension } from "../../../utils/getFileExtension";
+import { formatDate } from "../../../utils/formatDate";
 
 function getSourceTypeMeta(type) {
   switch (type) {
@@ -64,28 +64,18 @@ function getSourceTypeMeta(type) {
 }
 
 export default function ArchiveRow({ item, onDelete }) {
-  // console.log(item);
+  const [activeTab, setActiveTab] = useState("simple");
   const [currentTime, setCurrentTime] = useState(0);
   const [segments, setSegments] = useState(null);
-  const [currentSegmentIndex, setCurrentSegmentIndex] = useState(3);
   const [isExpanded, setIsExpanded] = useState(false);
-  const guessedType = guessSourceTypeFromUrl(item.url);
-  const { icon, color, borderColor } = getSourceTypeMeta(
-    item.type || guessedType,
-  );
-
-  const [activeTab, setActiveTab] = useState("simple");
-
   const [transcriptSimple, setTranscriptSimple] = useState(null);
   const [isLoadingTranscript, setIsLoadingTranscript] = useState(false);
   const [transcriptError, setTranscriptError] = useState(null);
 
-  const fileType = "." + (item.filename?.split(".").pop().toLowerCase() || "");
-  const activeSegmentIndex = Array.isArray(segments)
-    ? segments.findIndex(
-        (seg) => currentTime >= seg.start && currentTime <= seg.end,
-      )
-    : -1;
+  const guessedType = guessSourceTypeFromUrl(item.url);
+  const { icon, color, borderColor } = getSourceTypeMeta(
+    item.type || guessedType,
+  );
 
   async function handleToggleExpand() {
     if (!isExpanded) {
@@ -117,24 +107,6 @@ export default function ArchiveRow({ item, onDelete }) {
       toast.error("خطا در حذف آیتم.");
     }
   }
-
-  function formatDate(dateStr) {
-    const date = new Date(dateStr);
-    if (isNaN(date)) return dateStr;
-    return date.toLocaleDateString("fa-IR");
-  }
-
-  // Handling play time
-  const handleTimeUpdate = (currentTime) => {
-    // console.log(currentTime);
-    if (!segments) return;
-    const index = segments.findIndex(
-      (seg) => currentTime >= seg.start && currentTime <= seg.end,
-    );
-    if (index !== -1 && index !== currentSegmentIndex) {
-      setCurrentSegmentIndex(index);
-    }
-  };
 
   return (
     <>
@@ -173,7 +145,7 @@ export default function ArchiveRow({ item, onDelete }) {
             ...(isExpanded ? { borderColor } : {}),
           }}
         >
-          {fileType}
+          {getFileExtension(item.filename)}
         </td>
 
         <td
@@ -314,10 +286,7 @@ export default function ArchiveRow({ item, onDelete }) {
                 ) : activeTab === "simple" ? (
                   <p className="px-15 text-black">{transcriptSimple}</p>
                 ) : (
-                  <SegmentsViewer
-                    segments={segments}
-                    activeSegmentIndex={activeSegmentIndex}
-                  />
+                  <SegmentsViewer segments={segments} />
                 )}
               </div>
 

@@ -1,14 +1,20 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
+
 import UploadIcon from "../../assets/icons/UploadIcon";
 import MicIcon from "../../assets/icons/MicIcon";
 import LinkIcon from "../../assets/icons/LinkIcon";
 import RefreshIcon from "../../assets/icons/RefreshIcon";
 
 import Input from "../../components/Input";
+
 import Goftar from "./Goftar";
 import UploadFile from "./UploadFile";
 import Recorder from "./Recorder";
+import UploaderRecord from "./UploaderRecord";
+import UploaderUpload from "./UploaderUpload";
+import UploaderLink from "./UploaderLink";
+
 import {
   transcribeFilesFromMediaUrls,
   transcribeFileUpload,
@@ -32,7 +38,6 @@ const tabs = [
 
 function Uploader() {
   const [selectedLang, setSelectedLang] = useState("فارسی");
-
   const [activeTab, setActiveTab] = useState("record");
   const [linkInput, setLinkInput] = useState("");
   const [uploadedFile, setUploadedFile] = useState(null);
@@ -66,15 +71,6 @@ function Uploader() {
     } finally {
       setLoading(false);
     }
-  };
-
-  // Recording audio
-  const handleTranscription = (newText) => {
-    setTranscript((prev) => prev + (prev ? " " : "") + newText);
-  };
-
-  const handleReset = () => {
-    setTranscript("");
   };
 
   return (
@@ -127,104 +123,32 @@ function Uploader() {
         <div className="text-custom-gray flex h-full flex-col items-center justify-center space-y-4 self-center py-10 text-center">
           {/* Record */}
           {activeTab === "record" && (
-            <>
-              <Recorder
-                onTranscription={(newText) => {
-                  setTranscript((prev) =>
-                    prev ? prev + " " + newText : newText,
-                  );
-                }}
-              />
-
-              {loading && (
-                <p className="mt-2 text-center text-gray-600">
-                  در حال پردازش...
-                </p>
-              )}
-
-              {transcript && (
-                <div className="relative mt-4 px-10 text-center leading-8 text-gray-700">
-                  <p>متن پیاده شده: {transcript}</p>
-                  <button
-                    onClick={() => setTranscript("")}
-                    className="absolute top-0 right-0 p-2 hover:text-red-500"
-                    aria-label="شروع مجدد"
-                  >
-                    {/* اینجا آیکون ریست شما */}
-                    <RefreshIcon className="h-6 w-6" />
-                  </button>
-                </div>
-              )}
-            </>
+            <UploaderRecord
+              transcript={transcript}
+              setTranscript={setTranscript}
+              loading={loading}
+            />
           )}
 
-          {/* Upload file */}
+          {/* Upload */}
           {activeTab === "upload" && (
-            <>
-              <UploadFile
-                onFileSelect={async (file) => {
-                  if (!file) return;
-                  setUploadedFile(file);
-                  setTranscript(null);
-                  setLoading(true);
-
-                  try {
-                    const data = await transcribeFileUpload(file);
-                    setTranscript(
-                      data.transcripts?.[0]?.text || "متنی یافت نشد",
-                    );
-                    toast.success("فایل با موفقیت پردازش شد 🎉");
-                  } catch (err) {
-                    console.error("خطا در پردازش فایل:", err);
-                    toast.error("خطا: " + (err.message || "خطای ناشناخته"));
-                  } finally {
-                    setLoading(false);
-                  }
-                }}
-              />
-
-              {loading && (
-                <p className="mt-4 text-center text-blue-500">
-                  در حال پردازش فایل، لطفا صبر کنید...
-                </p>
-              )}
-
-              {!loading && transcript && (
-                <p className="mt-4 text-center">{transcript}</p>
-              )}
-
-              {!loading && !transcript && (
-                <p className="mt-4 text-center">
-                  برای بارگذاری فایل گفتاری (صوتی/تصویری)، دکمه را فشار دهید
-                  <br /> متن پیاده شده آن، در اینجا ظاهر می شود
-                </p>
-              )}
-            </>
+            <UploaderUpload
+              transcript={transcript}
+              setTranscript={setTranscript}
+              setUploadedFile={setUploadedFile}
+              loading={loading}
+              setLoading={setLoading}
+            />
           )}
 
           {/* Link */}
           {activeTab === "link" && (
-            <>
-              <Input
-                value={linkInput}
-                onChange={(e) => setLinkInput(e.target.value)}
-              />
-              <button
-                onClick={handleSubmitLink}
-                disabled={loading}
-                className={`mt-3 rounded-full px-6 py-2 text-white ${
-                  loading
-                    ? "cursor-not-allowed bg-gray-400"
-                    : "bg-red-600 hover:bg-red-700"
-                }`}
-              >
-                {loading ? "در حال پردازش..." : "ارسال"}
-              </button>
-              <p className="mt-2 text-sm text-gray-600">
-                نشانی اینترنتی فایل حاوی گفتار (صوتی/تصویری) را وارد
-                <br /> و دکمه را فشار دهید
-              </p>
-            </>
+            <UploaderLink
+              linkInput={linkInput}
+              setLinkInput={setLinkInput}
+              handleSubmitLink={handleSubmitLink}
+              loading={loading}
+            />
           )}
         </div>
       </div>
