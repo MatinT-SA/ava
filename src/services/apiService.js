@@ -41,6 +41,7 @@ export async function deleteArchiveItem(id) {
 
 // Speech Conversion
 
+// Link
 export async function transcribeFilesFromMediaUrls(mediaUrls) {
   const res = await fetch(`${BASE_URL}/transcribe_files/`, {
     method: "POST",
@@ -61,4 +62,31 @@ export async function transcribeFilesFromMediaUrls(mediaUrls) {
   }
 
   return data;
+}
+
+// Uploading file
+export async function transcribeFileUpload(file) {
+  const formData = new FormData();
+  formData.append("file", file);
+
+  const res = await fetch(`${BASE_URL}/transcribe_files/`, {
+    method: "POST",
+    headers: {
+      Authorization: `Token ${TOKEN}`,
+    },
+    body: formData,
+  });
+
+  const text = await res.text();
+
+  if (!res.ok) {
+    console.error("پاسخ خطای خام:", text);
+    throw new Error("خطا در ارسال فایل صوتی: " + text.slice(0, 100));
+  }
+
+  try {
+    return JSON.parse(text);
+  } catch (err) {
+    throw new Error("پاسخ JSON نبود. محتوای دریافتی: " + text.slice(0, 100));
+  }
 }

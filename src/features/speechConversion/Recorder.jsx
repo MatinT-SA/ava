@@ -5,9 +5,9 @@ import toast from "react-hot-toast";
 function Recorder({ onTranscription }) {
   const [isRecording, setIsRecording] = useState(false);
   const recognitionRef = useRef(null);
+  const isManuallyStopped = useRef(false);
 
   useEffect(() => {
-    // بررسی پشتیبانی مرورگر
     const SpeechRecognition =
       window.SpeechRecognition || window.webkitSpeechRecognition;
 
@@ -17,54 +17,72 @@ function Recorder({ onTranscription }) {
     }
 
     const recognition = new SpeechRecognition();
-    recognition.continuous = true; // ادامه دادن حتی بعد از سکته کوتاه
-    recognition.interimResults = true; // دریافت نتایج موقت (زنده)
+    recognition.continuous = true;
+    recognition.interimResults = true;
+    recognition.lang = "fa-IR";
 
-    recognition.lang = "fa-IR"; // زبان فارسی (می‌تونی تغییرش بدی)
+    recognition.onstart = () => {
+      console.log("🎙️ ضبط شروع شد");
+      setIsRecording(true);
+    };
 
     recognition.onresult = (event) => {
-      let interimTranscript = "";
       let finalTranscript = "";
 
       for (let i = event.resultIndex; i < event.results.length; i++) {
-        const transcriptPiece = event.results[i][0].transcript;
         if (event.results[i].isFinal) {
-          finalTranscript += transcriptPiece + " ";
-        } else {
-          interimTranscript += transcriptPiece;
+          finalTranscript += event.results[i][0].transcript + " ";
         }
       }
 
-      // به‌روزرسانی متن زنده (موقت + نهایی)
-      if (onTranscription) {
-        onTranscription(finalTranscript + interimTranscript);
+      if (finalTranscript && onTranscription) {
+        onTranscription(finalTranscript.trim());
       }
     };
 
     recognition.onerror = (event) => {
+      console.error("❌ Error:", event.error);
       toast.error("خطا در تشخیص گفتار: " + event.error);
+      setIsRecording(false);
+      isManuallyStopped.current = true;
     };
 
     recognition.onend = () => {
-      // وقتی ضبط به صورت غیرمنتظره تمام شد (مثلا کاربر صدای بلند نداشت)
+      console.log("🛑 ضبط متوقف شد");
       setIsRecording(false);
+
+      if (!isManuallyStopped.current) {
+        console.log("🔁 تلاش برای شروع مجدد...");
+        setTimeout(() => {
+          if (!isManuallyStopped.current) {
+            recognition.start();
+          }
+        }, 500);
+      }
     };
 
     recognitionRef.current = recognition;
+
+    return () => {
+      isManuallyStopped.current = true;
+      recognition.stop();
+    };
   }, [onTranscription]);
 
   const handleRecordToggle = () => {
-    if (!recognitionRef.current) return;
+    const recognition = recognitionRef.current;
+    if (!recognition) return;
 
     if (isRecording) {
-      recognitionRef.current.stop();
-      setIsRecording(false);
+      isManuallyStopped.current = true;
+      recognition.stop();
     } else {
+      isManuallyStopped.current = false;
       try {
-        recognitionRef.current.start();
-        setIsRecording(true);
+        recognition.start();
       } catch (error) {
         toast.error("خطا در شروع ضبط: " + error.message);
+        console.error("❌ Start error:", error);
       }
     }
   };
@@ -83,7 +101,7 @@ function Recorder({ onTranscription }) {
         <MicIcon className="text-4xl text-white" />
       </div>
       {isRecording ? (
-        <p>در حال ضبط و تشخیص گفتار...</p>
+        <p>در حال ضبط گفتار...</p>
       ) : (
         <p>برای شروع به صحبت، دکمه را فشار دهید</p>
       )}

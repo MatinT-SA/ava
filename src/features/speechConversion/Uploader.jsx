@@ -3,12 +3,16 @@ import toast from "react-hot-toast";
 import UploadIcon from "../../assets/icons/UploadIcon";
 import MicIcon from "../../assets/icons/MicIcon";
 import LinkIcon from "../../assets/icons/LinkIcon";
+import RefreshIcon from "../../assets/icons/RefreshIcon";
 
 import Input from "../../components/Input";
 import Goftar from "./Goftar";
 import UploadFile from "./UploadFile";
 import Recorder from "./Recorder";
-import { transcribeFilesFromMediaUrls } from "../../services/apiService";
+import {
+  transcribeFilesFromMediaUrls,
+  transcribeFileUpload,
+} from "../../services/apiService";
 
 const tabs = [
   { id: "record", label: "ضبط صدا", icon: <MicIcon />, color: "#00BA9F" },
@@ -65,18 +69,13 @@ function Uploader() {
   };
 
   // Recording audio
-  // async function handleAudioRecorded(fileUrl) {
-  //   setLoading(true);
-  //   try {
-  //     const data = await transcribeFilesFromMediaUrls([fileUrl]);
-  //     // فرض کن جواب api به این شکل باشه که متن پیاده شده تو data.transcripts[0].text هست
-  //     setTranscript(data.transcripts?.[0]?.text || "متنی یافت نشد");
-  //   } catch (error) {
-  //     toast.error(error.message);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // }
+  const handleTranscription = (newText) => {
+    setTranscript((prev) => prev + (prev ? " " : "") + newText);
+  };
+
+  const handleReset = () => {
+    setTranscript("");
+  };
 
   return (
     <div
@@ -130,20 +129,10 @@ function Uploader() {
           {activeTab === "record" && (
             <>
               <Recorder
-                onTranscription={async (audioBlob) => {
-                  try {
-                    setLoading(true);
-                    // const data = await transcribeAudioFile(
-                    //   audioBlob,
-                    //   selectedLang,
-                    // );
-                    const text = data.transcripts?.[0]?.text || "متنی یافت نشد";
-                    setTranscript(text);
-                  } catch (err) {
-                    toast.error(err.message);
-                  } finally {
-                    setLoading(false);
-                  }
+                onTranscription={(newText) => {
+                  setTranscript((prev) =>
+                    prev ? prev + " " + newText : newText,
+                  );
                 }}
               />
 
@@ -152,10 +141,19 @@ function Uploader() {
                   در حال پردازش...
                 </p>
               )}
+
               {transcript && (
-                <p className="mt-4 text-center text-gray-700">
-                  متن پیاده شده: {transcript}
-                </p>
+                <div className="relative mt-4 text-center text-gray-700">
+                  <p>متن پیاده شده: {transcript}</p>
+                  <button
+                    onClick={() => setTranscript("")}
+                    className="absolute top-0 right-0 p-2 hover:text-red-500"
+                    aria-label="شروع مجدد"
+                  >
+                    {/* اینجا آیکون ریست شما */}
+                    <RefreshIcon className="h-6 w-6" />
+                  </button>
+                </div>
               )}
             </>
           )}
@@ -163,11 +161,44 @@ function Uploader() {
           {/* Upload file */}
           {activeTab === "upload" && (
             <>
-              <UploadFile onFileSelect={(file) => setUploadedFile(file)} />
-              <p className="text-center">
-                برای بارگذاری فایل گفتاری (صوتی/تصویری)، دکمه را فشار دهید
-                <br /> متن پیاده شده آن، در اینجا ظاهر می شود
-              </p>
+              <UploadFile
+                onFileSelect={async (file) => {
+                  if (!file) return;
+                  setUploadedFile(file);
+                  setTranscript(null);
+                  setLoading(true);
+
+                  try {
+                    const data = await transcribeFileUpload(file);
+                    setTranscript(
+                      data.transcripts?.[0]?.text || "متنی یافت نشد",
+                    );
+                    toast.success("فایل با موفقیت پردازش شد 🎉");
+                  } catch (err) {
+                    console.error("خطا در پردازش فایل:", err);
+                    toast.error("خطا: " + (err.message || "خطای ناشناخته"));
+                  } finally {
+                    setLoading(false);
+                  }
+                }}
+              />
+
+              {loading && (
+                <p className="mt-4 text-center text-blue-500">
+                  در حال پردازش فایل، لطفا صبر کنید...
+                </p>
+              )}
+
+              {!loading && transcript && (
+                <p className="mt-4 text-center">{transcript}</p>
+              )}
+
+              {!loading && !transcript && (
+                <p className="mt-4 text-center">
+                  برای بارگذاری فایل گفتاری (صوتی/تصویری)، دکمه را فشار دهید
+                  <br /> متن پیاده شده آن، در اینجا ظاهر می شود
+                </p>
+              )}
             </>
           )}
 
