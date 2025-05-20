@@ -1,20 +1,28 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  toggleSidebar,
+  closeSidebar,
+  setIsMobileView,
+  setIsSidebarVisible,
+} from "../redux/uiSlice";
 
 function AppLayout() {
-  const [isSidebarVisible, setIsSidebarVisible] = useState(false);
-  const [isMobileView, setIsMobileView] = useState(false);
+  const dispatch = useDispatch();
+  const isSidebarVisible = useSelector((state) => state.ui.isSidebarVisible);
+  const isMobileView = useSelector((state) => state.ui.isMobileView);
 
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 1024) {
-        setIsSidebarVisible(true);
-        setIsMobileView(false);
+        dispatch(setIsSidebarVisible(true));
+        dispatch(setIsMobileView(false));
       } else {
-        setIsSidebarVisible(false);
-        setIsMobileView(true);
+        dispatch(setIsSidebarVisible(false));
+        dispatch(setIsMobileView(true));
       }
     };
 
@@ -22,22 +30,14 @@ function AppLayout() {
     handleResize();
 
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  const toggleSidebar = () => {
-    setIsSidebarVisible((prevState) => !prevState);
-  };
-
-  const closeSidebar = () => {
-    setIsSidebarVisible(false);
-  };
+  }, [dispatch]);
 
   return (
     <div className="flex h-screen bg-white">
       {isSidebarVisible && isMobileView && (
         <div
           className="fixed top-0 right-0 bottom-0 left-0 z-40 bg-black opacity-30"
-          onClick={closeSidebar}
+          onClick={() => dispatch(closeSidebar())}
         ></div>
       )}
 
@@ -48,7 +48,10 @@ function AppLayout() {
             : "translate-x-full"
         } lg:block lg:translate-x-0`}
       >
-        <Sidebar closeSidebar={closeSidebar} isMobileView={isMobileView} />
+        <Sidebar
+          closeSidebar={() => dispatch(closeSidebar())}
+          isMobileView={isMobileView}
+        />
       </div>
 
       <div
@@ -57,7 +60,7 @@ function AppLayout() {
         }`}
       >
         <Header
-          toggleSidebar={toggleSidebar}
+          toggleSidebar={() => dispatch(toggleSidebar())}
           isMobileView={isMobileView}
           isSidebarVisible={isSidebarVisible}
         />
