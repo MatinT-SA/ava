@@ -1,8 +1,11 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import HomePage from "./pages/HomePage";
-import AppLayout from "./components/AppLayout";
-import ArchivePage from "./pages/ArchivePage";
 import { Toaster } from "react-hot-toast";
+
+import HomePage from "./pages/HomePage";
+import ArchivePage from "./pages/ArchivePage";
+import NotFound from "./pages/NotFound";
+
+import AppLayout from "./components/AppLayout";
 
 function App() {
   return (
@@ -13,6 +16,7 @@ function App() {
           <Route path="/" element={<AppLayout />}>
             <Route index element={<HomePage />} />
             <Route path="archive" element={<ArchivePage />} />
+            <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
       </Router>

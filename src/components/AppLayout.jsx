@@ -48,10 +48,7 @@ function AppLayout() {
             : "translate-x-full"
         } lg:block lg:translate-x-0`}
       >
-        <Sidebar
-          closeSidebar={() => dispatch(closeSidebar())}
-          isMobileView={isMobileView}
-        />
+        <Sidebar />
       </div>
 
       <div
@@ -59,11 +56,7 @@ function AppLayout() {
           !isMobileView && "lg:mr-44"
         }`}
       >
-        <Header
-          toggleSidebar={() => dispatch(toggleSidebar())}
-          isMobileView={isMobileView}
-          isSidebarVisible={isSidebarVisible}
-        />
+        <Header />
         <main className="flex-1 overflow-y-auto">
           <Outlet />
         </main>
