@@ -1,23 +1,15 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { deleteArchiveItem } from "../services/apiService";
+import {
+  deleteArchiveItem,
+  fetchArchiveItems,
+  fetchArchiveItemDetails,
+} from "../services/apiService";
 
 export const loadArchive = createAsyncThunk(
   "archive/loadArchive",
   async (page, { rejectWithValue }) => {
     try {
-      const token = "a85d08400c622b50b18b61e239b9903645297196";
-      const res = await fetch(`/api/requests?page=${page}`, {
-        headers: {
-          Authorization: `Token ${token}`,
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (!res.ok) {
-        throw new Error(`HTTP error! status: ${res.status}`);
-      }
-
-      const data = await res.json();
+      const data = await fetchArchiveItems(page);
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -29,15 +21,7 @@ export const fetchArchiveItemDetailsThunk = createAsyncThunk(
   "archive/fetchDetails",
   async (id, { rejectWithValue }) => {
     try {
-      const token = "a85d08400c622b50b18b61e239b9903645297196"; // بهتره از جای مطمئن بگیری مثل redux یا localStorage
-      const res = await fetch(`/api/requests/${id}`, {
-        headers: {
-          Authorization: `Token ${token}`,
-          "Content-Type": "application/json",
-        },
-      });
-      if (!res.ok) throw new Error("خطا در دریافت اطلاعات");
-      const data = await res.json();
+      const data = await fetchArchiveItemDetails(id);
       return { id, details: data };
     } catch (err) {
       return rejectWithValue({ id, error: err.message });

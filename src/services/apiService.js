@@ -35,8 +35,7 @@ export async function deleteArchiveItem(id) {
     },
   });
 
-  if (!res.ok)
-    throw new Error(`خطا در حذف فایل با شناسه ${id} - کد: ${res.status}`);
+  if (!res.ok) throw new Error(`خطا در حذف فایل با شناسه ${id}`);
   return true;
 }
 
