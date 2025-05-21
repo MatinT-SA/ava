@@ -22,7 +22,6 @@ function Recorder({ onTranscription }) {
     recognition.lang = "fa-IR";
 
     recognition.onstart = () => {
-      console.log("🎙️ ضبط شروع شد");
       setIsRecording(true);
     };
 
@@ -48,11 +47,9 @@ function Recorder({ onTranscription }) {
     };
 
     recognition.onend = () => {
-      console.log("🛑 ضبط متوقف شد");
       setIsRecording(false);
 
       if (!isManuallyStopped.current) {
-        console.log("🔁 تلاش برای شروع مجدد...");
         setTimeout(() => {
           if (!isManuallyStopped.current) {
             recognition.start();

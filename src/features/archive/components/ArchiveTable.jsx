@@ -1,48 +1,29 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import ArchiveRow from "./ArchiveRow";
 import Pagination from "./Pagination";
-import { fetchArchiveItems } from "../../../services/apiService";
+import {
+  loadArchive,
+  setCurrentPage,
+  removeArchiveItem,
+} from "../../../redux/archiveSlice";
 
 export default function ArchiveTable() {
-  const [archiveData, setArchiveData] = useState({
-    count: 0,
-    next: null,
-    previous: null,
-    results: [],
-  });
-  const [currentPage, setCurrentPage] = useState(1);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState("");
+  const dispatch = useDispatch();
+  const { count, results, currentPage, isLoading, error } = useSelector(
+    (state) => state.archive,
+  );
 
   const itemsPerPage = 10;
+  const totalPages = Math.ceil(count / itemsPerPage);
 
   useEffect(() => {
-    async function loadData() {
-      setIsLoading(true);
-      setError("");
+    dispatch(loadArchive(currentPage));
+  }, [dispatch, currentPage]);
 
-      try {
-        const data = await fetchArchiveItems(currentPage);
-        setArchiveData(data);
-      } catch (err) {
-        setError("خطا در دریافت آرشیو");
-      } finally {
-        setIsLoading(false);
-      }
-    }
-
-    loadData();
-  }, [currentPage]);
-
-  const totalPages = Math.ceil(archiveData.count / itemsPerPage);
-
-  function handleDelete(id) {
-    setArchiveData((prevData) => ({
-      ...prevData,
-      results: prevData.results.filter((item) => item.id !== id),
-      count: prevData.count - 1,
-    }));
-  }
+  const handleDelete = (id) => {
+    dispatch(removeArchiveItem(id));
+  };
 
   return (
     <div className="overflow-x-auto rounded-xl bg-white px-12 py-6">
@@ -70,7 +51,7 @@ export default function ArchiveTable() {
                 </tr>
               </thead>
               <tbody>
-                {archiveData.results.map((item) => (
+                {results.map((item) => (
                   <ArchiveRow
                     key={item.id}
                     item={item}
@@ -84,7 +65,7 @@ export default function ArchiveTable() {
           <Pagination
             currentPage={currentPage}
             totalPages={totalPages}
-            onPageChange={setCurrentPage}
+            onPageChange={(page) => dispatch(setCurrentPage(page))}
           />
         </>
       )}

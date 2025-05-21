@@ -1,30 +1,34 @@
 import { useState } from "react";
-import { toast } from "react-hot-toast";
-import LinkIcon from "../../../assets/icons/LinkIcon";
-import MicIcon from "../../../assets/icons/MicIcon";
-import UploadIcon from "../../../assets/icons/UploadIcon";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchArchiveItemDetailsThunk,
+  deleteArchiveItemThunk,
+  selectArchiveItemDetails,
+  selectLoading,
+  selectError,
+  removeArchiveItemFromResults,
+} from "../../../redux/archiveSlice";
 
-import DeleteIcon from "../../../assets/icons/DeleteIcon";
-import CopyIcon from "../../../assets/icons/CopyIcon";
 import WordIcon from "../../../assets/icons/WordIcon";
+import CopyIcon from "../../../assets/icons/CopyIcon";
+import DeleteIcon from "../../../assets/icons/DeleteIcon";
 import TextIcon from "../../../assets/icons/TextIcon";
+import UploadIcon from "../../../assets/icons/UploadIcon";
+import MicIcon from "../../../assets/icons/MicIcon";
 import TimeIcon from "../../../assets/icons/TimeIcon";
+
+import SegmentsViewer from "./SegmentsViewer";
+import CustomAudioPlayer from "../../../components/CustomAudioPlayer";
 import DownloadIconWithTooltip from "../../../components/DownloadIconWithTooltip/DownloadIconWithTooltip";
 
-import CustomAudioPlayer from "../../../components/CustomAudioPlayer";
-import SegmentsViewer from "./SegmentsViewer";
-
-import {
-  deleteArchiveItem,
-  fetchArchiveItemDetails,
-} from "../../../services/apiService";
-
-import { copyTextToClipboard } from "../../../utils/copyTextToClipboard";
-import { formatDuration } from "../../../utils/formatDuration";
+import { copyTextToClipboard } from "../../../utils/CopyTextToClipboard";
 import { guessSourceTypeFromUrl } from "../../../utils/guessSourceFileFromUrl";
 import { removingExtension } from "../../../utils/removingExtension";
 import { getFileExtension } from "../../../utils/getFileExtension";
 import { formatDate } from "../../../utils/formatDate";
+import { formatDuration } from "../../../utils/formatDuration";
+
+import toast from "react-hot-toast";
 
 function getSourceTypeMeta(type) {
   switch (type) {
@@ -63,14 +67,28 @@ function getSourceTypeMeta(type) {
   }
 }
 
-export default function ArchiveRow({ item, onDelete }) {
+export default function ArchiveRow({ item }) {
+  const dispatch = useDispatch();
+
   const [activeTab, setActiveTab] = useState("simple");
   const [currentTime, setCurrentTime] = useState(0);
-  const [segments, setSegments] = useState(null);
   const [isExpanded, setIsExpanded] = useState(false);
-  const [transcriptSimple, setTranscriptSimple] = useState(null);
-  const [isLoadingTranscript, setIsLoadingTranscript] = useState(false);
-  const [transcriptError, setTranscriptError] = useState(null);
+
+  const segments = useSelector(
+    (state) => selectArchiveItemDetails(state, item.id)?.segments,
+  );
+
+  const transcriptSimple = useSelector((state) =>
+    selectArchiveItemDetails(state, item.id)
+      ? selectArchiveItemDetails(state, item.id)
+          .segments.map((seg) => seg.text)
+          .join(" ")
+      : null,
+  );
+  const isLoadingTranscript = useSelector((state) =>
+    selectLoading(state, item.id),
+  );
+  const transcriptError = useSelector((state) => selectError(state, item.id));
 
   const guessedType = guessSourceTypeFromUrl(item.url);
   const { icon, color, borderColor } = getSourceTypeMeta(
@@ -78,30 +96,21 @@ export default function ArchiveRow({ item, onDelete }) {
   );
 
   async function handleToggleExpand() {
-    if (!isExpanded) {
-      if (transcriptSimple === null) {
-        setIsLoadingTranscript(true);
-        try {
-          const data = await fetchArchiveItemDetails(item.id);
-          setTranscriptSimple(
-            data.segments.map((segment) => segment.text).join(" "),
-          );
-          setSegments(data.segments);
-        } catch (err) {
-          setTranscriptError("خطا در دریافت متن");
-        } finally {
-          setIsLoadingTranscript(false);
-        }
-      }
+    if (!isExpanded && !segments && !isLoadingTranscript) {
+      dispatch(fetchArchiveItemDetailsThunk(item.id))
+        .unwrap()
+        .catch(() => {
+          toast.error("خطا در دریافت متن");
+        });
     }
     setIsExpanded((prev) => !prev);
   }
 
   async function handleDelete() {
     try {
-      await deleteArchiveItem(item.id);
-      onDelete(item.id);
+      await dispatch(deleteArchiveItemThunk(item.id)).unwrap();
       toast.success("آیتم با موفقیت حذف شد.");
+      dispatch(removeArchiveItemFromResults(item.id));
     } catch (err) {
       console.error("خطا در حذف آیتم:", err);
       toast.error("خطا در حذف آیتم.");
@@ -286,7 +295,10 @@ export default function ArchiveRow({ item, onDelete }) {
                 ) : activeTab === "simple" ? (
                   <p className="px-15 text-black">{transcriptSimple}</p>
                 ) : (
-                  <SegmentsViewer segments={segments} />
+                  <SegmentsViewer
+                    segments={segments}
+                    currentTime={currentTime}
+                  />
                 )}
               </div>
 

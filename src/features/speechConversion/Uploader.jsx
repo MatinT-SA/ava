@@ -1,16 +1,19 @@
-import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setActiveTab,
+  setLinkInput,
+  setUploadedFile,
+  setTranscript,
+  setLoading,
+  setSelectedLang,
+} from "../../redux/uploaderSlice";
 import toast from "react-hot-toast";
 
 import UploadIcon from "../../assets/icons/UploadIcon";
 import MicIcon from "../../assets/icons/MicIcon";
 import LinkIcon from "../../assets/icons/LinkIcon";
-import RefreshIcon from "../../assets/icons/RefreshIcon";
-
-import Input from "../../components/Input";
 
 import Goftar from "./Goftar";
-import UploadFile from "./UploadFile";
-import Recorder from "./Recorder";
 import UploaderRecord from "./UploaderRecord";
 import UploaderUpload from "./UploaderUpload";
 import UploaderLink from "./UploaderLink";
@@ -37,41 +40,32 @@ const tabs = [
 ];
 
 function Uploader() {
-  const [selectedLang, setSelectedLang] = useState("فارسی");
-  const [activeTab, setActiveTab] = useState("record");
-  const [linkInput, setLinkInput] = useState("");
-  const [uploadedFile, setUploadedFile] = useState(null);
-  const [transcript, setTranscript] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+
+  const selectedLang = useSelector((state) => state.uploader.selectedLang);
+  const activeTab = useSelector((state) => state.uploader.activeTab);
+  const linkInput = useSelector((state) => state.uploader.linkInput);
+  const uploadedFile = useSelector((state) => state.uploader.uploadedFile);
+  const transcript = useSelector((state) => state.uploader.transcript);
+  const loading = useSelector((state) => state.uploader.loading);
 
   const activeColor = tabs.find((tab) => tab.id === activeTab)?.color;
 
-  const handleSubmitLink = async () => {
-    if (!linkInput.trim()) {
-      toast.error("لطفاً یک لینک معتبر وارد کنید.");
-      return;
-    }
+  // const handleSubmitLink = async () => {
+  //   if (!linkInput) return;
 
-    setLoading(true);
-    setTranscript(null);
-
-    try {
-      const data = await transcribeFilesFromMediaUrls([linkInput]);
-
-      if (data.transcripts && data.transcripts.length > 0) {
-        setTranscript(data.transcripts[0].text);
-      } else {
-        setTranscript("متنی یافت نشد");
-      }
-
-      toast.success("فایل با موفقیت پردازش شد 🎉");
-    } catch (err) {
-      console.error("خطا در تماس با API:", err);
-      toast.error("خطا: " + (err.message || "خطای ناشناخته"));
-    } finally {
-      setLoading(false);
-    }
-  };
+  //   dispatch(setLoading(true));
+  //   try {
+  //     const data = await transcribeFilesFromMediaUrls([linkInput]);
+  //     const text = data.transcripts?.[0]?.text || "متنی یافت نشد";
+  //     dispatch(setTranscript(text));
+  //   } catch (error) {
+  //     console.error("خطا در پردازش لینک:", error);
+  //     toast.error("خطا در پردازش لینک. لطفا دوباره تلاش کنید.");
+  //   } finally {
+  //     dispatch(setLoading(false));
+  //   }
+  // };
 
   return (
     <div
@@ -85,7 +79,7 @@ function Uploader() {
             return (
               <button
                 key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
+                onClick={() => dispatch(setActiveTab(tab.id))}
                 className={`flex cursor-pointer items-center justify-center gap-2 px-6 py-3 text-sm font-medium transition-all ${
                   isActive
                     ? "text-white shadow"
@@ -111,7 +105,9 @@ function Uploader() {
 
       {/* Upload Box */}
       <div
-        className={`upload-box xs:h-[200px] xs:w-[300px] relative overflow-y-auto sm:h-[350px] sm:w-[480px] md:h-[429px] md:w-[653px] xl:h-[429px] xl:w-[653px] 2xl:h-[789px] 2xl:w-[1200px] ${activeTab === "link" ? "link-active" : ""}`}
+        className={`upload-box xs:h-[200px] xs:w-[300px] relative overflow-y-auto sm:h-[350px] sm:w-[480px] md:h-[429px] md:w-[653px] xl:h-[429px] xl:w-[653px] 2xl:h-[789px] 2xl:w-[1200px] ${
+          activeTab === "link" ? "link-active" : ""
+        }`}
         dir="rtl"
         style={{
           borderRadius: activeTab === "record" ? "25px 0 25px 25px" : "25px",
@@ -125,7 +121,7 @@ function Uploader() {
           {activeTab === "record" && (
             <UploaderRecord
               transcript={transcript}
-              setTranscript={setTranscript}
+              setTranscript={(text) => dispatch(setTranscript(text))}
               loading={loading}
             />
           )}
@@ -134,28 +130,24 @@ function Uploader() {
           {activeTab === "upload" && (
             <UploaderUpload
               transcript={transcript}
-              setTranscript={setTranscript}
-              setUploadedFile={setUploadedFile}
+              setTranscript={(text) => dispatch(setTranscript(text))}
+              setUploadedFile={(file) => dispatch(setUploadedFile(file))}
               loading={loading}
-              setLoading={setLoading}
+              setLoading={(value) => dispatch(setLoading(value))}
             />
           )}
 
           {/* Link */}
-          {activeTab === "link" && (
-            <UploaderLink
-              linkInput={linkInput}
-              setLinkInput={setLinkInput}
-              handleSubmitLink={handleSubmitLink}
-              loading={loading}
-            />
-          )}
+          {activeTab === "link" && <UploaderLink />}
         </div>
       </div>
 
       {/* Goftar */}
       <div>
-        <Goftar selectedLang={selectedLang} onLangChange={setSelectedLang} />
+        <Goftar
+          selectedLang={selectedLang}
+          onLangChange={(val) => dispatch(setSelectedLang(val))}
+        />
       </div>
     </div>
   );

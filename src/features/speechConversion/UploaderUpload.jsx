@@ -1,31 +1,39 @@
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setTranscript,
+  setLoading,
+  setUploadedFile,
+} from "../../redux/uploaderSlice";
+
 import UploadFile from "./UploadFile";
 import toast from "react-hot-toast";
 
-export default function UploaderUpload({
-  transcript,
-  setTranscript,
-  setUploadedFile,
-  loading,
-  setLoading,
-}) {
+export default function UploaderUpload() {
+  const dispatch = useDispatch();
+  const transcript = useSelector((state) => state.uploader.transcript);
+  const loading = useSelector((state) => state.uploader.loading);
+
   return (
     <>
       <UploadFile
         onFileSelect={async (file) => {
           if (!file) return;
-          setUploadedFile(file);
-          setTranscript(null);
-          setLoading(true);
+
+          dispatch(setUploadedFile(file));
+          dispatch(setTranscript(null));
+          dispatch(setLoading(true));
 
           try {
             const data = await transcribeFileUpload(file);
-            setTranscript(data.transcripts?.[0]?.text || "متنی یافت نشد");
+            dispatch(
+              setTranscript(data.transcripts?.[0]?.text || "متنی یافت نشد"),
+            );
             toast.success("فایل با موفقیت پردازش شد 🎉");
           } catch (err) {
             console.error("خطا در پردازش فایل:", err);
             toast.error("خطا: " + (err.message || "خطای ناشناخته"));
           } finally {
-            setLoading(false);
+            dispatch(setLoading(false));
           }
         }}
       />
