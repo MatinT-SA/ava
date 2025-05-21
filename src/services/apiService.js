@@ -1,5 +1,5 @@
-const BASE_URL = import.meta.env.DEV ? "/api" : "https://harf.roshan-ai.ir/api";
-const TOKEN = import.meta.env.VITE_API_TOKEN;
+const BASE_URL = "/api";
+const TOKEN = "a85d08400c622b50b18b61e239b9903645297196";
 
 // Fetching list of archive items
 export async function fetchArchiveItems(page = 1) {
