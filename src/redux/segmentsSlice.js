@@ -9,7 +9,6 @@ const segmentsSlice = createSlice({
   reducers: {
     setSegments(state, action) {
       state.segments = action.payload;
-      // Reset activeSegmentIndex وقتی داده جدید میاد
       state.activeSegmentIndex = 0;
     },
     setActiveSegmentIndex(state, action) {
